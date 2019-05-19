@@ -1,0 +1,18 @@
+AllCops:
+  Exclude:
+   - 'bin/*'
+   - 'db/**/*'
+   - 'config/**/*'
+   - 'vendor/bundle/**/*'
+   - 'node_modules/**/*'
+   - 'Guardfile'
+Rails:
+  Enabled: true
+Documentation:
+  Enabled: false
+Lint/Debugger:
+  AutoCorrect: false
+LineLength:
+  Max: 120
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
