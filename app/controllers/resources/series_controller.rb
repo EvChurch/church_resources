@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Resources::SeriesController < ApplicationController
-  decorates_assigned :series
+  decorates_assigned :series, :resources
 
   def index
     load_series_index
@@ -9,9 +9,20 @@ class Resources::SeriesController < ApplicationController
 
   def show
     load_series
+    load_resources
   end
 
   protected
+
+  def load_resources
+    return @resources if @resources
+
+    @resources = Resource.where(series: [@series])
+    if params[:resource_type].present?
+      @resources = @resources.where(type: Resource::TYPES[params[:resource_type].to_sym])
+    end
+    @resources = @resources.page params[:page]
+  end
 
   def load_series_index
     @series_index ||= alphabetized_series

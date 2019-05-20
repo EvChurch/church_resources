@@ -1,2 +1,3 @@
 <% title params[:resource_type] ? "#{params[:resource_type].pluralize.titleize} on #{series.name}" : "Resources on #{series.name}" %>
 <%= render 'shared/listing_header' %>
+<%= render 'shared/resources', locals: { resources: resources } %>

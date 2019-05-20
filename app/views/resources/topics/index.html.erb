@@ -2,7 +2,13 @@
 <%= render 'shared/listing_header' %>
 <div class="index container mt-5">
   <% categories.each do |category| %>
-    <strong><%= category.name %></strong>
+    <div class="row">
+      <div class="col">
+        <div class="mt-4 mb-2">
+          <strong><%= category.name %></strong>
+        </div>
+      </div>
+    </div>
     <div class="row">
       <% category.topics.order(:name).in_groups(5, false) do |topic_group| %>
       <div class="col">

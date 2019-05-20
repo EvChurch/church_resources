@@ -2,6 +2,6 @@
 
 class ResourceTypeConstraint
   def matches?(request)
-    Resource::TYPES.include?(request.params[:resource_type]) || request.params[:resource_type].blank?
+    Resource::TYPES.keys.include?(request.params[:resource_type].to_sym) || request.params[:resource_type].blank?
   end
 end

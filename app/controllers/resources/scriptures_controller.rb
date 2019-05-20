@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Resources::ScripturesController < ApplicationController
-  decorates_assigned :scripture
+  decorates_assigned :scripture, :resources
 
   def index
     load_scriptures
@@ -9,9 +9,20 @@ class Resources::ScripturesController < ApplicationController
 
   def show
     load_scripture
+    load_resources
   end
 
   protected
+
+  def load_resources
+    return @resources if @resources
+
+    @resources = Resource.where(scriptures: [@scripture])
+    if params[:resource_type].present?
+      @resources = @resources.where(type: Resource::TYPES[params[:resource_type].to_sym])
+    end
+    @resources = @resources.page params[:page]
+  end
 
   def load_scriptures
     @scriptures ||= alphabetized_scripture

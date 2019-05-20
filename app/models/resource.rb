@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Resource < ApplicationRecord
-  TYPES = %w[article sermon].freeze
+  TYPES = { article: 'Resource::Article', sermon: 'Resource::Sermon' }.freeze
 
   extend FriendlyId
   friendly_id :name, use: :slugged
