@@ -1,0 +1,17 @@
+<div class="w-100 w-md-40 mx-auto mb-4">
+  <header>
+    <h3 class="text-primary font-weight-normal mb-0">My <span class="font-weight-bold">Account</span></h3>
+    <p>Update Password</p>
+  </header>
+  <%= simple_form_for @user, url: users_authentications_path, as: :user do |f| %>
+    <%= render partial: 'resource_errors', locals: { resource: @user } %>
+    <%= f.input :password %>
+    <%= f.input :password_confirmation %>
+    <%= f.input :current_password %>
+    <hr>
+    <div class="text-right">
+      <%= link_to 'Cancel', edit_user_registration_path, class: 'btn btn-link' %>
+      <%= f.submit 'Save', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>

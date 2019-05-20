@@ -1,0 +1,53 @@
+<% title 'Sign In' %>
+<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<div class="w-100 w-md-40 mx-auto mb-4">
+  <div id="login" data-target-group="idForm">
+    <header class="text-center mb-2 mb-md-7">
+      <h2 class="h4 text-primary mb-0">Welcome Back!</h2>
+      <p>Sign In to manage your account.</p>
+    </header>
+    <%= devise_error_messages! %>
+    <div class="mb-4">
+      <div class="input-group u-form">
+        <div class="input-group-prepend u-form__prepend">
+          <span class="input-group-text u-form__text">
+            <span class="fa fa-user u-form__text-inner"></span>
+          </span>
+        </div>
+        <%= f.input :email, autofocus: true, wrapper: false, label: false, placeholder: 'Email', input_html: { class: 'u-form__input' } %>
+      </div>
+    </div>
+    <div class="mb-2">
+      <div class="input-group u-form">
+        <div class="input-group-prepend u-form__prepend">
+          <span class="input-group-text u-form__text">
+            <span class="fa fa-lock u-form__text-inner"></span>
+          </span>
+        </div>
+        <%= f.input :password, wrapper: false, label: false, placeholder: 'Password', input_html: { class: 'u-form__input' } %>
+      </div>
+    </div>
+    <% if devise_mapping.rememberable? || devise_mapping.recoverable? %>
+    <div class="clearfix mt-3 mb-2">
+        <% if devise_mapping.rememberable? %>
+          <div class="float-left">
+            <label class="small u-link-muted">
+              <%= f.check_box :remember_me %> Remember me
+            </label>
+          </div>
+        <% end %>
+        <% if devise_mapping.recoverable? %>
+          <%= link_to "Forgot password?", new_password_path(resource_name), class: 'float-right small u-link-muted'%>
+        <% end %>
+    </div>
+    <% end %>
+    <div class="mb-2">
+        <%= f.submit 'Sign In', class: 'btn btn-block btn-primary u-btn-primary transition-3d-hover' %>
+    </div>
+    <div class="text-center text-muted">
+      <small>Don't have an account yet? <%= link_to 'Sign Up', new_user_registration_path, class: 'right' %></small><br>
+      <small>Didn't receive confirmation email? <%= link_to 'Resend', new_confirmation_path(resource_name) %></small>
+    </div>
+  </div>
+</div>
+<% end %>

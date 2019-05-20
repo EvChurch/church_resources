@@ -1,0 +1,18 @@
+<% title params[:resource_type] ? "#{params[:resource_type].pluralize.titleize} by Author" : 'Author Index' %>
+<%= render 'shared/listing_header' %>
+<div class="index container mt-5">
+  <div class="row">
+  <% @authors.each do |hash| %>
+    <div class="col">
+    <% hash.each do |key, collection| %>
+      <dl>
+      <dt class="mt-4 mb-2"><%= key %></dt>
+      <% collection.each do |author| %>
+      <dd><%= link_to author.name, author_path(author, resource_type: params[:resource_type]) %></dd>
+      <% end %>
+      </dl>
+    <% end %>
+    </div>
+  <% end %>
+  </div>
+</div>

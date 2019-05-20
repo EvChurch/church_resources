@@ -1,0 +1,18 @@
+
+<% title 'Resend Confirmation Email' %>
+<div class="w-100 w-md-40 mx-auto mb-4">
+  <header class="text-center mb-2">
+    <h2 class="h4 text-primary mb-0">Didn't receive confirmation email?</h2>
+    <p>We'll send confirmation instructions via email.</p>
+  </header>
+  <%= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name)) do |f| %>
+    <%= devise_error_messages! %>
+    <%= f.input :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+    <%= f.submit 'Resend Confirmation Email', class: 'btn btn-block btn-primary transition-3d-hover' %>
+  <% end %>
+  <div class="text-center text-muted mt-2">
+    <small>
+      Already Have an Account? <%= link_to 'Sign In', new_user_session_path  %>
+    </small>
+  </div>
+</div>

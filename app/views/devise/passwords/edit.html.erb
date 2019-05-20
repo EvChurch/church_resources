@@ -1,0 +1,13 @@
+<div class="w-100 w-md-40 mx-auto mb-4">
+  <header class="text-center mb-2">
+    <h2 class="h4 text-primary mb-0">Forgot your Password?</h2>
+    <p>Reset it below!</p>
+  </header>
+  <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+    <%= f.hidden_field :reset_password_token %>
+    <%= devise_error_messages! %>
+    <%= f.input :password, label: 'New Password', autofocus: true %>
+    <%= f.input :password_confirmation, label: 'Confirm new password' %>
+    <%= f.submit 'Change My Password', class: 'btn btn-block btn-primary transition-3d-hover' %>
+  <% end %>
+</div>

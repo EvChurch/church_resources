@@ -4,16 +4,22 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.3'
-
+gem 'activeadmin'
+gem 'aws-sdk-s3', require: false
 gem 'bootsnap', '>= 1.4.2', require: false
+gem 'devise'
 gem 'high_voltage', '~> 3.1'
 gem 'image_processing', '~> 1.2'
+gem 'meta-tags'
 gem 'pg'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 6.0.0.rc1'
 gem 'sass-rails', '~> 5'
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 4.0'
+gem 'simple_form'
+gem 'draper'
+gem 'friendly_id', '~> 5.2.4'
 
 group :development, :test do
   gem 'byebug'
@@ -23,7 +29,10 @@ group :development, :test do
 end
 
 group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
   gem 'foreman'
+  gem 'letter_opener'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'rubocop'
   gem 'spring'

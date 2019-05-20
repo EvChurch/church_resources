@@ -1,0 +1,18 @@
+<% title params[:resource_type] ? "#{params[:resource_type].pluralize.titleize} by Topic" : 'Topic Index' %>
+<%= render 'shared/listing_header' %>
+<div class="index container mt-5">
+  <% categories.each do |category| %>
+    <strong><%= category.name %></strong>
+    <div class="row">
+      <% category.topics.order(:name).in_groups(5, false) do |topic_group| %>
+      <div class="col">
+        <dl>
+        <% topic_group.each do |topic| %>
+          <dd><%= link_to topic.name, topic_path(topic, resource_type: params[:resource_type]) %></dd>
+        <% end %>
+        </dl>
+      </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

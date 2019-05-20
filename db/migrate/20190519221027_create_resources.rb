@@ -10,6 +10,7 @@ class CreateResources < ActiveRecord::Migration[6.0]
       t.timestamp :published_at
       t.timestamp :featured_at
       t.string :video_url
+      t.string :slug, unique: true
 
       t.timestamps
     end

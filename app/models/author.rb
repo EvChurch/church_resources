@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
 class Author < ApplicationRecord
-  validates :name, presence: true
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
+  validates :name, presence: true, uniqueness: true
 end

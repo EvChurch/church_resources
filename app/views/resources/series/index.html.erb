@@ -1,0 +1,18 @@
+<% title params[:resource_type] ? "#{params[:resource_type].pluralize.titleize} by Series" : 'Series Index' %>
+<%= render 'shared/listing_header' %>
+<div class="index container mt-5">
+  <div class="row">
+  <% @series_index.each do |hash| %>
+    <div class="col">
+    <% hash.each do |key, collection| %>
+      <dl>
+      <dt class="mt-4 mb-2"><%= key %></dt>
+      <% collection.each do |series| %>
+      <dd><%= link_to series.name, series_path(series, resource_type: params[:resource_type]) %></dd>
+      <% end %>
+      </dl>
+    <% end %>
+    </div>
+  <% end %>
+  </div>
+</div>

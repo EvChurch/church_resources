@@ -1,1 +1,64 @@
 @import './bootstrap_custom';
+
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+
+body {
+  font-family: "proxima-nova", Helvetica, Arial, sans-serif;
+  padding-top: 56px;
+  background-color: #E6E6E6;
+}
+
+h1, h2, h3, h4 {
+  font-family: "ff-meta-serif-web-pro", garamond, times, 'times new roman', serif;
+}
+
+.listing-header {
+  background: #1f2326;
+  color: #fff;
+  h1 {
+    font-family: "proxima-nova", Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 2rem;
+    padding-bottom: 20px;
+    padding-top: 30px;
+    text-align: center;
+    border-bottom: 1px solid #068df8;
+  }
+  .content {
+    text-align: left;
+    padding: 25px 0 35px;
+    text-align: center;
+    ul {
+      li {
+        display: inline-block;
+        margin: 0 15px;
+        font-size: 1.5rem;
+        font-weight: 100;
+        a {
+          color: #fff;
+          text-decoration: none;
+          &.active {
+            border-bottom: 1px solid #068df8;
+          }
+        }
+        .dropdown-menu {
+          a {
+            color: #000;
+          }
+        }
+      }
+    }
+  }
+}
+.index {
+  dl dd a {
+    transition: color 0.2s ease-out;
+    color: #1f2326;
+    &:hover {
+      color: #068df8;
+      text-decoration: none;
+    }
+  }
+}

@@ -2,5 +2,5 @@
 
 class Resource::Connection::Scripture < ApplicationRecord
   belongs_to :resource
-  belongs_to :author
+  belongs_to :scripture
 end

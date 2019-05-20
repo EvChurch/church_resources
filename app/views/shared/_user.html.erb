@@ -1,0 +1,13 @@
+<div class="row no-gutters">
+  <div class="col-md-6 pr-2">
+      <%= f.input :first_name, label: 'First Name' %>
+  </div>
+  <div class="col-md-6">
+      <%= f.input :last_name, label: 'Last Name' %>
+  </div>
+</div>
+<%= f.input :email, placeholder: 'test@example.com', label: 'Email Address' %>
+<% unless current_user %>
+  <%= f.input :password, autocomplete: 'off' %>
+  <%= f.input :password_confirmation, autocomplete: 'off' %>
+<% end %>
