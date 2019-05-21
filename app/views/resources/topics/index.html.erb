@@ -1,6 +1,6 @@
 <% title params[:resource_type] ? "#{params[:resource_type].pluralize.titleize} by Topic" : 'Topic Index' %>
 <%= render 'shared/listing_header' %>
-<div class="index container mt-5">
+<div class="index container my-5">
   <% categories.each do |category| %>
     <div class="row">
       <div class="col">

@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 ActiveAdmin.setup do |config|
   # == Site Title
   #
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
-  config.site_title = "Church Resources"
+  config.site_title = 'Church Resources'
 
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
@@ -157,7 +159,7 @@ ActiveAdmin.setup do |config|
   # You can exclude possibly sensitive model attributes from being displayed,
   # added to forms, or exported by default by ActiveAdmin
   #
-  config.filter_attributes = [:encrypted_password, :password, :password_confirmation]
+  config.filter_attributes = %i[encrypted_password password password_confirmation]
 
   # == Localize Date/Time Format
   #
@@ -309,4 +311,14 @@ ActiveAdmin.setup do |config|
   # You can inherit it with own class and inject it for all resources
   #
   # config.order_clause = MyOrderClause
+end
+
+ActiveAdmin::ResourceController.class_eval do
+  def find_resource
+    id_field = 'id'
+
+    id_field = scoped_collection.friendly_id_config.query_field if scoped_collection.is_a? FriendlyId
+
+    scoped_collection.find_by! id_field => params[:id]
+  end
 end

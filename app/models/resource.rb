@@ -9,6 +9,8 @@ class Resource < ApplicationRecord
   has_one_attached :banner
   has_one_attached :foreground
   has_one_attached :background
+  has_one_attached :audio
+  has_one_attached :video
 
   has_many :connection_authors, class_name: 'Resource::Connection::Author', dependent: :destroy
   has_many :authors, through: :connection_authors
@@ -20,4 +22,6 @@ class Resource < ApplicationRecord
   has_many :topics, through: :connection_topics
 
   validates :name, :snippet, presence: true
+
+  scope :published, -> { where.not(published_at: nil) }
 end

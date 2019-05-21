@@ -1,6 +1,6 @@
 <% title params[:resource_type] ? "#{params[:resource_type].pluralize.titleize} by Series" : 'Series Index' %>
 <%= render 'shared/listing_header' %>
-<div class="index container mt-5">
+<div class="index container my-5">
   <div class="row">
   <% @series_index.each do |hash| %>
     <div class="col">

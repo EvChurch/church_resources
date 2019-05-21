@@ -1,6 +1,6 @@
 <header class="listing-header">
   <div class="container">
-    <h1><%= display_title %></h1>
+    <h1 class="mt-0"><%= display_title %></h1>
     <div class="content">
       <ul>
         <li>
@@ -16,10 +16,10 @@
           </div>
         </li>
         <li><%= link_to 'Recent', resources_path(resource_type: params[:resource_type]), class: ('active' if current_page?(resources_path(resource_type: params[:resource_type]))) %></li>
-        <li><%= link_to 'Topics', topics_path(resource_type: params[:resource_type]), class: ('active' if current_page?(topics_path(resource_type: params[:resource_type]))) %></li>
+        <li><%= link_to 'Authors', authors_path(resource_type: params[:resource_type]), class: ('active' if current_page?(authors_path(resource_type: params[:resource_type]))) %></li>
         <li><%= link_to 'Scripture', scriptures_path(resource_type: params[:resource_type]), class: ('active' if current_page?(scriptures_path(resource_type: params[:resource_type]))) %></li>
         <li><%= link_to 'Series', series_index_path(resource_type: params[:resource_type]), class: ('active' if current_page?(series_index_path(resource_type: params[:resource_type]))) %></li>
-        <li><%= link_to 'Authors', authors_path(resource_type: params[:resource_type]), class: ('active' if current_page?(authors_path(resource_type: params[:resource_type]))) %></li>
+        <li><%= link_to 'Topics', topics_path(resource_type: params[:resource_type]), class: ('active' if current_page?(topics_path(resource_type: params[:resource_type]))) %></li>
       </ul>
     </div>
   </div>

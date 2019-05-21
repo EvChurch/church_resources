@@ -1,0 +1,36 @@
+<footer class="site-footer">
+  <%# <div class="connect">
+    <div class="container">
+    </div>
+  </div> %>
+  <div class="container">
+    <div class="links">
+      <div class="row">
+        <div class="col">
+          <ul>
+            <li><%= link_to 'Articles', resources_path(resource_type: 'article') %></li>
+          </ul>
+        </div>
+        <div class="col">
+          <ul>
+            <li><%= link_to 'Sermons', resources_path(resource_type: 'sermon') %></li>
+          </ul>
+        </div>
+        <div class="col">
+          <ul>
+            <li><%= link_to 'About Us', 'https://aucklandev.co.nz/about', target: '_blank' %></li>
+          </ul>
+        </div>
+        <div class="col">
+          <ul>
+            <li><%= link_to ENV.fetch('NAME'), 'https://aucklandev.co.nz', target: '_blank' %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="credits">
+      <p>Inform your mind. Inspire your heart.</p>
+      <p class="copyright">&copy; <%= Date.today.year %> <%= ENV.fetch('NAME') %></p>
+    </div>
+  </div>
+</footer>

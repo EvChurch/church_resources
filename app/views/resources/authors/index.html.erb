@@ -1,6 +1,6 @@
 <% title params[:resource_type] ? "#{params[:resource_type].pluralize.titleize} by Author" : 'Author Index' %>
 <%= render 'shared/listing_header' %>
-<div class="index container mt-5">
+<div class="index container my-5">
   <div class="row">
   <% @authors.each do |hash| %>
     <div class="col">

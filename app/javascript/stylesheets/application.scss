@@ -1,19 +1,48 @@
 @import './bootstrap_custom';
-
+$color-primary: #A90E1D;
 $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import '~@fortawesome/fontawesome-free/scss/solid';
 
+@import '~video.js/dist/video-js';
+
 body {
   font-family: "proxima-nova", Helvetica, Arial, sans-serif;
-  padding-top: 56px;
+  padding-top: 58px;
   background-color: #E6E6E6;
 }
 
 h1, h2, h3, h4 {
+  font-weight: 800;
+  line-height: 1.2;
   font-family: "ff-meta-serif-web-pro", garamond, times, 'times new roman', serif;
 }
 
+h1, .h1, h2, .h2, h3, .h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+a {
+  transition: color 0.2s ease-out;
+  color: #1f2326;
+  &:hover {
+    color: $color-primary;
+    text-decoration: none;
+  }
+}
+.video-js .vjs-big-play-button {
+  top: calc(50% - 25px);
+  left: calc(50% - 45px);
+}
+.navbar {
+  .navbar-brand {
+    margin: -0.5rem 0;
+    padding: 0;
+    img {
+      height: 56px;
+    }
+  }
+}
 .listing-header {
   background: #1f2326;
   color: #fff;
@@ -24,7 +53,7 @@ h1, h2, h3, h4 {
     padding-bottom: 20px;
     padding-top: 30px;
     text-align: center;
-    border-bottom: 1px solid #068df8;
+    border-bottom: 1px solid $color-primary;
   }
   .content {
     text-align: left;
@@ -36,11 +65,13 @@ h1, h2, h3, h4 {
         margin: 0 15px;
         font-size: 1.5rem;
         font-weight: 100;
-        a {
+        > a {
+          transition: border-bottom-color 0.2s ease-out;
           color: #fff;
           text-decoration: none;
-          &.active {
-            border-bottom: 1px solid #068df8;
+          border-bottom: 1px solid transparent;
+          &.active, &:hover {
+            border-bottom-color: $color-primary;
           }
         }
         .dropdown-menu {
@@ -52,13 +83,166 @@ h1, h2, h3, h4 {
     }
   }
 }
-.index {
-  dl dd a {
-    transition: color 0.2s ease-out;
-    color: #1f2326;
-    &:hover {
-      color: #068df8;
-      text-decoration: none;
+.item {
+  margin: 20px 0;
+  background-color: #fff;
+  padding: 30px;
+  .topics, .type, .authors, .date, .scriptures, .series {
+    font-size: 13px;
+    text-transform: uppercase;
+  }
+  .authors {
+    font-weight: bold;
+  }
+  h2 {
+    font-size: 32px;
+    a {
+      border-bottom: 1px solid $color-primary;
+    }
+  }
+}
+.feature {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: #fff;
+  margin: 20px 0;
+  .media-image {
+    width: 100%;
+  }
+  .highlight {
+    background-size: cover;
+  }
+  .body {
+    padding: 20px 30px;
+  }
+  .content {
+    text-align: center;
+    height: 244px;
+  }
+  .type, .snippet, .date, .action {
+    font-size: 13px;
+    text-transform: uppercase;
+  }
+  .action {
+    color: $color-primary;
+    font-weight: bold;
+  }
+  .snippet {
+    font-weight: bold;
+  }
+  h2 {
+    font-size: 32px;
+    a {
+      border-bottom: 1px solid $color-primary;
+    }
+  }
+}
+.card-deck {
+  margin: 20px -15px;
+}
+.card.resource {
+  border: 0;
+  border-radius: 0;
+  .type, .card-footer {
+    font-size: 13px;
+    text-transform: uppercase;
+  }
+  .media-image {
+    width: 100%;
+  }
+  .card-body {
+    padding: 20px 30px;
+  }
+  .card-footer {
+    padding: 20px 30px;
+    background: transparent;
+    border: 0;
+  }
+  .action {
+    color: $color-primary;
+    font-weight: bold;
+  }
+  .card-title {
+    a {
+      border-bottom: 1px solid $color-primary;
+    }
+  }
+}
+.page {
+  &-header {
+    background: #1f2326;
+    padding: 10px 0;
+    .media-image {
+      width: 100%;
+    }
+  }
+  &-section {
+    background: #fff;
+  }
+}
+.resource {
+  &-header {
+    text-align: center;
+    padding: 60px 0;
+    .breadcrumbs {
+      margin: 1em 10px;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+    .lead {
+      font-size: 26px;
+      max-width: 670px;
+      margin: 0 auto 1em;
+      font-weight: 300;
+    }
+    .authors, .pipe, .date {
+      font-weight: bold;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+    .scripture {
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+    h1 {
+      font-size: 70px;
+      line-height: 1.05;
+      max-width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+.site-footer {
+  background-color: #1f2326;
+  color: $color-primary;
+  padding-bottom: 80px;
+  .connect {
+    background: #282c2f;
+    padding: 50px 0;
+  }
+  .links {
+    margin: 0 auto;
+    width: 80%;
+    padding: 60px 0;
+    ul {
+      list-style-type: none;
+      li {
+        line-height: 1.7;
+        font-size: 25px;
+        font-weight: 100;
+        a {
+          color: #fff;
+        }
+      }
+    }
+  }
+  .credits {
+    font-size: 18px;
+    text-align: center;
+    .copyright {
+      font-size: 15px;
+      text-transform: uppercase;
     }
   }
 }

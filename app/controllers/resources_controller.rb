@@ -14,7 +14,13 @@ class ResourcesController < ApplicationController
   protected
 
   def load_resources
-    @resources ||= scope.all
+    return @resources if @resources
+
+    @resources = scope.published
+    if params[:resource_type].present?
+      @resources = @resources.where(type: Resource::TYPES[params[:resource_type].to_sym])
+    end
+    @resources = @resources.page params[:page]
   end
 
   def load_resource

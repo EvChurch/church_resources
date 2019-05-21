@@ -1,0 +1,36 @@
+<div class="item">
+  <header>
+    <div class="d-flex">
+      <span class="type"><%= resource.type_title %></span>
+      <div class="series ml-auto">
+        Series:
+        <% resource.series.each do |series| %>
+          <%= link_to series.name, series_path(series, resource_type: params[:resource_type]) %>
+        <% end %>
+      </div>
+    </div>
+    <h2><%= link_to resource.name, resource_path(resource) %></h2>
+    <p class="authors">
+    <% resource.authors.each do |author| %>
+      <%= link_to author.name, author_path(author, resource_type: params[:resource_type]) %>
+    <% end %>
+    </p>
+  </header>
+  <footer>
+    <div class="d-flex">
+      <date class="date"><%= resource.created_at.strftime('%b %d, %Y') %></date>
+      <div class="topics ml-auto">
+        Topic:
+        <% resource.topics.each do |topic| %>
+          <%= link_to topic.name, topic_path(topic, resource_type: params[:resource_type]) %>
+        <% end %>
+      </div>
+      <div class="scriptures ml-3">
+        Scripture:
+        <% resource.scriptures.each do |scripture| %>
+          <%= link_to scripture.name, scripture_path(scripture, resource_type: params[:resource_type]) %>
+        <% end %>
+      </div>
+    </div>
+  </footer>
+</div>

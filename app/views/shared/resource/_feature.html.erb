@@ -1,0 +1,26 @@
+<div class="feature">
+  <%= render partial: 'shared/resource/media', locals: { resource: resource } %>
+  <div class="body">
+    <div class="content d-flex flex-column justify-content-center">
+      <div>
+        <span class="type"><%= resource.type_title %></span>
+        <h2><%= link_to resource.name, resource_path(resource) %></h2>
+        <div class="snippet">
+          <% resource.series.each do |series| %>
+            <%= link_to series.name, series_path(series, resource_type: params[:resource_type]) %>
+          <% end %>
+          |
+          <% resource.authors.each do |author| %>
+            <%= link_to author.name, author_path(author, resource_type: params[:resource_type]) %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <date class="date"><%= resource.created_at.strftime('%b %d, %Y') %></date>
+      <div class="ml-auto">
+        <%= link_to "#{resource.action} <i class=\"fa fa-angle-right ml-1\"></i>".html_safe, resource_path(resource), class: 'action' %>
+      </div>
+    </div>
+  </div>
+</div>

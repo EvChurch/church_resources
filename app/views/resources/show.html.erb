@@ -1,0 +1,31 @@
+<div class="page-header">
+  <div class="container">
+    <%= render partial: 'shared/resource/media', locals: { resource: resource } %>
+  </div>
+</div>
+<div class="page-section">
+  <div class="container resource-header">
+    <div class="breadcrumbs">
+      <%= link_to resource.type_title, resources_path(resource_type: resource.type_param) %>
+      /
+      <%= link_to resource.series.first.name, series_path(resource.series.first) %>
+    </div>
+    <h1><%= title resource.name %></h1>
+    <p class="lead"><%= resource.snippet %></p>
+    <p>
+      <span class="authors">
+      <% resource.authors.each do |author| %>
+        <%= link_to author.name, author_path(author, resource_type: params[:resource_type]) %>
+      <% end %>
+      </span>
+      <span class="pipe">|</span>
+      <date class="date"><%= resource.created_at.strftime('%b %d, %Y') %></date>
+    </p>
+    <p class="scripture">
+      Scripture:
+      <% resource.scriptures.each do |scripture| %>
+        <%= link_to scripture.name, scripture_path(scripture, resource_type: params[:resource_type]) %>
+      <% end %>
+    </p>
+  </div>
+</div>

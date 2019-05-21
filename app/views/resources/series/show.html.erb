@@ -1,3 +1,13 @@
 <% title params[:resource_type] ? "#{params[:resource_type].pluralize.titleize} on #{series.name}" : "Resources on #{series.name}" %>
+<% if series.background.present? && series.foreground.present? %>
+<header class="listing-header">
+    <div style="background-image:url(<%= url_for series.background %>);">
+      <div class="container">
+          <%= image_tag url_for series.foreground %>
+      </div>
+    </div>
+</header>
+<% else %>
 <%= render 'shared/listing_header' %>
-<%= render 'shared/resources', locals: { resources: resources } %>
+<% end %>
+<%= render partial: 'shared/resources', locals: { resources: resources } %>

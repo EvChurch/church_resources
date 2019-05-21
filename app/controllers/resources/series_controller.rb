@@ -17,11 +17,11 @@ class Resources::SeriesController < ApplicationController
   def load_resources
     return @resources if @resources
 
-    @resources = Resource.where(series: [@series])
+    @resources = Resource.joins(:series).where(series: { id: [@series.id] })
     if params[:resource_type].present?
       @resources = @resources.where(type: Resource::TYPES[params[:resource_type].to_sym])
     end
-    @resources = @resources.page params[:page]
+    @resources = @resources.published.page params[:page]
   end
 
   def load_series_index

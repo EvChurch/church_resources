@@ -1,19 +1,14 @@
 <div class="container">
-  <% resources.limit(3).each do |resource| %>
-  <div class="card-deck">
-    <div class="card">
-      <img class="card-img-top" src="..." alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title"><%= resource.name %></h5>
-        <p class="card-text"><%= resource.snippet %></p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted"><%= resource.published_at %></small>
-      </div>
+  <% if params[:page].blank? %>
+    <%= render partial: "shared/resource/feature", locals: { resource: resources.first } if resources.first %>
+    <div class="card-deck">
+    <% resources[1, 3]&.each do |resource| %>
+      <%= render partial: "shared/resource/card", locals: { resource: resource } %>
+    <% end %>
     </div>
-  </div>
   <% end %>
-  <% resources.each do |resource| %>
-    <%= render "shared/#{resource_type}" %>
+  <% (params[:page].blank? ? resources[4..-1] : resources)&.each do |resource| %>
+    <%= render partial: "shared/resource/item", locals: { resource: resource } %>
   <% end %>
 </div>
+<%%>

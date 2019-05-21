@@ -17,11 +17,11 @@ class Resources::ScripturesController < ApplicationController
   def load_resources
     return @resources if @resources
 
-    @resources = Resource.where(scriptures: [@scripture])
+    @resources = Resource.joins(:scriptures).where(scriptures: { id: [@scripture.id] })
     if params[:resource_type].present?
       @resources = @resources.where(type: Resource::TYPES[params[:resource_type].to_sym])
     end
-    @resources = @resources.page params[:page]
+    @resources = @resources.published.page params[:page]
   end
 
   def load_scriptures
