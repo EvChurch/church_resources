@@ -260,6 +260,11 @@ a {
       border-bottom: 1px solid $color-primary;
     }
   }
+  .card-author {
+    font-weight: bold;
+    font-size: 13px;
+    text-transform: uppercase;
+  }
 }
 .page {
   &-header {
@@ -378,5 +383,14 @@ a {
     ul {
       padding: 0;
     }
+  }
+}
+.pagination {
+  .page-link {
+    color: $color-primary;
+  }
+  .page-item.active .page-link {
+    background-color: $color-primary;
+    border-color: $color-primary;
   }
 }

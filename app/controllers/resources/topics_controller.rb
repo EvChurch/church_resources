@@ -17,7 +17,7 @@ class Resources::TopicsController < ApplicationController
   def load_resources
     return @resources if @resources
 
-    @resources = Resource.order(:created_at).joins(:topics).where(category_topics: { id: [@topic.id] })
+    @resources = Resource.order(published_at: :desc).joins(:topics).where(category_topics: { id: [@topic.id] })
     if params[:resource_type].present?
       @resources = @resources.where(type: Resource::TYPES[params[:resource_type].to_sym])
     end

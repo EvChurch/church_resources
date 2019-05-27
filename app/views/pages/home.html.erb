@@ -1,3 +1,4 @@
 <% title 'Resource Library' %>
-<%= render partial: 'shared/resource/primary', locals: { resource: Resource.published.order(:created_at).first.decorate } if Resource.published.first %>
-<%= render partial: 'shared/resources', locals: { resources: Resource.published.order(:created_at).page(1).offset(1).decorate } %>
+<% resources = Resource.published.featured.order(featured_at: :desc).decorate %>
+<%= render partial: 'shared/resource/primary', locals: { resource: resources.first } if resources.first %>
+<%= render partial: 'shared/resources', locals: { resources: resources.offset(1) } %>

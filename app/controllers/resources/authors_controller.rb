@@ -17,7 +17,7 @@ class Resources::AuthorsController < ApplicationController
   def load_resources
     return @resources if @resources
 
-    @resources = Resource.order(:created_at).joins(:authors).where(authors: { id: [@author.id] })
+    @resources = Resource.order(published_at: :desc).joins(:authors).where(authors: { id: [@author.id] })
     if params[:resource_type].present?
       @resources = @resources.where(type: Resource::TYPES[params[:resource_type].to_sym])
     end

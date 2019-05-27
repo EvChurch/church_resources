@@ -21,8 +21,9 @@
   <footer>
     <div class="d-flex">
       <date class="date"><%= resource.published_at.strftime('%b %d, %Y') %></date>
+      <div class="ml-auto"></div>
       <% if resource.topics.any? %>
-      <div class="topics ml-auto d-none d-md-block">
+      <div class="topics ml-3 d-none d-md-block">
         Topic:
         <% resource.topics.each do |topic| %>
           <%= link_to topic.name, topic_path(topic, resource_type: params[:resource_type]) %>

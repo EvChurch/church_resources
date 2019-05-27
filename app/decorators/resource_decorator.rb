@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 class ResourceDecorator < ApplicationDecorator
-  def name
-    object.name.html_safe
-  end
-
   def action
     'view'
   end

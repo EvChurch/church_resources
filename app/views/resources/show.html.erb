@@ -19,7 +19,7 @@
       <% end %>
       </span>
       <span class="pipe">|</span>
-      <date class="date"><%= resource.created_at.strftime('%b %d, %Y') %></date>
+      <date class="date"><%= resource.published_at.strftime('%b %d, %Y') %></date>
     </p>
     <% if resource.scriptures.any? %>
     <p class="scripture">
