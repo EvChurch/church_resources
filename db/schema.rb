@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_20_100722) do
+ActiveRecord::Schema.define(version: 2019_05_27_024353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2019_05_20_100722) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "remote_id"
   end
 
   create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -134,6 +135,8 @@ ActiveRecord::Schema.define(version: 2019_05_20_100722) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "youtube_url"
+    t.string "remote_id"
+    t.string "audio_url"
   end
 
   create_table "scriptures", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -148,6 +151,7 @@ ActiveRecord::Schema.define(version: 2019_05_20_100722) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "remote_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

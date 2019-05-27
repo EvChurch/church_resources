@@ -3,6 +3,10 @@
 class Resource < ApplicationRecord
   TYPES = { article: 'Resource::Article', sermon: 'Resource::Sermon' }.freeze
 
+  TYPES.each do |key, value|
+    scope key.to_s.pluralize, -> { where(type: value) }
+  end
+
   extend FriendlyId
   friendly_id :name, use: :slugged
 
@@ -21,7 +25,8 @@ class Resource < ApplicationRecord
   has_many :connection_topics, class_name: 'Resource::Connection::Topic', dependent: :destroy
   has_many :topics, through: :connection_topics
 
-  validates :name, :snippet, presence: true
+  validates :name, presence: true
 
   scope :published, -> { where.not(published_at: nil) }
+  scope :featured, -> { where.not(featured_at: nil) }
 end

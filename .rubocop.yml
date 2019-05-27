@@ -16,3 +16,5 @@ LineLength:
   Max: 120
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
+Naming/MemoizedInstanceVariableName:
+  Enabled: false

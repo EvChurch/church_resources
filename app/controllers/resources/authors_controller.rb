@@ -17,7 +17,7 @@ class Resources::AuthorsController < ApplicationController
   def load_resources
     return @resources if @resources
 
-    @resources = Resource.joins(:authors).where(authors: { id: [@author.id] })
+    @resources = Resource.order(:created_at).joins(:authors).where(authors: { id: [@author.id] })
     if params[:resource_type].present?
       @resources = @resources.where(type: Resource::TYPES[params[:resource_type].to_sym])
     end
@@ -43,6 +43,8 @@ class Resources::AuthorsController < ApplicationController
   end
 
   def scope
-    ::Author
+    return ::Author unless params[:resource_type]
+
+    ::Author.joins(:resources).where(resources: { type: Resource::TYPES[params[:resource_type].to_sym] }).distinct
   end
 end

@@ -2,12 +2,14 @@
   <header>
     <div class="d-flex">
       <span class="type"><%= resource.type_title %></span>
-      <div class="series ml-auto">
+      <% if resource.series.any? %>
+      <div class="series ml-auto d-none d-md-block">
         Series:
         <% resource.series.each do |series| %>
           <%= link_to series.name, series_path(series, resource_type: params[:resource_type]) %>
         <% end %>
       </div>
+      <% end %>
     </div>
     <h2><%= link_to resource.name, resource_path(resource) %></h2>
     <p class="authors">
@@ -18,19 +20,23 @@
   </header>
   <footer>
     <div class="d-flex">
-      <date class="date"><%= resource.created_at.strftime('%b %d, %Y') %></date>
-      <div class="topics ml-auto">
+      <date class="date"><%= resource.published_at.strftime('%b %d, %Y') %></date>
+      <% if resource.topics.any? %>
+      <div class="topics ml-auto d-none d-md-block">
         Topic:
         <% resource.topics.each do |topic| %>
           <%= link_to topic.name, topic_path(topic, resource_type: params[:resource_type]) %>
         <% end %>
       </div>
-      <div class="scriptures ml-3">
+      <% end %>
+      <% if resource.scriptures.any? %>
+      <div class="scriptures ml-3 d-none d-md-block">
         Scripture:
         <% resource.scriptures.each do |scripture| %>
           <%= link_to scripture.name, scripture_path(scripture, resource_type: params[:resource_type]) %>
         <% end %>
       </div>
+      <% end %>
     </div>
   </footer>
 </div>

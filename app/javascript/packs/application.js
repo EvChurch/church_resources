@@ -4,7 +4,7 @@
 // that code so it'll be compiled.
 
 import '../stylesheets/application';
-import './bootstrap_custom.js';
+import './vendor/bootstrap';
 import videojs from 'video.js';
 import 'videojs-youtube';
 

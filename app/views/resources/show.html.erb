@@ -21,11 +21,13 @@
       <span class="pipe">|</span>
       <date class="date"><%= resource.created_at.strftime('%b %d, %Y') %></date>
     </p>
+    <% if resource.scriptures.any? %>
     <p class="scripture">
       Scripture:
       <% resource.scriptures.each do |scripture| %>
         <%= link_to scripture.name, scripture_path(scripture, resource_type: params[:resource_type]) %>
       <% end %>
     </p>
+    <% end %>
   </div>
 </div>

@@ -17,7 +17,7 @@ class Resources::ScripturesController < ApplicationController
   def load_resources
     return @resources if @resources
 
-    @resources = Resource.joins(:scriptures).where(scriptures: { id: [@scripture.id] })
+    @resources = Resource.order(:created_at).joins(:scriptures).where(scriptures: { id: [@scripture.id] })
     if params[:resource_type].present?
       @resources = @resources.where(type: Resource::TYPES[params[:resource_type].to_sym])
     end
@@ -43,6 +43,8 @@ class Resources::ScripturesController < ApplicationController
   end
 
   def scope
-    ::Scripture
+    return ::Scripture unless params[:resource_type]
+
+    ::Scripture.joins(:resources).where(resources: { type: Resource::TYPES[params[:resource_type].to_sym] }).distinct
   end
 end

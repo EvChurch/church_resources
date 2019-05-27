@@ -1,12 +1,12 @@
 <div class="card resource">
-  <%= render partial: 'shared/resource/media', locals: { resource: resource } %>
+  <%= render partial: 'shared/resource/media', locals: { resource: resource } if show_image %>
   <div class="card-body">
     <span class="type"><%= resource.type_title %></span>
     <h3 class="card-title"><%= link_to resource.name, resource_path(resource) %></h3>
     <p class="card-text"><%= resource.snippet %></p>
   </div>
   <div class="card-footer d-flex">
-    <date class="date"><%= resource.created_at.strftime('%b %d, %Y') %></date>
+    <date class="date"><%= resource.published_at.strftime('%b %d, %Y') %></date>
     <div class="ml-auto">
       <%= link_to "#{resource.action} <i class=\"fa fa-angle-right ml-1\"></i>".html_safe, resource_path(resource), class: 'action' %>
     </div>

@@ -10,8 +10,8 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <%= link_to 'All', resources_path, class: 'dropdown-item' %>
-              <%= link_to 'Article', resources_path(resource_type: 'article'), class: 'dropdown-item' %>
-              <%= link_to 'Sermon', resources_path(resource_type: 'sermon'), class: 'dropdown-item' %>
+              <%= link_to 'Article', resources_path(resource_type: 'article'), class: 'dropdown-item' if Resource.articles.any? %>
+              <%= link_to 'Sermon', resources_path(resource_type: 'sermon'), class: 'dropdown-item' if Resource.sermons.any? %>
             </div>
           </div>
         </li>

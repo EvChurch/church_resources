@@ -11,15 +11,23 @@
       <div class="container">
         <div class="card-deck">
         <% resources[1, 3]&.each do |resource| %>
-          <%= render partial: "shared/resource/card", locals: { resource: resource } %>
+          <%= render partial: "shared/resource/card", locals: { resource: resource, show_image: true } %>
         <% end %>
         </div>
       </div>
     </div>
   <% end %>
 <% end %>
-<div class="container">
-  <% (params[:page].blank? ? resources[4..-1] : resources)&.each do |resource| %>
-    <%= render partial: "shared/resource/item", locals: { resource: resource } %>
-  <% end %>
+<div class="page-listing">
+  <div class="container">
+    <% (params[:page].blank? ? resources[4..-1] : resources)&.each do |resource| %>
+      <%= render partial: "shared/resource/item", locals: { resource: resource } %>
+    <% end %>
+  </div>
 </div>
+<% unless current_page?(root_path) || resources.count < 4 %>
+<div class="d-flex flex-column align-items-center my-4">
+  <div><%= paginate resources, theme: 'twitter-bootstrap-4' %></div>
+  <div><%= page_entries_info resources %></div>
+</div>
+<% end %>

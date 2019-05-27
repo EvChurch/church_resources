@@ -7,6 +7,7 @@ ruby '2.5.3'
 gem 'activeadmin'
 gem 'aws-sdk-s3', require: false
 gem 'bootsnap', '>= 1.4.2', require: false
+gem 'bootstrap4-kaminari-views'
 gem 'devise'
 gem 'high_voltage', '~> 3.1'
 gem 'image_processing', '~> 1.2'
@@ -20,12 +21,15 @@ gem 'webpacker', '~> 4.0'
 gem 'simple_form'
 gem 'draper'
 gem 'friendly_id', '~> 5.2.4'
+gem 'httparty'
 
 group :development, :test do
   gem 'byebug'
   gem 'dotenv-rails', '~> 2.7'
   gem 'factory_bot_rails'
   gem 'rspec-rails', '~> 3.8'
+  gem 'pry-byebug'
+  gem 'pry-rails'
 end
 
 group :development do

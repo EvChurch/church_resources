@@ -3,7 +3,7 @@
 ActiveAdmin.register Resource::Sermon do
   menu parent: 'Resources', label: 'Sermons'
 
-  permit_params :name, :snippet, :content, :video, :audio, :youtube_url,
+  permit_params :name, :snippet, :content, :video, :audio, :youtube_url, :audio_url,
                 topic_ids: [], author_ids: [], scripture_ids: [], series_ids: []
 
   form do |f|
@@ -12,9 +12,10 @@ ActiveAdmin.register Resource::Sermon do
       f.input :name
       f.input :snippet
       f.input :content
+      f.input :youtube_url
+      f.input :audio_url
       f.input :video, as: :file
       f.input :audio, as: :file
-      f.input :youtube_url
       f.input :topics, collection: Category::Topic.all, multiple: true
       f.input :authors, collection: Author.all, multiple: true
       f.input :scriptures, collection: Scripture.all, multiple: true

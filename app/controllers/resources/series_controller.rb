@@ -17,7 +17,7 @@ class Resources::SeriesController < ApplicationController
   def load_resources
     return @resources if @resources
 
-    @resources = Resource.joins(:series).where(series: { id: [@series.id] })
+    @resources = Resource.order(:created_at).joins(:series).where(series: { id: [@series.id] })
     if params[:resource_type].present?
       @resources = @resources.where(type: Resource::TYPES[params[:resource_type].to_sym])
     end
@@ -43,6 +43,8 @@ class Resources::SeriesController < ApplicationController
   end
 
   def scope
-    ::Series
+    return ::Series unless params[:resource_type]
+
+    ::Series.joins(:resources).where(resources: { type: Resource::TYPES[params[:resource_type].to_sym] }).distinct
   end
 end
