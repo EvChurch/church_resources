@@ -6,22 +6,22 @@
   </video>
 <% elsif resource.video.present? %>
     <video class="media-video video-js vjs-default-skin"
-      controls preload="none" poster="<%= url_for resource.banner if resource.banner.present? %>"
+      controls preload="none" poster="<%= polymorphic_url(resource.banner) if resource.banner.present? %>"
       data-setup='{ "aspectRatio":"16:9", "fluid": true, "playbackRates": [1, 1.5, 2] }'>
       <source src="https://vjs.zencdn.net/v/oceans.mp4" type='video/mp4' />
       <source src="https://vjs.zencdn.net/v/oceans.webm" type='video/webm' />
     </video>
 <% elsif resource.audio_url.present? %>
   <audio class="media-audio video-js vjs-default-skin"
-    controls preload="auto" poster="<%= url_for resource.banner if resource.banner.present? %>"
+    controls preload="auto" poster="<%= polymorphic_url(resource.banner) if resource.banner.present? %>"
     data-setup='{ "fluid": true, "playbackRates": [1, 1.5, 2] }'>
-    <source src="<%= url_for resource.audio_url %>" type='audio/mp3'/>
+    <source src="<%= resource.audio_url %>" type='audio/mp3'/>
   </audio>
 <% elsif resource.audio.present? %>
   <audio class="media-audio video-js vjs-default-skin"
-    controls preload="auto" poster="<%= url_for resource.banner if resource.banner.present? %>"
+    controls preload="auto" poster="<%= polymorphic_url(resource.banner) if resource.banner.present? %>"
     data-setup='{ "fluid": true, "playbackRates": [1, 1.5, 2] }'>
-    <source src="<%= url_for resource.audio %>" type='audio/mp3'/>
+    <source src="<%= polymorphic_url(resource.audio) %>" type='audio/mp3'/>
   </audio>
 <% elsif resource.banner.present? %>
   <%= image_tag resource.banner, class: 'img-fluid' %>

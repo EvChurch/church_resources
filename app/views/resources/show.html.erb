@@ -48,8 +48,8 @@
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ced0bb51af38b7a"></script>
 <% set_meta_tags og: {
   title: resource.name,
-  audio: resource.audio_url.presence || url_for(resource.audio),
+  audio: resource.audio_url.presence || polymorphic_url(resource.audio),
   description: resource.snippet,
   url: resource_url(resource),
-  image: (url_for(resource.banner) if resource.banner.present?)
+  image: (polymorphic_url(resource.banner) if resource.banner.present?)
 } %>
