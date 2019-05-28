@@ -1,26 +1,26 @@
 <header class="listing-header">
   <div class="container">
     <h1 class="mt-0"><%= display_title %></h1>
-    <div class="content">
-      <ul>
-        <li>
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <%= params[:resource_type] ? params[:resource_type].pluralize.titleize : 'All Resources' %>
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <%= link_to 'All', resources_path, class: 'dropdown-item' %>
-              <%= link_to 'Article', resources_path(resource_type: 'article'), class: 'dropdown-item' if Resource.articles.any? %>
-              <%= link_to 'Sermon', resources_path(resource_type: 'sermon'), class: 'dropdown-item' if Resource.sermons.any? %>
-            </div>
+  </div>
+  <div class="content">
+    <ul>
+      <li>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= params[:resource_type] ? params[:resource_type].pluralize.titleize : 'All Resources' %>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <%= link_to 'All', resources_path, class: 'dropdown-item' %>
+            <%= link_to 'Article', resources_path(resource_type: 'article'), class: 'dropdown-item' if Resource.articles.any? %>
+            <%= link_to 'Sermon', resources_path(resource_type: 'sermon'), class: 'dropdown-item' if Resource.sermons.any? %>
           </div>
-        </li>
-        <li><%= link_to 'Recent', resources_path(resource_type: params[:resource_type]), class: ('active' if current_page?(resources_path(resource_type: params[:resource_type]))) %></li>
-        <li><%= link_to 'Authors', authors_path(resource_type: params[:resource_type]), class: ('active' if current_page?(authors_path(resource_type: params[:resource_type]))) %></li>
-        <li><%= link_to 'Scripture', scriptures_path(resource_type: params[:resource_type]), class: ('active' if current_page?(scriptures_path(resource_type: params[:resource_type]))) %></li>
-        <li><%= link_to 'Series', series_index_path(resource_type: params[:resource_type]), class: ('active' if current_page?(series_index_path(resource_type: params[:resource_type]))) %></li>
-        <li><%= link_to 'Topics', topics_path(resource_type: params[:resource_type]), class: ('active' if current_page?(topics_path(resource_type: params[:resource_type]))) %></li>
-      </ul>
-    </div>
+        </div>
+      </li>
+      <li><%= link_to 'Recent', resources_path(resource_type: params[:resource_type]), class: ('active' if current_page?(resources_path(resource_type: params[:resource_type]))) %></li>
+      <li><%= link_to 'Authors', authors_path(resource_type: params[:resource_type]), class: ('active' if current_page?(authors_path(resource_type: params[:resource_type]))) %></li>
+      <li><%= link_to 'Scripture', scriptures_path(resource_type: params[:resource_type]), class: ('active' if current_page?(scriptures_path(resource_type: params[:resource_type]))) %></li>
+      <li><%= link_to 'Series', series_index_path(resource_type: params[:resource_type]), class: ('active' if current_page?(series_index_path(resource_type: params[:resource_type]))) %></li>
+      <li><%= link_to 'Topics', topics_path(resource_type: params[:resource_type]), class: ('active' if current_page?(topics_path(resource_type: params[:resource_type]))) %></li>
+    </ul>
   </div>
 </header>

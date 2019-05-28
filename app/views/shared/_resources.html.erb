@@ -27,7 +27,7 @@
 </div>
 <% unless current_page?(root_path) || resources.count < 4 && params[:page].blank? %>
 <div class="d-flex flex-column align-items-center my-4">
-  <div><%= paginate resources, theme: 'twitter-bootstrap-4' %></div>
+  <div><%= paginate resources, theme: 'twitter-bootstrap-4', window: 1 %></div>
   <div><%= page_entries_info resources %></div>
 </div>
 <% end %>

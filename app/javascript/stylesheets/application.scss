@@ -105,7 +105,11 @@ a {
     text-align: left;
     padding: 25px 0 35px;
     text-align: center;
+    overflow-y: auto;
     ul {
+      padding: 0;
+      margin: 0;
+      min-width: 710px;
       li {
         display: inline-block;
         margin: 0 15px;
@@ -134,15 +138,12 @@ a {
     background-repeat: no-repeat;
   }
   @include media-breakpoint-down(sm) {
-    text-align: center;
     .content {
-      ul {
-        padding: 0;
-        li {
-          display: block;
-          margin-bottom: 5px;
-        }
-      }
+      padding: 10px 0 20px;
+      margin-bottom: 20px;
+    }
+    .series-background {
+      margin-bottom: 20px;
     }
   }
 }
@@ -209,6 +210,7 @@ a {
   @include media-breakpoint-down(sm) {
     padding: 0;
     padding-bottom: 20px;
+    background: transparent;
     .container {
       padding: 0;
     }
@@ -465,5 +467,14 @@ a {
   }
   @include media-breakpoint-down(sm) {
     padding: 50px 25px;
+  }
+}
+.pagination {
+  @include media-breakpoint-down(sm) {
+    padding: 50px 25px;
+    .page-item:first-child,
+    .page-item:last-child {
+      display: none;
+    }
   }
 }
