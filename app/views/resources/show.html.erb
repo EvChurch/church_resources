@@ -49,7 +49,7 @@
 <% set_meta_tags og: {
   title: resource.name,
   audio: resource.audio_url.presence || polymorphic_url(resource.audio),
-  description: resource.snippet,
+  description: resource.description,
   url: resource_url(resource),
   image: (polymorphic_url(resource.banner) if resource.banner.present?)
 } %>
