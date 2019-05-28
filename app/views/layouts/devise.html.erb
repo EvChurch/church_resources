@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= display_meta_tags site: 'Auckland Ev', reverse: true %>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <link rel="stylesheet" href="https://use.typekit.net/vww5ope.css">
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+
+  <body>
+    <%= render 'menu' %>
+      <div class="container my-md-5">
+        <div class="row">
+          <div class="page-section py-md-5 p-md-5 col-12 col-md-6 offset-md-3">
+          <%= yield %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= render 'footer' %>
+  </body>
+</html>

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  layout :layout_by_resource
+
   protect_from_forgery prepend: true, with: :null_session
   before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -9,6 +11,11 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer_sign_up
     devise_parameter_sanitizer_account_update
+  end
+
+  def authenticate_admin_user!
+    authenticate_user!
+    redirect_to new_user_session_path unless current_user.has_role?(:admin)
   end
 
   private
@@ -27,5 +34,9 @@ class ApplicationController < ActionController::Base
         first_name last_name
       ]
     )
+  end
+
+  def layout_by_resource
+    devise_controller? ? 'devise' : 'application'
   end
 end

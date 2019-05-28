@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_28_071641) do
+ActiveRecord::Schema.define(version: 2019_05_28_201527) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -141,6 +141,16 @@ ActiveRecord::Schema.define(version: 2019_05_28_071641) do
     t.string "audio_url"
   end
 
+  create_table "roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "resource_type"
+    t.uuid "resource_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", unique: true
+    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
+  end
+
   create_table "scriptures", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "slug"
@@ -184,6 +194,16 @@ ActiveRecord::Schema.define(version: 2019_05_28_071641) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  create_table "users_roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "role_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["role_id"], name: "index_users_roles_on_role_id"
+    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", unique: true
+    t.index ["user_id"], name: "index_users_roles_on_user_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "category_topics", "categories", on_delete: :cascade
   add_foreign_key "resource_connection_authors", "authors", on_delete: :cascade
@@ -194,4 +214,6 @@ ActiveRecord::Schema.define(version: 2019_05_28_071641) do
   add_foreign_key "resource_connection_series", "series", on_delete: :cascade
   add_foreign_key "resource_connection_topics", "category_topics", column: "topic_id", on_delete: :cascade
   add_foreign_key "resource_connection_topics", "resources", on_delete: :cascade
+  add_foreign_key "users_roles", "roles", on_delete: :cascade
+  add_foreign_key "users_roles", "users", on_delete: :cascade
 end

@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.3'
+
 gem 'activeadmin'
 gem 'aws-sdk-s3', require: false
 gem 'bootsnap', '>= 1.4.2', require: false
@@ -25,6 +26,7 @@ gem 'httparty'
 gem 'redis'
 gem 'hiredis'
 gem 'mechanize'
+gem 'rolify'
 
 group :development, :test do
   gem 'byebug'
