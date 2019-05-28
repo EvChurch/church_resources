@@ -451,4 +451,7 @@ a {
   .woj {
     color: $color-primary;
   }
+  @include media-breakpoint-down(sm) {
+    padding: 50px 25px;
+  }
 }
