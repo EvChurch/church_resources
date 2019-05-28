@@ -24,6 +24,7 @@ gem 'friendly_id', '~> 5.2.4'
 gem 'httparty'
 gem 'redis'
 gem 'hiredis'
+gem 'mechanize'
 
 group :development, :test do
   gem 'byebug'

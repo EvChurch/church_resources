@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ResourceDecorator < ApplicationDecorator
+  decorates_association :connection_scriptures
+
   def action
     'view'
   end

@@ -33,8 +33,8 @@
       <% if resource.scriptures.any? %>
       <div class="scriptures ml-3 d-none d-md-block">
         Scripture:
-        <% resource.scriptures.each do |scripture| %>
-          <%= link_to scripture.name, scripture_path(scripture, resource_type: params[:resource_type]) %>
+        <% resource.connection_scriptures.each do |connection_scripture| %>
+          <%= link_to connection_scripture.name, scripture_path(connection_scripture.scripture_id, resource_type: params[:resource_type]) %>
         <% end %>
       </div>
       <% end %>

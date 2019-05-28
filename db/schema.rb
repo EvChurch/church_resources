@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_27_024353) do
+ActiveRecord::Schema.define(version: 2019_05_28_071641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -101,6 +101,8 @@ ActiveRecord::Schema.define(version: 2019_05_27_024353) do
     t.uuid "scripture_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "range"
+    t.text "content"
     t.index ["resource_id"], name: "index_resource_connection_scriptures_on_resource_id"
     t.index ["scripture_id"], name: "index_resource_connection_scriptures_on_scripture_id"
   end
