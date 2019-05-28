@@ -12,8 +12,8 @@ class Import::WpfcService
   end
 
   def import
-    # import_authors
-    # import_series
+    import_authors
+    import_series
     import_sermons
   end
 
@@ -21,15 +21,17 @@ class Import::WpfcService
     items('wpfc_sermon_series').each do |remote_series|
       series = Series.find_or_initialize_by(remote_id: remote_series['id'])
       series.name = CGI.unescapeHTML(remote_series['name'])
+      series.slug = remote_series['slug']
       series.save!
     end
   end
 
   def import_authors
     items('wpfc_preacher').each do |remote_author|
-      series = Author.find_or_initialize_by(remote_id: remote_author['id'])
-      series.name = CGI.unescapeHTML(remote_author['name'])
-      series.save!
+      author = Author.find_or_initialize_by(remote_id: remote_author['id'])
+      author.name = CGI.unescapeHTML(remote_author['name'])
+      author.slug = remote_author['slug']
+      author.save!
     end
   end
 
@@ -37,6 +39,7 @@ class Import::WpfcService
     items('wpfc_sermon').each do |remote_sermon|
       sermon = Resource::Sermon.find_or_initialize_by(remote_id: remote_sermon['id'])
       sermon.name = CGI.unescapeHTML(remote_sermon['title']['rendered'])
+      sermon.slug = remote_sermon['slug']
       sermon.connection_scriptures = connection_scriptures(remote_sermon['bible_passage'])
       sermon.authors = Author.where(remote_id: remote_sermon['wpfc_preacher'])
       sermon.series = Series.where(remote_id: remote_sermon['wpfc_sermon_series'])
