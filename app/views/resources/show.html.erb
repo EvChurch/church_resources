@@ -12,6 +12,7 @@
     </div>
     <h1><%= title resource.name %></h1>
     <p class="lead"><%= resource.snippet %></p>
+    <div class="addthis_inline_share_toolbox mb-3"></div>
     <p>
       <span class="authors">
       <% resource.authors.each do |author| %>
@@ -32,3 +33,23 @@
     <% end %>
   </div>
 </div>
+<% if resource.related.any? %>
+<div class="card-deck-container">
+  <div class="container">
+    <h2>Related Resources</h2>
+    <div class="card-deck">
+    <% resource.related.each do |resource| %>
+      <%= render partial: "shared/resource/card", locals: { resource: resource, show_image: true } %>
+    <% end %>
+    </div>
+  </div>
+</div>
+<% end %>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ced0bb51af38b7a"></script>
+<% set_meta_tags og: {
+  title: resource.name,
+  audio: resource.audio_url.present || url_for(resource.audio),
+  description: resource.snippet,
+  url: resource_url(resource),
+  image: (url_for(resource.banner) if resource.banner.present?)
+} %>

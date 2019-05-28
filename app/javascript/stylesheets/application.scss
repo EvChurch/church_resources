@@ -223,11 +223,22 @@ a {
 }
 .card-deck-container {
   padding-bottom: 60px;
+  h2 {
+    text-align: center;
+    font-weight: 100;
+    font-family: $font-family-sans-serif;
+    text-transform: uppercase;
+    margin-top: 80px;
+  }
   .card-deck {
     margin: 20px -15px;
   }
   @include media-breakpoint-down(sm) {
     padding-bottom: 0;
+    h2 {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
     .card-deck {
       margin: 0 -15px;
     }
@@ -291,7 +302,7 @@ a {
 .resource {
   &-header {
     text-align: center;
-    padding: 60px 0;
+    padding: 50px 0;
     .breadcrumbs {
       margin: 1em 10px;
       font-size: 13px;
@@ -398,6 +409,7 @@ a {
   }
 }
 .passage-content {
+  margin-top: 60px;
   padding: 50px 100px;
   background: #f1f1f1;
   text-align: left;
