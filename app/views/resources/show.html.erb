@@ -27,7 +27,7 @@
           Scripture:
           <%= link_to connection_scripture.name, scripture_path(connection_scripture.scripture_id, resource_type: params[:resource_type]) %>
         </p>
-        <%= connection_scripture.content.html_safe %>
+        <%= connection_scripture.content&.html_safe %>
       <% end %>
     <% end %>
   </div>
