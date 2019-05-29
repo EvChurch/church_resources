@@ -34,4 +34,8 @@ class ResourceDecorator < ApplicationDecorator
 
     [author_names, scripture_names, display_published_at].select(&:present?).join(' | ')
   end
+
+  def author_names
+    resource.authors.map(&:name).join(', ')
+  end
 end
