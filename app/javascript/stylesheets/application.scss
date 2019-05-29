@@ -4,6 +4,7 @@ $primary: #A90E1D;
 $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
 
 @import '~video.js/dist/video-js';
 
@@ -347,8 +348,51 @@ a {
 .site-footer {
   background-color: #1f2326;
   color: #fff;
-  .credits {
+  .connect {
     background: #282c2f;
+    padding: 50px 0;
+    .podcast {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      a {
+        margin-right: 10px;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+    .social {
+      text-align: right;
+      a {
+        border-radius: 40px;
+        color: #fff;
+        display: inline-block;
+        height: 40px;
+        width: 40px;
+        text-align: center;
+        line-height: 40px;
+        font-size: 18px;
+        border: 1px solid $primary;
+        margin-left: 5px;
+        margin-right: 5px;
+        transition: all .2s ease;
+        &:hover {
+          border: 1px solid #fff;
+          color: $primary;
+        }
+      }
+    }
+    @include media-breakpoint-down(sm) {
+      .podcast {
+        margin-bottom: 30px;
+      }
+      .social {
+        text-align: center;
+      }
+    }
+  }
+  .credits {
     padding: 20px 0;
     font-size: 18px;
     text-align: center;
