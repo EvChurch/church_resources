@@ -8,14 +8,23 @@ import './vendor/bootstrap';
 import videojs from 'video.js';
 import 'videojs-youtube';
 
-require("@rails/ujs").start();
-require("turbolinks").start();
-require("@rails/activestorage").start();
-require("channels");
+require('@rails/ujs').start();
+require('turbolinks').start();
+require('@rails/activestorage').start();
+require('channels');
 
-$(document).on("turbolinks:load", function() {
-  $('.video-js').each(function () {
-    videojs(this);
+$(document).on('turbolinks:load', () => {
+  const players = $('.video-js');
+
+  players.each((_index, player) => {
+    videojs(player);
+    $(player).on('play', () => {
+      players.each((_index, player_to_compare) => {
+        if (player_to_compare !== player) {
+          player_to_compare.pause();
+        }
+      });
+    });
   });
 });
 
