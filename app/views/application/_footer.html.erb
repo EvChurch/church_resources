@@ -29,6 +29,15 @@
     <%= render 'links' %>
   </div>
   <div class="credits">
-    <div class="copyright">&copy; <%= Date.today.year %> Auckland Ev</div>
+    <div class="container">
+      <div class="copyright">&copy; <%= Date.today.year %> <a href="https://aucklandev.co.nz">Auckland Ev</a></div>
+      <div class="pages">
+        <ul class="navbar-nav">
+          <li class="nav-item"><%= link_to 'Permissions', page_path('permissions') %></li>
+          <li class="nav-item"><%= link_to 'Privacy<span class="d-none d-md-inline"> Policy</span>'.html_safe, page_path('privacy') %></li>
+          <li class="nav-item"><%= link_to 'Terms<span class="d-none d-md-inline"> of Service</span>'.html_safe, page_path('terms') %></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </footer>

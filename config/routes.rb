@@ -15,4 +15,8 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  get 'permissions' => 'high_voltage/pages#show', id: 'permissions'
+  get 'privacy' => 'high_voltage/pages#show', id: 'privacy'
+  get 'terms' => 'high_voltage/pages#show', id: 'terms'
 end
