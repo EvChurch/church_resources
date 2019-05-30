@@ -1,11 +1,11 @@
 <% title params[:resource_type] ? "#{params[:resource_type].pluralize.titleize} on #{series.name}" : "Resources on #{series.name}" %>
 <% if series.background.present? && series.foreground.present? %>
 <header class="listing-header">
-    <div class="series-background" style="background-image:url(<%= polymorphic_url(series.background) %>);">
-      <div class="container">
-          <%= image_tag polymorphic_url(series.foreground), class: 'img-fluid' %>
-      </div>
+  <div class="series-background" style="background-image:url(<%= polymorphic_url(series.background) %>);">
+    <div class="series-foreground" style="background-image:url(<%= polymorphic_url(series.foreground) %>);">
+      <i class="d-block d-md-none fa fa-angle-down"></i>
     </div>
+  </div>
 </header>
 <% else %>
 <%= render 'shared/listing_header' %>
