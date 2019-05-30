@@ -15,7 +15,6 @@ require('channels');
 
 $(document).on('turbolinks:load', () => {
   const players = $('.video-js');
-
   players.each((_index, player) => {
     videojs(player);
     $(player).on('play', () => {
@@ -26,6 +25,12 @@ $(document).on('turbolinks:load', () => {
       });
     });
   });
+  if (typeof dataLayer !== 'undefined') {
+    dataLayer.push({
+      'event':'pageView',
+      'virtualUrl': window.location.href
+    });
+  }
 });
 
 // Uncomment to copy all static images under ../images to the output folder and reference
