@@ -25,6 +25,8 @@ $(document).on('turbolinks:load', () => {
       });
     });
   });
+});
+$(document).on('turbolinks:visit', () => {
   if (typeof dataLayer !== 'undefined') {
     dataLayer.push({
       'event':'pageView',
