@@ -2,9 +2,9 @@ $primary: #A90E1D;
 
 @import './vendor/bootstrap';
 @import '~video.js/dist/video-js';
-
-$font-family-serif: "ff-meta-serif-web-pro", garamond, times, 'times new roman', serif;
-$font-family-sans-serif: "proxima-nova", Helvetica, Arial, sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Merriweather:700|Source+Sans+Pro:300,400,700&display=swap');
+$font-family-serif: 'Merriweather', garamond, times, 'times new roman', serif;
+$font-family-sans-serif: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 
 body {
   font-family: $font-family-sans-serif;
