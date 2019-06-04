@@ -21,5 +21,7 @@ module ChurchResources
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
     end
+
+    config.middleware.insert_after ActionDispatch::Static, Rack::Deflater
   end
 end
