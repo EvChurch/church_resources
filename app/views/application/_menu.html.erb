@@ -1,5 +1,27 @@
 <nav class="navbar fixed-top navbar-light">
   <a href="<%= root_path %>" class="navbar-brand"><%= image_pack_tag 'aev_logo.png' %> Resources</a>
+  <div class="d-none d-md-block">
+    <ul class="navbar-nav md-menu">
+      <li class="nav-item<%= ' active' if current_page?(root_path) %>">
+        <%= link_to 'Home', root_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item<%= ' active' if current_page?(resources_path(resource_type: params[:resource_type])) %>">
+        <%= link_to 'Recent', resources_path(resource_type: params[:resource_type]), class: 'nav-link' %>
+      </li>
+      <li class="nav-item<%= ' active' if current_page?(authors_path(resource_type: params[:resource_type])) %>">
+        <%= link_to 'Authors', authors_path(resource_type: params[:resource_type]), class: 'nav-link' %>
+      </li>
+      <li class="nav-item<%= ' active' if current_page?(scriptures_path(resource_type: params[:resource_type])) %>">
+        <%= link_to 'Scripture', scriptures_path(resource_type: params[:resource_type]), class: 'nav-link' %>
+      </li>
+      <li class="nav-item<%= ' active' if current_page?(series_index_path(resource_type: params[:resource_type])) %>">
+        <%= link_to 'Series', series_index_path(resource_type: params[:resource_type]), class: 'nav-link' %>
+      </li>
+      <li class="nav-item<%= ' active' if current_page?(topics_path(resource_type: params[:resource_type])) %>">
+        <%= link_to 'Topics', topics_path(resource_type: params[:resource_type]), class: 'nav-link' %>
+      </li>
+    </ul>
+  </div>
   <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="sr-only">Toggle navigation</span>
     <div class="icon-bar top-bar"></div>
