@@ -1,11 +1,6 @@
 $primary: #A90E1D;
 
 @import './vendor/bootstrap';
-$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
-@import '~@fortawesome/fontawesome-free/scss/fontawesome';
-@import '~@fortawesome/fontawesome-free/scss/solid';
-@import '~@fortawesome/fontawesome-free/scss/brands';
-
 @import '~video.js/dist/video-js';
 
 $font-family-serif: "ff-meta-serif-web-pro", garamond, times, 'times new roman', serif;
