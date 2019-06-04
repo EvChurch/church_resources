@@ -1,4 +1,14 @@
 <% title 'Resource Library' %>
 <% resources = Resource.published.featured.order(featured_at: :desc).decorate %>
 <%= render partial: 'shared/resource/primary', locals: { resource: resources.first } if resources.first %>
-<%= render partial: 'shared/resources', locals: { resources: resources.offset(1) } %>
+
+<% latest_sermon = Resource.published.where(type: 'Resource::Sermon').order(published_at: :desc).decorate.first %>
+<% if latest_sermon #&& latest_sermon != resources.first %>
+<div class="feature-container latest">
+  <div class="container">
+    <%= render partial: "shared/resource/feature", locals: { resource: latest_sermon, type_title: 'Latest Sermon' } %>
+  </div>
+</div>
+<% end %>
+
+<%= render partial: 'shared/resources', locals: { show_feature: latest_sermon.present?, resources: resources.offset(1) } %>
