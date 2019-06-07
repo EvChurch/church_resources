@@ -8,7 +8,18 @@
       <dl>
       <dt class="mt-4 mb-2"><%= key %></dt>
       <% collection.each do |series| %>
-      <dd><%= link_to series.name, series_path(series, resource_type: params[:resource_type]) %></dd>
+      <dd>
+        <a href="<%= series_path(series, resource_type: params[:resource_type]) %>">
+          <div class="card">
+            <%= image_tag series.banner, class: 'card-img-top' if series.banner.attached? %>
+            <div class="card-body">
+              <h5 class="card-title mb-0">
+                <%= series.name %>
+              </h5>
+            </div>
+          </div>
+        </a>
+      </dd>
       <% end %>
       </dl>
     <% end %>

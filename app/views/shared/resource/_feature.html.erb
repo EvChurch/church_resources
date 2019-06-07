@@ -3,8 +3,16 @@
   <div class="body">
     <div class="content">
       <div>
-        <span class="type"><%= defined?(type_title) ? type_title : resource.type_title %></span>
-        <h2><%= link_to resource.name, resource_path(resource) %></h2>
+        <span class="type">
+          <%= defined?(type_title) ? type_title : resource.type_title %>
+          <% if resource.scriptures.any? %>
+            |
+            <% resource.connection_scriptures.each do |connection_scripture| %>
+              <%= link_to connection_scripture.name, scripture_path(connection_scripture.scripture_id, resource_type: params[:resource_type]) %>
+            <% end %>
+          <% end %>
+        </span>
+        <h2 class="my-2"><%= link_to resource.name, resource_path(resource) %></h2>
         <div class="snippet">
           <% resource.series.each do |series| %>
             <%= link_to series.name, series_path(series, resource_type: params[:resource_type]) %>
