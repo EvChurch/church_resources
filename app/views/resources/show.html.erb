@@ -22,6 +22,16 @@
       <span class="pipe">|</span>
       <date class="date"><%= resource.published_at.strftime('%b %d, %Y') %></date>
     </p>
+    <% if resource.topics.any? %>
+        <p class="topics">
+          Topics:
+        <%=
+          resource.topics.map do |topic|
+            link_to topic.name, topic_path(topic, resource_type: params[:resource_type])
+          end.join(', ').html_safe
+        %>
+        </p>
+    <% end %>
     <% if resource.scriptures.any? %>
       <% resource.connection_scriptures.each do |connection_scripture| %>
         <p class="scripture">

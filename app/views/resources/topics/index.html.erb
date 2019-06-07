@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="row">
-      <% category.topics.order(:name).in_groups(5, false) do |topic_group| %>
+      <% category.topics.order(:name).select { |topic| topic.resources.any? }.in_groups(5, false) do |topic_group| %>
       <div class="col-12 col-md">
         <dl>
         <% topic_group.each do |topic| %>

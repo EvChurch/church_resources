@@ -33,7 +33,7 @@ class Resources::TopicsController < ApplicationController
   end
 
   def category_scope
-    return ::Category unless params[:resource_type]
+    return ::Category.joins(topics: :resources).distinct unless params[:resource_type]
 
     ::Category.joins(topics: :resources).where(
       resources: { type: Resource::TYPES[params[:resource_type].to_sym] }
