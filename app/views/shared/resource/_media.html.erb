@@ -15,13 +15,13 @@
   <audio class="media-audio video-js vjs-default-skin"
     controls preload="none" poster="<%= polymorphic_url(resource.banner) if resource.banner.present? %>"
     data-setup='{ "fluid": true, "playbackRates": [1, 1.5, 2] }'>
-    <source src="<%= resource.audio_url %>" type='audio/mp3'/>
+    <source src="<%= "#{'https://chtbl.com/track/1G77G/' if Rails.env.production? }#{resource.audio_url}" %>" type='audio/mp3'/>
   </audio>
 <% elsif resource.audio.present? %>
   <audio class="media-audio video-js vjs-default-skin"
     controls preload="none" poster="<%= polymorphic_url(resource.banner) if resource.banner.present? %>"
     data-setup='{ "fluid": true, "playbackRates": [1, 1.5, 2] }'>
-    <source src="<%= polymorphic_url(resource.audio) %>" type='audio/mp3'/>
+    <source src="<%= "#{'https://chtbl.com/track/1G77G/' if Rails.env.production? }#{polymorphic_url(resource.audio)}" %>" type='audio/mp3'/>
   </audio>
 <% elsif resource.banner.present? %>
   <%= image_tag resource.banner, class: 'img-fluid' %>
