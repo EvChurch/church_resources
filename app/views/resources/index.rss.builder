@@ -32,7 +32,7 @@ xml.rss version: '2.0',
         xml.title resource.name
         xml.description resource.description
         xml.pubDate resource.published_at.to_s(:rfc822)
-        if resource.audio_url
+        if resource.audio_url.present?
           audio_url = "#{'https://chtbl.com/track/1G77G/' if Rails.env.production?}#{resource.audio_url}"
           xml.enclosure url: audio_url, type: 'audio/mp3'
         end
