@@ -17,11 +17,11 @@ class ResourceDecorator < ApplicationDecorator
   end
 
   def related
-    resources =
-      Resource.published.order('RANDOM()').limit(3).left_outer_joins(:series, :authors, :topics).where.not(id: id)
+    resources = related_resource_scope
     resources = resources.where(series: { id: resource.series.pluck(:id) })
     resources = resources.or(resources.where(category_topics: { id: resource.topics.pluck(:id) }))
     resources = resources.or(resources.where(authors: { id: resource.authors.pluck(:id) }))
+    resources = resources.or(resources.where(scriptures: { id: resource.scriptures.pluck(:id) }))
     resources.decorate
   end
 
@@ -37,5 +37,13 @@ class ResourceDecorator < ApplicationDecorator
 
   def author_names
     resource.authors.map(&:name).join(', ')
+  end
+
+  def related_resource_scope
+    Resource.published
+            .order('RANDOM()')
+            .limit(3)
+            .left_outer_joins(:series, :authors, :topics, :scriptures)
+            .where.not(id: id)
   end
 end

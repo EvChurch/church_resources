@@ -24,5 +24,5 @@
     <source src="<%= "#{'https://chtbl.com/track/1G77G/' if Rails.env.production? }#{polymorphic_url(resource.audio)}" %>" type='audio/mp3'/>
   </audio>
 <% elsif resource.banner.present? %>
-  <%= image_tag resource.banner, class: 'img-fluid' %>
+  <%= image_tag resource.banner, class: 'img-fluid rounded' %>
 <% end %>

@@ -1,25 +1,29 @@
-<div class="page-header">
+<div class="page-header <%= resource.type_title.underscore %>">
   <div class="container">
     <%= render partial: 'shared/resource/media', locals: { resource: resource } %>
   </div>
 </div>
-<div class="page-section">
-  <div class="container resource-header">
+<div class="page-section <%= resource.type_title.underscore %>">
+  <div class="container resource-header <%= resource.type_title.underscore %>">
     <div class="breadcrumbs">
       <%= link_to resource.type_title, resources_path(resource_type: resource.type_param) %>
-      /
-      <%= link_to resource.series.first.name, series_path(resource.series.first) %>
+      <% if resource.series.any? %>
+        /
+        <%= link_to resource.series.first.name, series_path(resource.series.first) %>
+      <% end %>
     </div>
     <h1><%= title resource.name %></h1>
     <p class="lead"><%= resource.snippet %></p>
     <div class="addthis_inline_share_toolbox mb-3"></div>
     <p>
-      <span class="authors">
-      <% resource.authors.each do |author| %>
-        <%= link_to author.name, author_path(author, resource_type: params[:resource_type]) %>
+      <% if resource.authors.any? %>
+        <span class="authors">
+        <% resource.authors.each do |author| %>
+          <%= link_to author.name, author_path(author, resource_type: params[:resource_type]) %>
+        <% end %>
+        </span>
+        <span class="pipe">|</span>
       <% end %>
-      </span>
-      <span class="pipe">|</span>
       <date class="date"><%= resource.published_at.strftime('%b %d, %Y') %></date>
     </p>
     <% if resource.topics.any? %>
@@ -42,6 +46,11 @@
       <% end %>
     <% end %>
   </div>
+  <% if resource.content.present? %>
+    <div class="container pb-5">
+      <%= resource.content.html_safe %>
+    </div>
+  <% end %>
 </div>
 <% if resource.related.any? %>
 <div class="card-deck-container">
@@ -58,7 +67,7 @@
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ced0bb51af38b7a"></script>
 <% set_meta_tags og: {
   title: resource.name,
-  audio: resource.audio_url.presence || polymorphic_url(resource.audio),
+  audio: resource.audio_url.presence || (polymorphic_url(resource.audio) if resource.audio.attached?),
   description: resource.description,
   url: resource_url(resource),
   image: (polymorphic_url(resource.banner) if resource.banner.present?)

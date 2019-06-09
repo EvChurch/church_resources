@@ -10,6 +10,16 @@
 // Active Admin's got SASS!
 @import "active_admin/mixins";
 @import "active_admin/base";
+@import "trix";
+
+.trix-editor-wrapper {
+  display: inline-block;
+  background: #fff;
+  border: 1px solid #c9d0d6;
+  border-radius: 3px;
+  width: calc(80% - 22px);
+  padding: 10px;
+}
 
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:

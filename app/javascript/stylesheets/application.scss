@@ -395,6 +395,19 @@ a {
         font-size: 20px;
       }
     }
+    &.article {
+      text-align: left;
+      padding: 50px 15px;
+      .breadcrumbs {
+        margin: 1em 0;
+      }
+      h1 {
+        margin: 20px 0 10px;
+      }
+      .lead {
+        margin: 0 0 1em;
+      }
+    }
   }
 }
 .site-footer {

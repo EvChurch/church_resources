@@ -27,6 +27,7 @@ gem 'redis'
 gem 'hiredis'
 gem 'mechanize'
 gem 'rolify'
+gem 'formtastic-trix'
 
 group :development, :test do
   gem 'byebug'
