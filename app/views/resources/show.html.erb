@@ -48,7 +48,9 @@
   </div>
   <% if resource.content.present? %>
     <div class="container pb-5">
-      <%= resource.content.html_safe %>
+      <div class="resource-content">
+        <%= resource.content.html_safe %>
+      </div>
     </div>
   <% end %>
 </div>

@@ -2,7 +2,7 @@ $primary: #A90E1D;
 
 @import './vendor/bootstrap';
 @import '~video.js/dist/video-js';
-@import url('https://fonts.googleapis.com/css?family=Merriweather:700|Source+Sans+Pro:300,400,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Merriweather:400,700|Source+Sans+Pro:300,400,700&display=swap');
 $font-family-serif: 'Merriweather', garamond, times, 'times new roman', serif;
 $font-family-sans-serif: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 
@@ -397,7 +397,7 @@ a {
     }
     &.article {
       text-align: left;
-      padding: 50px 15px;
+      padding: 50px 15px 30px;
       .breadcrumbs {
         margin: 1em 0;
       }
@@ -407,6 +407,18 @@ a {
       .lead {
         margin: 0 0 1em;
       }
+    }
+  }
+  &-content {
+    max-width: 670px;
+    font-family: $font-family-serif;
+    font-size: 1.1rem;
+    line-height: 35px;
+    margin-bottom: 1.5em;
+    h1 {
+      font-family: $font-family-sans-serif;
+      font-size: 28px;
+      margin: 1.5em 0 0.8em;
     }
   }
 }
