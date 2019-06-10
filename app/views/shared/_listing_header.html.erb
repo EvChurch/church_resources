@@ -2,9 +2,21 @@
   <div class="container">
     <h1 class="mt-0"><%= display_title %></h1>
   </div>
+  <div class="container text-center d-block d-sm-none">
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle btn-block" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <%= params[:resource_type] ? params[:resource_type].pluralize.titleize : 'All Resources' %>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <%= link_to 'All', resources_path, class: 'dropdown-item' %>
+        <%= link_to 'Article', resources_path(resource_type: 'article'), class: 'dropdown-item' if Resource.articles.any? %>
+        <%= link_to 'Sermon', resources_path(resource_type: 'sermon'), class: 'dropdown-item' if Resource.sermons.any? %>
+      </div>
+    </div>
+  </div>
   <div class="content">
     <ul>
-      <li>
+      <li class="dropdown d-none d-sm-inline-block">
         <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <%= params[:resource_type] ? params[:resource_type].pluralize.titleize : 'All Resources' %>
