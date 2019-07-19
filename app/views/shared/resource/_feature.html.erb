@@ -6,10 +6,7 @@
         <span class="type">
           <%= defined?(type_title) ? type_title : resource.type_title %>
           <% if resource.scriptures.any? %>
-            |
-            <% resource.connection_scriptures.each do |connection_scripture| %>
-              <%= link_to connection_scripture.name, scripture_path(connection_scripture.scripture_id, resource_type: params[:resource_type]) %>
-            <% end %>
+            <%= render partial: 'shared/resource/scripture_list', locals: { resource: resource } %>
           <% end %>
         </span>
         <h2 class="my-2"><%= link_to resource.name, resource_path(resource) %></h2>
