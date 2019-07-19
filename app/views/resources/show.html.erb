@@ -37,11 +37,11 @@
         </p>
     <% end %>
     <% if resource.scriptures.any? %>
+      <p class="scripture">
+        Scripture:
+        <%= render partial: 'shared/resource/scripture_list', locals: { resource: resource } %>
+      </p>
       <% resource.connection_scriptures.each do |connection_scripture| %>
-        <p class="scripture">
-          Scripture:
-          <%= link_to connection_scripture.name, scripture_path(connection_scripture.scripture_id, resource_type: params[:resource_type]) %>
-        </p>
         <%= connection_scripture.content&.html_safe %>
       <% end %>
     <% end %>

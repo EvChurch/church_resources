@@ -33,9 +33,7 @@
       <% if resource.scriptures.any? %>
       <div class="scriptures ml-3 d-none d-md-block">
         Scripture:
-        <% resource.connection_scriptures.each do |connection_scripture| %>
-          <%= link_to connection_scripture.name, scripture_path(connection_scripture.scripture_id, resource_type: params[:resource_type]) %>
-        <% end %>
+        <%= render partial: 'shared/resource/scripture_list', locals: { resource: resource } %>
       </div>
       <% end %>
     </div>
