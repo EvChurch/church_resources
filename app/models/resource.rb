@@ -25,6 +25,8 @@ class Resource < ApplicationRecord
   has_many :connection_topics, class_name: 'Resource::Connection::Topic', dependent: :destroy
   has_many :topics, through: :connection_topics
 
+  accepts_nested_attributes_for :connection_scriptures
+
   validates :name, presence: true
 
   scope :published, -> { where.not(published_at: nil) }

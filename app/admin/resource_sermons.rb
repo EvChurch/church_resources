@@ -5,7 +5,8 @@ ActiveAdmin.register Resource::Sermon do
   config.sort_order = 'published_at_desc'
 
   permit_params :name, :snippet, :content, :video, :audio, :youtube_url, :audio_url, :published_at, :featured_at,
-                topic_ids: [], author_ids: [], scripture_ids: [], series_ids: []
+                topic_ids: [], author_ids: [], scripture_ids: [], series_ids: [],
+                connection_scriptures_attributes: [:id, :resource_id, :scripture_id, :range, :_destroy]
 
   index do
     id_column
@@ -29,7 +30,12 @@ ActiveAdmin.register Resource::Sermon do
       f.input :audio, as: :file
       f.input :topics, collection: Category::Topic.all, multiple: true
       f.input :authors, collection: Author.all, multiple: true
-      f.input :scriptures, collection: Scripture.all, multiple: true
+      f.has_many :connection_scriptures, 
+        heading: "Bible Passage",
+        new_record: "Add Passage Range" do |a|
+        a.input :scripture, collection: Scripture.all, label: 'Book'
+        a.input :range
+      end
       f.input :series, collection: Series.all, multiple: true
     end
     f.actions
