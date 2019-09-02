@@ -18,3 +18,5 @@ Style/ClassAndModuleChildren:
   EnforcedStyle: compact
 Naming/MemoizedInstanceVariableName:
   Enabled: false
+Metrics/ParameterLists:
+  Max: 10
