@@ -10,37 +10,38 @@ gem 'aws-sdk-s3', require: false
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'bootstrap4-kaminari-views'
 gem 'devise'
+gem 'draper'
+gem 'formtastic-trix'
+gem 'friendly_id', '~> 5.2.4'
+gem 'graphql'
 gem 'high_voltage', '~> 3.1'
+gem 'hiredis'
+gem 'httparty'
 gem 'image_processing', '~> 1.2'
+gem 'mechanize'
 gem 'meta-tags'
 gem 'pg'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 6.0.0.rc1'
+gem 'redis'
+gem 'rolify'
 gem 'sass-rails', '~> 5'
+gem 'simple_form'
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 4.0'
-gem 'simple_form'
-gem 'draper'
-gem 'friendly_id', '~> 5.2.4'
-gem 'httparty'
-gem 'redis'
-gem 'hiredis'
-gem 'mechanize'
-gem 'rolify'
-gem 'formtastic-trix'
 
 group :development, :test do
   gem 'byebug'
   gem 'dotenv-rails', '~> 2.7'
   gem 'factory_bot_rails'
-  gem 'rspec-rails', '~> 3.8'
   gem 'pry-byebug'
   gem 'pry-rails'
+  gem 'rspec-rails', '~> 3.8'
 end
 
 group :development do
-  gem "better_errors"
-  gem "binding_of_caller"
+  gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'foreman'
   gem 'letter_opener'
   gem 'listen', '>= 3.0.5', '< 3.2'
@@ -55,3 +56,5 @@ group :test do
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end
+
+gem 'graphiql-rails', group: :development

@@ -14,7 +14,7 @@ xml.rss version: '2.0',
                     'excited about the future he offers, and eager to authentically share this hope with Auckland.'
     xml.language 'en'
     xml.lastBuildDate resources.first.published_at.to_s(:rfc822)
-    xml.copyright "Copyright &copy; #{Date.today.year} Auckland Ev"
+    xml.copyright "Copyright &copy; #{Time.zone.today.year} Auckland Ev"
     xml.itunes :author, 'Auckland Ev'
     xml.itunes :keywords, 'auckland, evangelical, church, christian, sermon, ev, jesus, god, hope, holy spirit'
     xml.itunes :explicit, 'clean'
