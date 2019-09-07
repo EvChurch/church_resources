@@ -5,6 +5,10 @@ class Resource::SermonDecorator < ResourceDecorator
     object.banner.presence || object.series.first&.banner
   end
 
+  def foreground
+    object.foreground.presence || object.series.first&.foreground
+  end
+
   def background
     object.background.presence || object.series.first&.background
   end

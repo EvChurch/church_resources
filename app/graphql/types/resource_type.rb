@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Types::ResourceType < Types::BaseObject
+  include Rails.application.routes.url_helpers
+
   field :id, ID, null: false
   field :name, String, null: false
   field :snippet, String, null: true
@@ -15,4 +17,30 @@ class Types::ResourceType < Types::BaseObject
   field :audio_url, String, null: true
   field :video_url, String, null: true
   field :youtube_url, String, null: true
+
+  def banner_url
+    banner && polymorphic_url(banner)
+  end
+
+  def foreground_url
+    foreground && polymorphic_url(foreground)
+  end
+
+  def background_url
+    background && polymorphic_url(background)
+  end
+
+  protected
+
+  def banner
+    object.banner.presence || object.series.first&.banner
+  end
+
+  def foreground
+    object.foreground.presence || object.series.first&.foreground
+  end
+
+  def background
+    object.background.presence || object.series.first&.background
+  end
 end
