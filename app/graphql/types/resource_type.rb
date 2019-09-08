@@ -31,11 +31,11 @@ class Types::ResourceType < Types::BaseObject
   end
 
   def audio_url
-    audio_url || polymorphic_url(object.audio)
+    object.audio_url || polymorphic_url(object.audio)
   end
 
   def video_url
-    video_url || polymorphic_url(object.video)
+    object.video_url || polymorphic_url(object.video)
   end
 
   protected
