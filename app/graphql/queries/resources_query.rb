@@ -19,7 +19,7 @@ class Queries::ResourcesQuery < Queries::BaseQuery
   def scope(ids, author_ids, category_ids, scripture_ids, series_ids, topic_ids, resource_type)
     scope = ::Resource.published.order(published_at: :desc)
 
-    scope = filter_by_id(scope, ids)
+    scope = filter_by_ids(scope, ids)
     scope = filter_by_authors(scope, author_ids)
     scope = filter_by_categories(scope, category_ids)
     scope = filter_by_scriptures(scope, scripture_ids)
@@ -30,7 +30,7 @@ class Queries::ResourcesQuery < Queries::BaseQuery
     scope
   end
 
-  def filter_by_id(scope, ids)
+  def filter_by_ids(scope, ids)
     ids.present? ? scope.where(id: ids) : scope
   end
 
