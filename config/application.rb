@@ -24,7 +24,7 @@ module ChurchResources
 
     config.middleware.insert_after ActionDispatch::Static, Rack::Deflater
 
-    config.middleware.insert_before 0, 'Rack::Cors' do
+    config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins 'localhost:3000', 'aucklandev.co.nz', %r{\Ahttps:\/\/.*\.aucklandev\.co\.nz\z}
         resource(
