@@ -10,8 +10,8 @@ class Queries::ResourcesQuery < Queries::BaseQuery
   argument :topic_ids, [ID], required: false, default_value: nil
   argument :resource_type, String, required: false, default_value: nil
 
-  def resolve(id:, author_ids:, category_ids:, scripture_ids:, series_ids:, topic_ids:, resource_type:)
-    scope(id, author_ids, category_ids, scripture_ids, series_ids, topic_ids, resource_type).all
+  def resolve(ids:, author_ids:, category_ids:, scripture_ids:, series_ids:, topic_ids:, resource_type:)
+    scope(ids, author_ids, category_ids, scripture_ids, series_ids, topic_ids, resource_type).all
   end
 
   protected
