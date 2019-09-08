@@ -78,6 +78,7 @@ Rails.application.configure do
     authentication: :login,
     enable_starttls_auto: true
   }
+  config.default_url_options = { protocol: 'https', host: 'resources.aucklandev.co.nz' }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
