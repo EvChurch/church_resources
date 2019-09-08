@@ -2,6 +2,7 @@
 
 class Queries::ResourcesQuery < Queries::BaseQuery
   type Types::ResourceType.connection_type, null: false
+  argument :ids, [ID], required: false, default_value: nil
   argument :author_ids, [ID], required: false, default_value: nil
   argument :category_ids, [ID], required: false, default_value: nil
   argument :scripture_ids, [ID], required: false, default_value: nil
@@ -9,15 +10,16 @@ class Queries::ResourcesQuery < Queries::BaseQuery
   argument :topic_ids, [ID], required: false, default_value: nil
   argument :resource_type, String, required: false, default_value: nil
 
-  def resolve(author_ids:, category_ids:, scripture_ids:, series_ids:, topic_ids:, resource_type:)
-    scope(author_ids, category_ids, scripture_ids, series_ids, topic_ids, resource_type).all
+  def resolve(id:, author_ids:, category_ids:, scripture_ids:, series_ids:, topic_ids:, resource_type:)
+    scope(id, author_ids, category_ids, scripture_ids, series_ids, topic_ids, resource_type).all
   end
 
   protected
 
-  def scope(author_ids, category_ids, scripture_ids, series_ids, topic_ids, resource_type)
+  def scope(ids, author_ids, category_ids, scripture_ids, series_ids, topic_ids, resource_type)
     scope = ::Resource.published.order(published_at: :desc)
 
+    scope = filter_by_id(scope, ids)
     scope = filter_by_authors(scope, author_ids)
     scope = filter_by_categories(scope, category_ids)
     scope = filter_by_scriptures(scope, scripture_ids)
@@ -26,6 +28,10 @@ class Queries::ResourcesQuery < Queries::BaseQuery
     scope = scope.where(type: Resource::TYPES[resource_type.to_sym]) if resource_type.present?
 
     scope
+  end
+
+  def filter_by_id(scope, ids)
+    ids.present? ? scope.where(id: ids) : scope
   end
 
   def filter_by_authors(scope, ids)
