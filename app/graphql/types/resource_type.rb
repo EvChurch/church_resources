@@ -30,6 +30,14 @@ class Types::ResourceType < Types::BaseObject
     background && polymorphic_url(background)
   end
 
+  def audio_url
+    audio_url || polymorphic_url(object.audio)
+  end
+
+  def video_url
+    video_url || polymorphic_url(object.video)
+  end
+
   protected
 
   def banner
