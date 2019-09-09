@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Types::SeriesType < Types::BaseObject
+  include Rails.application.routes.url_helpers
+
   field :id, ID, null: false
   field :name, String, null: false
   field :resources, Types::ResourceType.connection_type, null: false
