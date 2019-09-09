@@ -15,9 +15,9 @@ class Queries::SeriesQuery < Queries::BaseQuery
     scope = ::Series.joins(:resources).where.not(resources: { published_at: nil }).order('resources.published_at desc')
 
     scope = filter_by_ids(scope, ids)
-    scope.where(resources: { type: Resource::TYPES[resource_type.to_sym] }).distinct if resource_type.present?
+    scope.where(resources: { type: Resource::TYPES[resource_type.to_sym] }) if resource_type.present?
 
-    scope.distinct
+    scope.uniq
   end
 
   def filter_by_ids(scope, ids)
