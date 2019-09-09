@@ -6,7 +6,7 @@ class Queries::SeriesQuery < Queries::BaseQuery
   argument :resource_type, String, required: false, default_value: nil
 
   def resolve(ids:, resource_type:)
-    scope(ids, resource_type).all
+    scope(ids, resource_type).all.uniq
   end
 
   protected
@@ -17,7 +17,7 @@ class Queries::SeriesQuery < Queries::BaseQuery
     scope = filter_by_ids(scope, ids)
     scope.where(resources: { type: Resource::TYPES[resource_type.to_sym] }) if resource_type.present?
 
-    scope.uniq
+    scope
   end
 
   def filter_by_ids(scope, ids)
