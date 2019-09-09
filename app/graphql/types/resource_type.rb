@@ -17,6 +17,7 @@ class Types::ResourceType < Types::BaseObject
   field :audio_url, String, null: true
   field :video_url, String, null: true
   field :youtube_url, String, null: true
+  field :published_at, GraphQL::Types::ISO8601DateTime, null: true
 
   def banner_url
     banner && polymorphic_url(banner)
