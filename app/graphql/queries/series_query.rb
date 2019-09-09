@@ -17,7 +17,7 @@ class Queries::SeriesQuery < Queries::BaseQuery
     scope = filter_by_ids(scope, ids)
     scope.where(resources: { type: Resource::TYPES[resource_type.to_sym] }).distinct if resource_type.present?
 
-    scope
+    scope.distinct
   end
 
   def filter_by_ids(scope, ids)
