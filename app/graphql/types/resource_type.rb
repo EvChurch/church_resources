@@ -9,6 +9,7 @@ class Types::ResourceType < Types::BaseObject
   field :content, String, null: true
   field :authors, [Types::AuthorType], null: false
   field :scriptures, [Types::ScriptureType], null: false
+  field :connection_scriptures, [Types::Resource::Connection::ScriptureType], null: false
   field :series, [Types::SeriesType], null: false
   field :topics, [Types::TopicType], null: false
   field :banner_url, String, null: true
