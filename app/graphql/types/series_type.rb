@@ -9,28 +9,14 @@ class Types::SeriesType < Types::BaseObject
   field :background_url, String, null: true
 
   def banner_url
-    banner && polymorphic_url(banner)
+    object.banner && polymorphic_url(object.banner)
   end
 
   def foreground_url
-    foreground && polymorphic_url(foreground)
+    object.foreground && polymorphic_url(object.foreground)
   end
 
   def background_url
-    background && polymorphic_url(background)
-  end
-
-  protected
-
-  def banner
-    object.banner.presence || object.series.first&.banner
-  end
-
-  def foreground
-    object.foreground.presence || object.series.first&.foreground
-  end
-
-  def background
-    object.background.presence || object.series.first&.background
+    object.background && polymorphic_url(object.background)
   end
 end
