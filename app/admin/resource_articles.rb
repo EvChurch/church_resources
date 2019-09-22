@@ -7,6 +7,16 @@ ActiveAdmin.register Resource::Article do
   permit_params :name, :snippet, :content, :banner, :published_at, :featured_at,
                 topic_ids: [], author_ids: [], scripture_ids: [], series_ids: []
 
+  filter :name
+  filter :snippet
+  filter :content
+  filter :published_at
+  filter :featured_at
+  filter :author
+  filter :scripture
+  filter :series
+  filter :topic
+
   index do
     id_column
     column :name

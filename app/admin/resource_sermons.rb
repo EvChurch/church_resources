@@ -8,6 +8,16 @@ ActiveAdmin.register Resource::Sermon do
                 topic_ids: [], author_ids: [], scripture_ids: [], series_ids: [],
                 connection_scriptures_attributes: %i[id resource_id scripture_id range _destroy]
 
+  filter :name
+  filter :snippet
+  filter :content
+  filter :published_at
+  filter :featured_at
+  filter :author
+  filter :scripture
+  filter :series
+  filter :topic
+
   index do
     id_column
     column :name
