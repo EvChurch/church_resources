@@ -3,7 +3,7 @@
 Rails.application.routes.draw do
   mount GraphiQL::Rails::Engine, at: '/graphiql', graphql_path: '/graphql' if Rails.env.development?
   post '/graphql', to: 'graphql#execute'
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   ActiveAdmin.routes(self)
 
   get 'resources/(:resource_type)', to: 'resources#index', constraints: ResourceTypeConstraint.new, as: :resources

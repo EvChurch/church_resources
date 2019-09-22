@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.5.3'
+ruby '2.6.4'
 
 gem 'activeadmin'
 gem 'aws-sdk-s3', require: false
@@ -18,8 +18,10 @@ gem 'high_voltage', '~> 3.1'
 gem 'hiredis'
 gem 'httparty'
 gem 'image_processing', '~> 1.2'
+gem 'koala'
 gem 'mechanize'
 gem 'meta-tags'
+gem 'omniauth-facebook'
 gem 'pg'
 gem 'puma', '~> 3.11'
 gem 'rack-cors'

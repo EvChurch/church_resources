@@ -5,7 +5,7 @@
       My <span class="font-weight-bold">Account</span>
     </h3>
   </header>
-  <%= devise_error_messages! %>
+  <%= render 'devise/shared/error_messages', resource: resource %>
   <%= render partial: 'shared/user', locals: { f: f } %>
   <hr>
   <div class="d-flex">
