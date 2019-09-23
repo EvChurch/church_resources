@@ -10,7 +10,7 @@ class Types::Location::EventType < Types::BaseObject
   field :name, String, null: false
   field :snippet, String, null: false
   field :content, String, null: false
-  field :form_url, String, null: true
+  field :elvanto_form_id, String, null: true
   field :facebook_url, String, null: true
   field :banner_url, String, null: false
   field :location, Types::LocationType, null: false

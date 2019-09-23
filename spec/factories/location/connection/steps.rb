@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :location_connection_step, class: 'Location::Connection::Step' do
-    form_url { 'MyString' }
+    elvanto_form_id { 'MyString' }
     content { 'MyText' }
     step { nil }
     location { nil }

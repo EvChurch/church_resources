@@ -7,5 +7,5 @@ class Types::Location::Connection::StepType < Types::BaseObject
   field :content, String, null: true
   field :location, Types::LocationType, null: false
   field :step, Types::StepType, null: false
-  field :form_url, String, null: false
+  field :elvanto_form_id, String, null: false
 end

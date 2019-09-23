@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 2019_09_23_000325) do
   end
 
   create_table "location_connection_steps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "form_url"
+    t.string "elvanto_form_id"
     t.text "content"
     t.uuid "step_id", null: false
     t.uuid "location_id", null: false
@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 2019_09_23_000325) do
     t.string "snippet"
     t.text "content"
     t.string "address"
-    t.string "form_url"
+    t.string "elvanto_form_id"
     t.string "facebook_url"
     t.uuid "location_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -127,7 +127,7 @@ ActiveRecord::Schema.define(version: 2019_09_23_000325) do
     t.datetime "start_at"
     t.datetime "end_at"
     t.uuid "location_id", null: false
-    t.string "form_url"
+    t.string "elvanto_form_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["location_id"], name: "index_location_services_on_location_id"

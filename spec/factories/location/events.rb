@@ -8,7 +8,7 @@ FactoryBot.define do
     snippet { 'MyString' }
     content { 'MyText' }
     address { 'MyString' }
-    form_url { 'MyString' }
+    elvanto_form_id { 'MyString' }
     facebook_url { 'MyString' }
     location { nil }
   end

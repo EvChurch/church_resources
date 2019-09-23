@@ -9,7 +9,7 @@ class CreateLocationEvents < ActiveRecord::Migration[6.0]
       t.string :snippet
       t.text :content
       t.string :address
-      t.string :form_url
+      t.string :elvanto_form_id
       t.string :facebook_url
       t.belongs_to :location, null: false, foreign_key: { on_delete: :cascade }, type: :uuid
 

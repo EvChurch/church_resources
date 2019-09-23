@@ -6,7 +6,7 @@ class CreateLocationServices < ActiveRecord::Migration[6.0]
       t.timestamp :start_at
       t.timestamp :end_at
       t.belongs_to :location, null: false, foreign_key: { on_delete: :cascade }, type: :uuid
-      t.string :form_url
+      t.string :elvanto_form_id
 
       t.timestamps
     end

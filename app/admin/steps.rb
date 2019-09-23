@@ -9,7 +9,7 @@ ActiveAdmin.register Step do
       f.input :name
       f.input :banner, as: :file
       f.input :snippet
-      f.input :content
+      f.input :content, as: :trix
     end
     f.actions
   end

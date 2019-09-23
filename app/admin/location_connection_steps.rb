@@ -2,7 +2,7 @@
 
 ActiveAdmin.register Location::Connection::Step do
   menu parent: 'Locations', label: 'Steps'
-  permit_params :content, :form_url, :location_id, :step_id
+  permit_params :content, :elvanto_form_id, :location_id, :step_id
 
   form do |f|
     f.semantic_errors
@@ -10,7 +10,7 @@ ActiveAdmin.register Location::Connection::Step do
       f.input :location
       f.input :step
       f.input :content, as: :trix
-      f.input :form_url
+      f.input :elvanto_form_id
     end
     f.actions
   end
