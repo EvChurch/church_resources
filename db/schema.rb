@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_16_040951) do
+ActiveRecord::Schema.define(version: 2019_09_23_000325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -85,6 +85,61 @@ ActiveRecord::Schema.define(version: 2019_09_16_040951) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "location_connection_steps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "form_url"
+    t.text "content"
+    t.uuid "step_id", null: false
+    t.uuid "location_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["location_id"], name: "index_location_connection_steps_on_location_id"
+    t.index ["step_id"], name: "index_location_connection_steps_on_step_id"
+  end
+
+  create_table "location_events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.string "name"
+    t.string "snippet"
+    t.text "content"
+    t.string "address"
+    t.string "form_url"
+    t.string "facebook_url"
+    t.uuid "location_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["location_id"], name: "index_location_events_on_location_id"
+  end
+
+  create_table "location_prayers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "snippet"
+    t.text "content"
+    t.uuid "location_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["location_id"], name: "index_location_prayers_on_location_id"
+  end
+
+  create_table "location_services", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.uuid "location_id", null: false
+    t.string "form_url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["location_id"], name: "index_location_services_on_location_id"
+  end
+
+  create_table "locations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "snippet"
+    t.text "content"
+    t.string "address"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "resource_connection_authors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -166,6 +221,14 @@ ActiveRecord::Schema.define(version: 2019_09_16_040951) do
     t.string "remote_id"
   end
 
+  create_table "steps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "snippet"
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -210,6 +273,11 @@ ActiveRecord::Schema.define(version: 2019_09_16_040951) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "category_topics", "categories", on_delete: :cascade
+  add_foreign_key "location_connection_steps", "locations", on_delete: :cascade
+  add_foreign_key "location_connection_steps", "steps", on_delete: :cascade
+  add_foreign_key "location_events", "locations", on_delete: :cascade
+  add_foreign_key "location_prayers", "locations", on_delete: :cascade
+  add_foreign_key "location_services", "locations", on_delete: :cascade
   add_foreign_key "resource_connection_authors", "authors", on_delete: :cascade
   add_foreign_key "resource_connection_authors", "resources", on_delete: :cascade
   add_foreign_key "resource_connection_scriptures", "resources", on_delete: :cascade

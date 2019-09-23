@@ -5,6 +5,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.4'
 
+gem 'active_admin_datetimepicker'
+gem 'active_storage_validations'
 gem 'activeadmin'
 gem 'aws-sdk-s3', require: false
 gem 'bootsnap', '>= 1.4.2', require: false
@@ -21,6 +23,7 @@ gem 'image_processing', '~> 1.2'
 gem 'koala'
 gem 'mechanize'
 gem 'meta-tags'
+gem 'mini_magick'
 gem 'omniauth-facebook'
 gem 'pg'
 gem 'puma', '~> 3.11'
@@ -32,6 +35,7 @@ gem 'rollbar'
 gem 'sass-rails', '~> 5'
 gem 'simple_form'
 gem 'turbolinks', '~> 5'
+gem 'validate_url'
 gem 'webpacker', '~> 4.0'
 
 group :development, :test do

@@ -29,8 +29,8 @@ ActiveAdmin.register Resource::Article do
     f.semantic_errors
     inputs do
       f.input :name
-      f.input :published_at, as: :datepicker
-      f.input :featured_at, as: :datepicker
+      f.input :published_at, as: :date_time_picker
+      f.input :featured_at, as: :date_time_picker
       f.input :snippet
       f.input :content, as: :trix
       f.input :banner, as: :file
