@@ -2,14 +2,22 @@
 
 class Queries::LocationsQuery < Queries::BaseQuery
   type Types::LocationType.connection_type, null: false
+  argument :ids, [ID], required: false
 
-  def resolve
-    scope.all
+  def resolve(ids: nil)
+    scope(ids).all
   end
 
   protected
 
-  def scope
-    ::Location
+  def scope(ids)
+    scope = ::Location
+    scope = filter_by_ids(scope, ids)
+
+    scope
+  end
+
+  def filter_by_ids(scope, ids)
+    ids.present? ? scope.where(id: ids) : scope
   end
 end

@@ -2,17 +2,28 @@
 
 class Queries::EventsQuery < Queries::BaseQuery
   type Types::Location::EventType.connection_type, null: false
+  argument :ids, [ID], required: false
   argument :location_ids, [ID], required: false
 
-  def resolve(location_ids: nil)
-    scope(location_ids).all
+  def resolve(ids: nil, location_ids: nil)
+    scope(ids, location_ids).all
   end
 
   protected
 
-  def scope(location_ids)
-    return ::Location::Event if location_ids.blank?
+  def scope(ids, location_ids)
+    scope = ::Location::Event
+    scope = filter_by_ids(scope, ids)
+    scope = filter_by_locations(scope, location_ids)
 
-    ::Location::Event.where(location_id: location_ids)
+    scope
+  end
+
+  def filter_by_ids(scope, ids)
+    ids.present? ? scope.where(id: ids) : scope
+  end
+
+  def filter_by_locations(scope, ids)
+    ids.present? ? scope.where(location_id: ids) : scope
   end
 end
