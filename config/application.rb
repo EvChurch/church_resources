@@ -34,5 +34,7 @@ module ChurchResources
         )
       end
     end
+
+    config.time_zone = 'Auckland'
   end
 end
