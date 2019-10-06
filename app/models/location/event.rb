@@ -15,4 +15,5 @@ class Location::Event < ApplicationRecord
             },
             size: { less_than: 500.kilobytes, message: '500KB max size' }
   validates :facebook_url, url: { allow_blank: true }
+  scope :upcoming, -> { where('end_at >= ?', Time.zone.today).order(:start_at) }
 end

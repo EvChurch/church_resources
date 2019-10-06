@@ -12,7 +12,7 @@ class Queries::EventsQuery < Queries::BaseQuery
   protected
 
   def scope(ids, location_ids)
-    scope = ::Location::Event
+    scope = ::Location::Event.upcoming
     scope = filter_by_ids(scope, ids)
     scope = filter_by_locations(scope, location_ids)
 
