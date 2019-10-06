@@ -11,7 +11,11 @@ class Types::SeriesType < Types::BaseObject
   field :background_url, String, null: true
 
   def banner_url
-    object.banner.presence && polymorphic_url(object.banner)
+    object.banner.presence && polymorphic_url(
+      object.banner.variant(
+        convert: 'jpg', saver: { quality: 80 }, strip: true, resize_to_limit: [1920, 1080]
+      )
+    )
   end
 
   def foreground_url

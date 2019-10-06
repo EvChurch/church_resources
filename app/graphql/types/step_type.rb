@@ -11,6 +11,8 @@ class Types::StepType < Types::BaseObject
   field :banner_url, String, null: false
 
   def banner_url
-    polymorphic_url(object.banner)
+    polymorphic_url(
+      object.banner.variant(convert: 'jpg', saver: { quality: 80 }, strip: true, resize_to_limit: [1920, 1080])
+    )
   end
 end

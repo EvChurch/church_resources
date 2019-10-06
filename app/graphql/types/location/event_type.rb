@@ -16,6 +16,10 @@ class Types::Location::EventType < Types::BaseObject
   field :location, Types::LocationType, null: false
 
   def banner_url
-    polymorphic_url(object.banner)
+    polymorphic_url(
+      object.banner.variant(
+        convert: 'jpg', saver: { quality: 80 }, strip: true, resize_to_limit: [1920, 1080]
+      )
+    )
   end
 end
