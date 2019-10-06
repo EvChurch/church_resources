@@ -4,8 +4,8 @@ class Types::Location::EventType < Types::BaseObject
   include Rails.application.routes.url_helpers
 
   field :id, ID, null: false
-  field :start_at, String, null: false
-  field :end_at, String, null: false
+  field :start_at, GraphQL::Types::ISO8601DateTime, null: false
+  field :end_at, GraphQL::Types::ISO8601DateTime, null: false
   field :address, String, null: false
   field :name, String, null: false
   field :snippet, String, null: false

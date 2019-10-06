@@ -14,5 +14,5 @@ class Location::Event < ApplicationRecord
               message: '1920x1080 max resolution'
             },
             size: { less_than: 500.kilobytes, message: '500KB max size' }
-  validates :facebook_url, url: { allow_nil: true }
+  validates :facebook_url, url: { allow_blank: true }
 end
