@@ -5,6 +5,7 @@ ActiveAdmin.register Resource::Sermon do
   config.sort_order = 'published_at_desc'
 
   permit_params :name, :snippet, :content, :video, :audio, :youtube_url, :audio_url, :published_at, :featured_at,
+                :sermon_notes, :connect_group_notes,
                 topic_ids: [], author_ids: [], scripture_ids: [], series_ids: [],
                 connection_scriptures_attributes: %i[id resource_id scripture_id range _destroy]
 
@@ -47,6 +48,8 @@ ActiveAdmin.register Resource::Sermon do
         a.input :range
       end
       f.input :series, collection: Series.all, multiple: true
+      f.input :sermon_notes, as: :trix
+      f.input :connect_group_notes, as: :trix
     end
     f.actions
   end
