@@ -3,7 +3,7 @@
 class Location::Event < ApplicationRecord
   belongs_to :location
   has_one_attached :banner
-  validates :start_at, :end_at, :name, :snippet, :content, :address, presence: true
+  validates :start_at, :end_at, :name, :content, :address, presence: true
   validates :banner,
             attached: true,
             aspect_ratio: :is_16_9,
