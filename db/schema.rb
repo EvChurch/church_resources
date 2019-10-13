@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_13_224453) do
+ActiveRecord::Schema.define(version: 2019_10_13_234442) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -102,7 +102,6 @@ ActiveRecord::Schema.define(version: 2019_10_13_224453) do
     t.datetime "start_at"
     t.datetime "end_at"
     t.string "name"
-    t.string "snippet"
     t.text "content"
     t.string "address"
     t.string "elvanto_form_id"
@@ -225,7 +224,6 @@ ActiveRecord::Schema.define(version: 2019_10_13_224453) do
 
   create_table "steps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
-    t.string "snippet"
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

@@ -5,7 +5,6 @@ class Types::StepType < Types::BaseObject
 
   field :id, ID, null: false
   field :name, String, null: false
-  field :snippet, String, null: false
   field :content, String, null: true
   field :location_connection_steps, Types::Location::Connection::StepType.connection_type, null: false
   field :banner_url, String, null: false
