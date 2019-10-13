@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Step do
-  permit_params :name, :snippet, :content, :banner
+  permit_params :name, :content, :banner
   config.sort_order = 'position_asc'
 
   filter :name
