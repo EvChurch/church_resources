@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class Step < ApplicationRecord
+  acts_as_list
   has_many :location_connection_steps, dependent: :destroy, class_name: 'Location::Connection::Step'
   has_one_attached :banner
-  validates :name, :snippet, :content, presence: true
+  validates :name, :content, presence: true
   validates :banner,
             attached: true,
             aspect_ratio: :is_16_9,

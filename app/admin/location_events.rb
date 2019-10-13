@@ -4,6 +4,16 @@ ActiveAdmin.register Location::Event do
   menu parent: 'Locations', label: 'Events'
   permit_params :banner, :name, :content, :start_at, :end_at, :address, :elvanto_form_id, :facebook_url, :location_id
 
+  index do
+    selectable_column
+    column :name
+    column :location
+    column :address
+    column :start_at
+    column :end_at
+    actions
+  end
+
   form do |f|
     f.semantic_errors
     inputs do

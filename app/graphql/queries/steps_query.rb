@@ -12,7 +12,7 @@ class Queries::StepsQuery < Queries::BaseQuery
   protected
 
   def scope(ids, location_ids)
-    scope = ::Step
+    scope = ::Step.order(position: :asc)
     scope = filter_by_ids(scope, ids)
     scope = filter_by_locations(scope, location_ids)
 

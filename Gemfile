@@ -8,11 +8,13 @@ ruby '2.6.4'
 gem 'active_admin_datetimepicker'
 gem 'active_storage_validations'
 gem 'activeadmin'
+gem 'acts_as_list'
 gem 'aws-sdk-s3', require: false
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'bootstrap4-kaminari-views'
 gem 'devise'
 gem 'draper'
+gem 'font-awesome-rails'
 gem 'formtastic-trix'
 gem 'friendly_id', '~> 5.2.4'
 gem 'graphql'
