@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_13_234442) do
+ActiveRecord::Schema.define(version: 2019_10_20_201030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -94,6 +94,8 @@ ActiveRecord::Schema.define(version: 2019_10_13_234442) do
     t.uuid "location_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "mail_chimp_user_id"
+    t.string "mail_chimp_audience_id"
     t.index ["location_id"], name: "index_location_connection_steps_on_location_id"
     t.index ["step_id"], name: "index_location_connection_steps_on_step_id"
   end

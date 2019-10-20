@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddNotesToResources < ActiveRecord::Migration[6.0]
   def change
     add_column :resources, :sermon_notes, :text
