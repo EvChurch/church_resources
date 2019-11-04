@@ -4,7 +4,7 @@ class Queries::EventsQuery < Queries::BaseQuery
   type Types::Location::EventType.connection_type, null: false
   argument :ids, [ID], required: false
   argument :location_ids, [ID], required: false
-  argument :featured, boolean, required: false
+  argument :featured, Boolean, required: false
 
   def resolve(ids: nil, location_ids: nil, featured: false)
     scope(ids, location_ids, featured).all
