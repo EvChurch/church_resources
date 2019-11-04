@@ -15,4 +15,5 @@ class Step < ApplicationRecord
               message: '1920x1080 max resolution'
             },
             size: { less_than: 500.kilobytes, message: '500KB max size' }
+  scope :featured, -> { where.not(featured_at: nil) }
 end

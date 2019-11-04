@@ -4,19 +4,20 @@ class Queries::EventsQuery < Queries::BaseQuery
   type Types::Location::EventType.connection_type, null: false
   argument :ids, [ID], required: false
   argument :location_ids, [ID], required: false
+  argument :featured, boolean, required: false
 
-  def resolve(ids: nil, location_ids: nil)
-    scope(ids, location_ids).all
+  def resolve(ids: nil, location_ids: nil, featured: false)
+    scope(ids, location_ids, featured).all
   end
 
   protected
 
-  def scope(ids, location_ids)
+  def scope(ids, location_ids, featured)
     scope = ::Location::Event.upcoming
     scope = filter_by_ids(scope, ids)
     scope = filter_by_locations(scope, location_ids)
 
-    scope
+    featured ? scope.featured : scope
   end
 
   def filter_by_ids(scope, ids)

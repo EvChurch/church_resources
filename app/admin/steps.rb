@@ -4,9 +4,26 @@ ActiveAdmin.register Step do
   permit_params :name, :content, :banner
   config.sort_order = 'position_asc'
 
+  scope :featured
+  scope :all, default: true
+
   filter :name
   filter :created_at
   filter :updated_at
+
+  batch_action :feature do |ids|
+    batch_action_collection.find(ids).each do |step|
+      step.update(featured_at: Time.zone.now)
+    end
+    redirect_to collection_path, alert: 'The step(s) have been featured'
+  end
+
+  batch_action :unfeature do |ids|
+    batch_action_collection.find(ids).each do |event|
+      event.update(featured_at: nil)
+    end
+    redirect_to collection_path, warning: 'The step(s) have been unfeatured'
+  end
 
   index do
     selectable_column
@@ -18,6 +35,7 @@ ActiveAdmin.register Step do
     end
     column :position
     column :name
+    column :featured_at
     actions
   end
 

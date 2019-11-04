@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_20_201030) do
+ActiveRecord::Schema.define(version: 2019_11_04_010246) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -111,6 +111,8 @@ ActiveRecord::Schema.define(version: 2019_10_20_201030) do
     t.uuid "location_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "featured_at"
+    t.index ["featured_at"], name: "index_location_events_on_featured_at"
     t.index ["location_id"], name: "index_location_events_on_location_id"
   end
 
@@ -230,6 +232,8 @@ ActiveRecord::Schema.define(version: 2019_10_20_201030) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "position"
+    t.datetime "featured_at"
+    t.index ["featured_at"], name: "index_steps_on_featured_at"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
