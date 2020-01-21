@@ -45,7 +45,7 @@
         <%= f.submit 'Sign In', class: 'btn btn-block btn-primary' %>
     </div>
 
-    <%= link_to 'Sign in with Facebook', user_facebook_omniauth_authorize_path, class: 'btn btn-block btn-secondary' %>
+    <%#= link_to 'Sign in with Facebook', user_facebook_omniauth_authorize_path, class: 'btn btn-block btn-secondary' %>
     <div class="text-center text-muted">
       <small>Don't have an account yet? <%= link_to 'Sign Up', new_user_registration_path, class: 'right' %></small><br>
       <small>Didn't receive confirmation email? <%= link_to 'Resend', new_confirmation_path(resource_name) %></small>
