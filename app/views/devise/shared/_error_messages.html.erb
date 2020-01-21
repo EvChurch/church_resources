@@ -1,3 +1,8 @@
+<% flash.each do |key, value| %>
+  <div class="<%= flash_class(key) %>">
+    <%= value %>
+  </div>
+<% end %>
 <% if resource.errors.any? %>
   <div class="alert alert-danger">
     <h2>
