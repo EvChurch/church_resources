@@ -2,7 +2,8 @@
 
 ActiveAdmin.register Location::Event do
   menu parent: 'Locations', label: 'Events'
-  permit_params :banner, :name, :content, :start_at, :end_at, :address, :elvanto_form_id, :facebook_url, :location_id
+  permit_params :banner, :name, :content, :start_at, :end_at, :address, :elvanto_form_id, :facebook_url, :location_id,
+                :registration_url
 
   scope :upcoming, default: true
   scope :featured
@@ -44,6 +45,7 @@ ActiveAdmin.register Location::Event do
       f.input :end_at, as: :date_time_picker
       f.input :address
       f.input :elvanto_form_id
+      f.input :registration_url
       f.input :facebook_url
     end
     f.actions

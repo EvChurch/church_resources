@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_04_010246) do
+ActiveRecord::Schema.define(version: 2020_02_08_200410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -112,6 +112,7 @@ ActiveRecord::Schema.define(version: 2019_11_04_010246) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "featured_at"
+    t.string "registration_url"
     t.index ["featured_at"], name: "index_location_events_on_featured_at"
     t.index ["location_id"], name: "index_location_events_on_location_id"
   end

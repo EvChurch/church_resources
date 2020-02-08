@@ -11,6 +11,7 @@ class Types::Location::EventType < Types::BaseObject
   field :content, String, null: false
   field :elvanto_form_id, String, null: true
   field :facebook_url, String, null: true
+  field :registration_url, String, null: true
   field :banner_url, String, null: false
   field :location, Types::LocationType, null: false
 

@@ -14,7 +14,7 @@ class Location::Event < ApplicationRecord
               message: '1920x1080 max resolution'
             },
             size: { less_than: 500.kilobytes, message: '500KB max size' }
-  validates :facebook_url, url: { allow_blank: true }
+  validates :registration_url, :facebook_url, url: { allow_blank: true }
   scope :upcoming, -> { where('end_at >= ?', Time.zone.today).order(:start_at) }
   scope :featured, -> { upcoming.where.not(featured_at: nil) }
 end
