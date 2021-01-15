@@ -14,9 +14,7 @@ class Queries::PrayersQuery < Queries::BaseQuery
   def scope(ids, location_ids)
     scope = ::Location::Prayer
     scope = filter_by_ids(scope, ids)
-    scope = filter_by_locations(scope, location_ids)
-
-    scope
+    filter_by_locations(scope, location_ids)
   end
 
   def filter_by_ids(scope, ids)

@@ -12,9 +12,7 @@ class Queries::LocationsQuery < Queries::BaseQuery
 
   def scope(ids)
     scope = ::Location
-    scope = filter_by_ids(scope, ids)
-
-    scope
+    filter_by_ids(scope, ids)
   end
 
   def filter_by_ids(scope, ids)

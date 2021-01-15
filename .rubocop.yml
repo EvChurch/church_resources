@@ -1,18 +1,22 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-rails
+  - rubocop-rspec
 AllCops:
   Exclude:
    - 'bin/*'
-   - 'db/**/*'
+   - 'db/*'
    - 'config/**/*'
    - 'vendor/bundle/**/*'
    - 'node_modules/**/*'
    - 'Guardfile'
-Rails:
-  Enabled: true
-Documentation:
+  NewCops: enable
+Style/Documentation:
   Enabled: false
 Lint/Debugger:
   AutoCorrect: false
-LineLength:
+Layout/LineLength:
   Max: 120
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact

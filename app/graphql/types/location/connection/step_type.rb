@@ -10,4 +10,5 @@ class Types::Location::Connection::StepType < Types::BaseObject
   field :elvanto_form_id, String, null: true
   field :mail_chimp_user_id, String, null: true
   field :mail_chimp_audience_id, String, null: true
+  field :fluro_form_url, String, null: true
 end

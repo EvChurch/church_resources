@@ -3,11 +3,11 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.4'
+ruby '2.7.2'
 
+gem 'activeadmin'
 gem 'active_admin_datetimepicker'
 gem 'active_storage_validations'
-gem 'activeadmin'
 gem 'acts_as_list'
 gem 'aws-sdk-s3', require: false
 gem 'bootsnap', '>= 1.4.2', require: false
@@ -26,11 +26,10 @@ gem 'koala'
 gem 'mechanize'
 gem 'meta-tags'
 gem 'mini_magick'
-gem 'omniauth-facebook'
 gem 'pg'
 gem 'puma', '~> 3.11'
 gem 'rack-cors'
-gem 'rails', '~> 6.0.0.rc1'
+gem 'rails', '~> 6'
 gem 'redis'
 gem 'rolify'
 gem 'rollbar'
@@ -55,7 +54,8 @@ group :development do
   gem 'foreman'
   gem 'letter_opener'
   gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'rubocop'
+  gem 'rubocop-rails'
+  gem 'rubocop-rspec'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
