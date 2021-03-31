@@ -53,7 +53,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'foreman'
   gem 'letter_opener'
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'listen', '>= 3.0.5', '< 3.6'
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
   gem 'spring'
