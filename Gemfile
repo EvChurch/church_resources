@@ -37,7 +37,7 @@ gem 'sass-rails', '~> 5'
 gem 'simple_form'
 gem 'turbolinks', '~> 5'
 gem 'validate_url'
-gem 'webpacker', '~> 4.0'
+gem 'webpacker', '~> 5.3'
 
 group :development, :test do
   gem 'byebug'
