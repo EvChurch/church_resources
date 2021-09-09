@@ -9,7 +9,7 @@
       <%= link_to resource.type_title, resources_path(resource_type: resource.type_param) %>
       <% if resource.series.any? %>
         /
-        <%= link_to resource.series.first.name, series_path(resource.series.first) %>
+        <%= link_to resource.series.first.name, series_path(resource.series.first, resource_type: params[:resource_type]) %>
       <% end %>
     </div>
     <h1><%= title resource.name %></h1>
