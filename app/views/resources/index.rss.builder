@@ -18,7 +18,7 @@ xml.rss version: '2.0',
     xml.itunes :author, 'Auckland Ev'
     xml.itunes :keywords, 'auckland, evangelical, church, christian, sermon, ev, jesus, god, hope, holy spirit'
     xml.itunes :explicit, 'clean'
-    xml.itunes :image, href: image_url('auckland_ev_podcast.jpg', skip_pipeline: true)
+    xml.itunes :image, href: image_url('ev_church_podcast.jpg', skip_pipeline: true)
     xml.itunes :owner do
       xml.itunes :name, 'Auckland Ev'
       xml.itunes :email, 'info@aucklandev.co.nz'
