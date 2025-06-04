@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[6.1].define(version: 2021_01_15_004827) do
-
+ActiveRecord::Schema[7.0].define(version: 2021_01_15_004827) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -24,8 +23,8 @@ ActiveRecord::Schema[6.1].define(version: 2021_01_15_004827) do
     t.uuid "resource_id"
     t.string "author_type"
     t.uuid "author_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
@@ -36,7 +35,7 @@ ActiveRecord::Schema[6.1].define(version: 2021_01_15_004827) do
     t.string "record_type", null: false
     t.uuid "record_id", null: false
     t.uuid "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -48,7 +47,7 @@ ActiveRecord::Schema[6.1].define(version: 2021_01_15_004827) do
     t.text "metadata"
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
@@ -62,24 +61,25 @@ ActiveRecord::Schema[6.1].define(version: 2021_01_15_004827) do
   create_table "authors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "slug"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "remote_id"
+    t.index ["remote_id"], name: "index_authors_on_remote_id"
   end
 
   create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "slug"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "category_topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.uuid "category_id", null: false
     t.string "slug"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_category_topics_on_category_id"
   end
 
@@ -88,7 +88,7 @@ ActiveRecord::Schema[6.1].define(version: 2021_01_15_004827) do
     t.uuid "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
     t.string "scope"
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
@@ -99,8 +99,8 @@ ActiveRecord::Schema[6.1].define(version: 2021_01_15_004827) do
     t.text "content"
     t.uuid "step_id", null: false
     t.uuid "location_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "mail_chimp_user_id"
     t.string "mail_chimp_audience_id"
     t.string "fluro_form_url"
@@ -109,17 +109,17 @@ ActiveRecord::Schema[6.1].define(version: 2021_01_15_004827) do
   end
 
   create_table "location_events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.datetime "start_at"
-    t.datetime "end_at"
+    t.datetime "start_at", precision: nil
+    t.datetime "end_at", precision: nil
     t.string "name"
     t.text "content"
     t.string "address"
     t.string "elvanto_form_id"
     t.string "facebook_url"
     t.uuid "location_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.datetime "featured_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "featured_at", precision: nil
     t.string "registration_url"
     t.index ["featured_at"], name: "index_location_events_on_featured_at"
     t.index ["location_id"], name: "index_location_events_on_location_id"
@@ -130,18 +130,18 @@ ActiveRecord::Schema[6.1].define(version: 2021_01_15_004827) do
     t.string "snippet"
     t.text "content"
     t.uuid "location_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["location_id"], name: "index_location_prayers_on_location_id"
   end
 
   create_table "location_services", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.datetime "start_at"
-    t.datetime "end_at"
+    t.datetime "start_at", precision: nil
+    t.datetime "end_at", precision: nil
     t.uuid "location_id", null: false
     t.string "elvanto_form_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["location_id"], name: "index_location_services_on_location_id"
   end
 
@@ -150,15 +150,15 @@ ActiveRecord::Schema[6.1].define(version: 2021_01_15_004827) do
     t.string "snippet"
     t.text "content"
     t.string "address"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "resource_connection_authors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "resource_id", null: false
     t.uuid "author_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_resource_connection_authors_on_author_id"
     t.index ["resource_id"], name: "index_resource_connection_authors_on_resource_id"
   end
@@ -166,8 +166,8 @@ ActiveRecord::Schema[6.1].define(version: 2021_01_15_004827) do
   create_table "resource_connection_scriptures", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "resource_id", null: false
     t.uuid "scripture_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "range"
     t.text "content"
     t.index ["resource_id"], name: "index_resource_connection_scriptures_on_resource_id"
@@ -177,8 +177,8 @@ ActiveRecord::Schema[6.1].define(version: 2021_01_15_004827) do
   create_table "resource_connection_series", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "resource_id", null: false
     t.uuid "series_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["resource_id"], name: "index_resource_connection_series_on_resource_id"
     t.index ["series_id"], name: "index_resource_connection_series_on_series_id"
   end
@@ -186,8 +186,8 @@ ActiveRecord::Schema[6.1].define(version: 2021_01_15_004827) do
   create_table "resource_connection_topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "resource_id", null: false
     t.uuid "topic_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["resource_id"], name: "index_resource_connection_topics_on_resource_id"
     t.index ["topic_id"], name: "index_resource_connection_topics_on_topic_id"
   end
@@ -197,25 +197,26 @@ ActiveRecord::Schema[6.1].define(version: 2021_01_15_004827) do
     t.string "name"
     t.string "snippet"
     t.text "content"
-    t.datetime "published_at"
-    t.datetime "featured_at"
+    t.datetime "published_at", precision: nil
+    t.datetime "featured_at", precision: nil
     t.string "video_url"
     t.string "slug"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "youtube_url"
     t.string "remote_id"
     t.string "audio_url"
     t.text "sermon_notes"
     t.text "connect_group_notes"
+    t.index ["remote_id"], name: "index_resources_on_remote_id"
   end
 
   create_table "roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
     t.uuid "resource_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", unique: true
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
   end
@@ -223,25 +224,26 @@ ActiveRecord::Schema[6.1].define(version: 2021_01_15_004827) do
   create_table "scriptures", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "slug"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "series", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "slug"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "remote_id"
+    t.index ["remote_id"], name: "index_series_on_remote_id"
   end
 
   create_table "steps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.text "content"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "position"
-    t.datetime "featured_at"
+    t.datetime "featured_at", precision: nil
     t.index ["featured_at"], name: "index_steps_on_featured_at"
   end
 
@@ -251,22 +253,22 @@ ActiveRecord::Schema[6.1].define(version: 2021_01_15_004827) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
     t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
+    t.datetime "confirmed_at", precision: nil
+    t.datetime "confirmation_sent_at", precision: nil
     t.string "unconfirmed_email"
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
-    t.datetime "locked_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "locked_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "facebook_token"
     t.string "name"
     t.string "facebook_remote_id"
@@ -280,8 +282,8 @@ ActiveRecord::Schema[6.1].define(version: 2021_01_15_004827) do
   create_table "users_roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.uuid "role_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["role_id"], name: "index_users_roles_on_role_id"
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", unique: true
     t.index ["user_id"], name: "index_users_roles_on_user_id"
