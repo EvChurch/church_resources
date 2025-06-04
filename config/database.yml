@@ -3,12 +3,12 @@ development: &dev
   encoding: utf8
   reconnect: false
   pool: <%= ENV['DB_ENV_POSTGRESQL_POOL'] || 25 %>
-  database: <%= ENV['DB_ENV_POSTGRESQL_DB'] || 'church_resources' %>
+  database: <%= ENV['DB_ENV_POSTGRESQL_DB'] || 'church_resources_development' %>
   username: <%= ENV['DB_ENV_POSTGRESQL_USER'] %>
   password: <%= ENV['DB_ENV_POSTGRESQL_PASS'] %>
   host: <%= ENV['DB_PORT_5432_TCP_ADDR'] %>
   port: <%= ENV['DB_PORT_5432_TCP_PORT'] %>
-test: &test
+test:
   <<: *dev
   database: <%= (ENV['DB_ENV_POSTGRESQL_DB_TEST'] || 'church_resources_test') + (ENV['TEST_ENV_NUMBER'] || '') %>
   username: <%= ENV['DB_ENV_POSTGRESQL_USER_TEST'] || ENV['DB_ENV_POSTGRESQL_USER'] %>
