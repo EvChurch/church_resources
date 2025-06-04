@@ -3,12 +3,12 @@
 class Types::SeriesType < Types::BaseObject
   include Rails.application.routes.url_helpers
 
+  field :background_url, String, null: true
+  field :banner_url, String, null: true
+  field :foreground_url, String, null: true
   field :id, ID, null: false
   field :name, String, null: false
   field :resources, Types::ResourceType.connection_type, null: false
-  field :banner_url, String, null: true
-  field :foreground_url, String, null: true
-  field :background_url, String, null: true
 
   def banner_url
     object.banner.presence && polymorphic_url(

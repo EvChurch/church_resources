@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 module ChurchResources
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.0
+    config.load_defaults 7.0
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -18,24 +18,5 @@ module ChurchResources
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-
-    config.generators do |g|
-      g.orm :active_record, primary_key_type: :uuid
-    end
-
-    config.middleware.insert_after ActionDispatch::Static, Rack::Deflater
-
-    config.middleware.insert_before 0, Rack::Cors do
-      allow do
-        origins 'localhost:3000', 'aucklandev.co.nz', %r{\Ahttps:\/\/.*\.aucklandev\.co\.nz\z}
-        resource(
-          '*',
-          headers: :any,
-          methods: %i[post options]
-        )
-      end
-    end
-
-    config.time_zone = 'Auckland'
   end
 end

@@ -313,12 +313,14 @@ ActiveAdmin.setup do |config|
   # config.order_clause = MyOrderClause
 end
 
-ActiveAdmin::ResourceController.class_eval do
-  def find_resource
-    id_field = 'id'
+ActiveAdmin.after_load do
+  ActiveAdmin::ResourceController.class_eval do
+    def find_resource
+      id_field = 'id'
 
-    id_field = scoped_collection.friendly_id_config.query_field if scoped_collection.is_a? FriendlyId
+      id_field = scoped_collection.friendly_id_config.query_field if scoped_collection.is_a? FriendlyId
 
-    scoped_collection.find_by! id_field => params[:id]
+      scoped_collection.find_by! id_field => params[:id]
+    end
   end
 end

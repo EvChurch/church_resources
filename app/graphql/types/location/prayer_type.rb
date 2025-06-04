@@ -3,12 +3,12 @@
 class Types::Location::PrayerType < Types::BaseObject
   include Rails.application.routes.url_helpers
 
+  field :banner_url, String, null: false
+  field :content, String, null: true
   field :id, ID, null: false
+  field :location, Types::LocationType, null: false
   field :name, String, null: false
   field :snippet, String, null: false
-  field :content, String, null: true
-  field :location, Types::LocationType, null: false
-  field :banner_url, String, null: false
 
   def banner_url
     polymorphic_url(

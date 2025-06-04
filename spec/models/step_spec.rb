@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe Step, type: :model do
+RSpec.describe Step do
   pending "add some examples to (or delete) #{__FILE__}"
 end

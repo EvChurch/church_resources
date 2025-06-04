@@ -32,7 +32,7 @@ class ResourceDecorator < ApplicationDecorator
     scripture_names = connection_scriptures.map(&:name).join(', ')
     display_published_at = published_at.strftime('%b %d, %Y')
 
-    [author_names, scripture_names, display_published_at].select(&:present?).join(' | ')
+    [author_names, scripture_names, display_published_at].compact_blank.join(' | ')
   end
 
   def author_names

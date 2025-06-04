@@ -3,17 +3,17 @@
 class Types::Location::EventType < Types::BaseObject
   include Rails.application.routes.url_helpers
 
-  field :id, ID, null: false
-  field :start_at, GraphQL::Types::ISO8601DateTime, null: false
-  field :end_at, GraphQL::Types::ISO8601DateTime, null: false
   field :address, String, null: false
-  field :name, String, null: false
+  field :banner_url, String, null: false
   field :content, String, null: false
   field :elvanto_form_id, String, null: true
+  field :end_at, GraphQL::Types::ISO8601DateTime, null: false
   field :facebook_url, String, null: true
-  field :registration_url, String, null: true
-  field :banner_url, String, null: false
+  field :id, ID, null: false
   field :location, Types::LocationType, null: false
+  field :name, String, null: false
+  field :registration_url, String, null: true
+  field :start_at, GraphQL::Types::ISO8601DateTime, null: false
 
   def banner_url
     polymorphic_url(

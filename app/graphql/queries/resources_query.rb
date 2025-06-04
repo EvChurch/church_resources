@@ -2,13 +2,13 @@
 
 class Queries::ResourcesQuery < Queries::BaseQuery
   type Types::ResourceType.connection_type, null: false
-  argument :ids, [ID], required: false, default_value: nil
   argument :author_ids, [ID], required: false, default_value: nil
   argument :category_ids, [ID], required: false, default_value: nil
+  argument :ids, [ID], required: false, default_value: nil
+  argument :resource_type, String, required: false, default_value: nil
   argument :scripture_ids, [ID], required: false, default_value: nil
   argument :series_ids, [ID], required: false, default_value: nil
   argument :topic_ids, [ID], required: false, default_value: nil
-  argument :resource_type, String, required: false, default_value: nil
 
   def resolve(ids:, author_ids:, category_ids:, scripture_ids:, series_ids:, topic_ids:, resource_type:)
     scope(ids, author_ids, category_ids, scripture_ids, series_ids, topic_ids, resource_type).all
