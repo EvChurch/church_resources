@@ -33,10 +33,10 @@ gem 'redis'
 gem 'rolify'
 gem 'rollbar'
 gem 'sass-rails', '~> 5'
+gem 'shakapacker', '~> 6.0'
 gem 'simple_form'
 gem 'turbolinks', '~> 5'
 gem 'validate_url'
-gem 'webpacker', '6.0.0.rc.6'
 
 group :development, :test do
   gem 'byebug'
