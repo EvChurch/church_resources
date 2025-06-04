@@ -16,4 +16,9 @@ class Step < ApplicationRecord
             },
             size: { less_than: 500.kilobytes, message: '500KB max size' }
   scope :featured, -> { where.not(featured_at: nil) }
+
+  # No association filters in ActiveAdmin, so none are ransackable
+  def self.ransackable_associations(_auth_object = nil)
+    []
+  end
 end

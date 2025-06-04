@@ -31,4 +31,9 @@ class Resource < ApplicationRecord
 
   scope :published, -> { where.not(published_at: nil) }
   scope :featured, -> { where.not(featured_at: nil) }
+
+  # Only allow these associations to be searchable by Ransack (used in ActiveAdmin filters)
+  def self.ransackable_associations(_auth_object = nil)
+    %w[authors scriptures series topics]
+  end
 end

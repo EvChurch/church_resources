@@ -17,4 +17,9 @@ class Location < ApplicationRecord
               message: '1920x1080 max resolution'
             },
             size: { less_than: 500.kilobytes, message: '500KB max size' }
+
+  # No association filters in ActiveAdmin, so none are ransackable
+  def self.ransackable_associations(_auth_object = nil)
+    []
+  end
 end

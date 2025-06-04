@@ -12,4 +12,9 @@ class Series < ApplicationRecord
   has_one_attached :banner
   has_one_attached :foreground
   has_one_attached :background
+
+  # Only allow these associations to be searchable by Ransack (used in ActiveAdmin filters)
+  def self.ransackable_associations(_auth_object = nil)
+    %w[resources]
+  end
 end
