@@ -7,6 +7,7 @@ import "../stylesheets/application.scss";
 import "./vendor/bootstrap";
 import videojs from "video.js";
 import "videojs-youtube";
+import $ from "jquery";
 
 require("@rails/ujs").start();
 require("turbolinks").start();
