@@ -1,4 +1,4 @@
-# Note: You must restart bin/webpacker-dev-server for changes to take effect
+# Note: You must restart bin/shakapacker-dev-server for changes to take effect
 
 default: &default
   source_path: app/javascript
@@ -19,10 +19,10 @@ default: &default
 
   public_root_path: public
   public_output_path: packs
-  cache_path: tmp/webpacker
+  cache_path: tmp/shakapacker
   webpack_compile_output: true
   # See https://github.com/shakacode/shakapacker#deployment
-  webpacker_precompile: true
+  shakapacker_precompile: true
 
   # Location for manifest.json, defaults to {public_output_path}/manifest.json if unset
   # manifest_path: public/packs/manifest.json
@@ -41,7 +41,8 @@ default: &default
   webpack_loader: 'babel'
 
   # Set to true to enable check for matching versions of shakapacker gem and NPM package - will raise an error if there is a mismatch or wildcard versioning is used
-  ensure_consistent_versioning: false
+  # This is now enabled by default in v8
+  ensure_consistent_versioning: true
 
   # Select whether the compiler will use SHA digest ('digest' option) or most most recent modified timestamp ('mtime') to determine freshness
   compiler_strategy: digest
@@ -54,7 +55,6 @@ development:
   # Reference: https://webpack.js.org/configuration/dev-server/
   # Keys not described there are documented inline and in https://github.com/shakacode/shakapacker/
   dev_server:
-    https: false
     host: localhost
     port: 3035
     # Hot Module Replacement updates modules while the application is running without a full reload
@@ -81,8 +81,8 @@ development:
     # Should we use gzip compression?
     compress: true
     # Note that apps that do not check the host are vulnerable to DNS rebinding attacks
-    allowed_hosts: 'all'
-    # Shows progress and colorizes output of bin/webpacker[-dev-server]
+    allowed_hosts: auto
+    # Shows progress and colorizes output of bin/shakapacker[-dev-server]
     pretty: true
     headers:
       'Access-Control-Allow-Origin': '*'
