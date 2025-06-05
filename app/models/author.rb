@@ -11,7 +11,7 @@ class Author < ApplicationRecord
 
   # Only allow these associations to be searchable by Ransack (used in ActiveAdmin filters)
   def self.ransackable_associations(_auth_object = nil)
-    %w[resources]
+    %w[resources connection_authors]
   end
 
   def self.ransackable_attributes(_auth_object = nil)

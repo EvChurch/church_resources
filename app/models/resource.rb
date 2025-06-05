@@ -38,6 +38,6 @@ class Resource < ApplicationRecord
   end
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[created_at featured_at id name published_at slug type updated_at]
+    %w[created_at featured_at id name published_at slug type updated_at snippet content]
   end
 end
