@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 xml.instruct! :xml, version: '1.0'
 
 xml.rss version: '2.0',
@@ -8,7 +10,9 @@ xml.rss version: '2.0',
     xml.tag!('atom:link', 'href' => resources_url(format: 'rss'), 'rel' => 'self', 'type' => 'application/rss+xml')
     xml.title "Ev Church - #{(params[:resource_type] || 'resource').pluralize.titleize}"
     xml.link resources_url(resource_type: params[:resource_type])
-    xml.description "We are a bunch of people, convinced we're not perfect, captivated by the historical Jesus, excited about the future he offers, and eager to authentically share this hope with Auckland."
+    xml.description "We are a bunch of people, convinced we're not perfect, " \
+                    'captivated by the historical Jesus, excited about the future he offers, ' \
+                    'and eager to authentically share this hope with Auckland.'
     xml.language 'en'
     if @resources.present? && @resources.first.published_at.present?
       xml.lastBuildDate @resources.first.published_at.to_fs(:rfc822)
