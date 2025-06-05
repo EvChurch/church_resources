@@ -33,7 +33,7 @@ class ResourcesController < ApplicationController
   def load_all_resources
     return @resources if @resources
 
-    @resources = scope.order(published_at: :desc).published
+    @resources = scope.order(published_at: :desc).published.limit(100)
     if params[:resource_type].present?
       @resources = @resources.where(type: Resource::TYPES[params[:resource_type].to_sym])
     end
