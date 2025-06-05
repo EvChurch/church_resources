@@ -54,4 +54,29 @@ RSpec.describe 'ActiveAdmin Smoke Tests', :js do
     visit admin_category_topics_path
     expect(page).to have_css('.filter_form_field')
   end
+
+  it 'loads Category index (with filter sidebar) without error' do
+    visit admin_categories_path
+    expect(page).to have_css('.filter_form_field')
+  end
+
+  it 'loads Location Connection Steps index (with filter sidebar) without error' do
+    visit admin_location_connection_steps_path
+    expect(page).to have_css('.filter_form_field')
+  end
+
+  it 'loads Location Events index (with filter sidebar) without error' do
+    visit admin_location_events_path
+    expect(page).to have_css('.filter_form_field')
+  end
+
+  it 'loads Location Prayers index (with filter sidebar) without error' do
+    visit admin_location_prayers_path
+    expect(page).to have_css('.filter_form_field')
+  end
+
+  it 'loads Location Services index (with filter sidebar) without error' do
+    visit admin_location_services_path
+    expect(page).to have_css('.filter_form_field')
+  end
 end

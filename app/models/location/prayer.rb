@@ -14,4 +14,12 @@ class Location::Prayer < ApplicationRecord
               message: '1920x1080 max resolution'
             },
             size: { less_than: 500.kilobytes, message: '500KB max size' }
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[content created_at id location_id name snippet updated_at]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[location banner_attachment banner_blob]
+  end
 end

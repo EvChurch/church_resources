@@ -17,4 +17,13 @@ class Location::Event < ApplicationRecord
   validates :registration_url, :facebook_url, url: { allow_blank: true }
   scope :upcoming, -> { where(end_at: Time.zone.today..).order(:start_at) }
   scope :featured, -> { upcoming.where.not(featured_at: nil) }
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[created_at id location_id updated_at elvanto_form_id name content address start_at end_at featured_at
+       facebook_url registration_url]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[location banner_attachment banner_blob]
+  end
 end

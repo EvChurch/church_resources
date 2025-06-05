@@ -12,4 +12,8 @@ class Category < ApplicationRecord
   def self.ransackable_attributes(_auth_object = nil)
     %w[created_at id name slug updated_at]
   end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[topics resources]
+  end
 end

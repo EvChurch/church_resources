@@ -38,3 +38,5 @@ GraphQL/ExtractType:
   Enabled: false
 Rails/I18nLocaleTexts:
   Enabled: false
+RSpec/ExampleLength:
+  Max: 10
