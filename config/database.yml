@@ -1,17 +1,18 @@
-development: &dev
+development:
   adapter: postgresql
   encoding: utf8
-  reconnect: false
-  pool: <%= ENV['DB_ENV_POSTGRESQL_POOL'] || 25 %>
-  database: <%= ENV['DB_ENV_POSTGRESQL_DB'] || 'church_resources_development' %>
-  username: <%= ENV['DB_ENV_POSTGRESQL_USER'] %>
-  password: <%= ENV['DB_ENV_POSTGRESQL_PASS'] %>
-  host: <%= ENV['DB_PORT_5432_TCP_ADDR'] %>
-  port: <%= ENV['DB_PORT_5432_TCP_PORT'] %>
+  pool: 5
+  database: church_resources_development
+  host: localhost
+  username: postgres
+  password: <%= ENV.fetch('POSTGRES_PASSWORD', nil) %>
+  port: 5432
 test:
-  <<: *dev
-  database: <%= (ENV['DB_ENV_POSTGRESQL_DB_TEST'] || 'church_resources_test') + (ENV['TEST_ENV_NUMBER'] || '') %>
-  username: <%= ENV['DB_ENV_POSTGRESQL_USER_TEST'] || ENV['DB_ENV_POSTGRESQL_USER'] %>
-  password: <%= ENV['DB_ENV_POSTGRESQL_PASS_TEST'] || ENV['DB_ENV_POSTGRESQL_PASS'] %>
-  host: <%= ENV['DB_PORT_5432_TCP_ADDR_TEST'] || ENV['DB_PORT_5432_TCP_ADDR'] %>
-  port: <%= ENV['DB_PORT_5432_TCP_PORT_TEST'] || ENV['DB_PORT_5432_TCP_PORT'] %>
+  adapter: postgresql
+  encoding: utf8
+  pool: 5
+  database: church_resources_test
+  host: localhost
+  username: postgres
+  password: <%= ENV.fetch('POSTGRES_PASSWORD', nil) %>
+  port: 5432
