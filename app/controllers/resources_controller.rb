@@ -9,7 +9,9 @@ class ResourcesController < ApplicationController
         load_resources
       end
       format.rss do
-        load_all_resources
+        load_all_resources # This will set @resources, which is then used by index.rss.builder
+        # The `decorates_assigned :resources` line will handle decoration.
+        # Rails will implicitly render app/views/resources/index.rss.builder
       end
     end
   end
