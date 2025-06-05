@@ -36,4 +36,8 @@ class Resource < ApplicationRecord
   def self.ransackable_associations(_auth_object = nil)
     %w[authors scriptures series topics]
   end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[created_at featured_at id name published_at slug type updated_at]
+  end
 end
