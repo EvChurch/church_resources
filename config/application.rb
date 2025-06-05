@@ -26,7 +26,7 @@ module ChurchResources
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins 'localhost:3000', 'aucklandev.co.nz', %r{\Ahttps:\/\/.*\.aucklandev\.co\.nz\z}
+        origins 'localhost:3000', 'ev.church', %r{\Ahttps:\/\/.*\.ev\.church\z}
         resource(
           '*',
           headers: :any,
