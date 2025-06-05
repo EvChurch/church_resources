@@ -14,7 +14,7 @@ ActiveAdmin.register Location do
       f.input :name
       f.input :banner, as: :file
       f.input :snippet
-      f.input :content, as: :trix
+      f.input :content, as: :text
       f.input :address
     end
     f.actions

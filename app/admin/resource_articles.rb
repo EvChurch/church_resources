@@ -32,7 +32,7 @@ ActiveAdmin.register Resource::Article do
       f.input :published_at, as: :date_time_picker
       f.input :featured_at, as: :date_time_picker
       f.input :snippet
-      f.input :content, as: :trix
+      f.input :content, as: :text
       f.input :banner, as: :file
       f.input :topics, collection: Category::Topic.all, multiple: true, input_html: { class: 'chosen-select' }
       f.input :authors, collection: Author.all, multiple: true, input_html: { class: 'chosen-select' }

@@ -56,7 +56,7 @@ ActiveAdmin.register Step do
     inputs do
       f.input :name
       f.input :banner, as: :file
-      f.input :content, as: :trix
+      f.input :content, as: :text
     end
     f.actions
   end

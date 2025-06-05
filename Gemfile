@@ -15,7 +15,7 @@ gem 'concurrent-ruby', '1.3.4' # Fix for Rails 7.0 Logger compatibility
 gem 'devise'
 gem 'draper'
 gem 'font-awesome-sass', '~> 6.0'
-gem 'formtastic-trix'
+gem 'formtastic', '>= 4.0'
 gem 'friendly_id', '~> 5.2.4'
 gem 'graphql'
 gem 'high_voltage', '~> 3.1'

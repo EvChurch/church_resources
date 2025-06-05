@@ -34,7 +34,7 @@ ActiveAdmin.register Resource::Sermon do
       f.input :published_at, as: :date_time_picker
       f.input :featured_at, as: :date_time_picker
       f.input :snippet
-      f.input :content, as: :trix
+      f.input :content, as: :text
       f.input :youtube_url
       f.input :audio_url
       f.input :video, as: :file
@@ -48,8 +48,8 @@ ActiveAdmin.register Resource::Sermon do
         a.input :range
       end
       f.input :series, collection: Series.all, multiple: true
-      f.input :sermon_notes, as: :trix
-      f.input :connect_group_notes, as: :trix
+      f.input :sermon_notes, as: :text
+      f.input :connect_group_notes, as: :text
     end
     f.actions
   end

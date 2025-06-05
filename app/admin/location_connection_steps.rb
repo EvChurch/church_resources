@@ -15,7 +15,7 @@ ActiveAdmin.register Location::Connection::Step do
     inputs do
       f.input :location
       f.input :step
-      f.input :content, as: :trix
+      f.input :content, as: :text
       f.input :elvanto_form_id
       f.input :mail_chimp_user_id
       f.input :mail_chimp_audience_id
