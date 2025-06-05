@@ -6,11 +6,11 @@ class Resource::Connection::Scripture < ApplicationRecord
 
   before_save :fetch_content, if: :range_changed?
 
-  def self.ransackable_attributes(auth_object = nil)
+  def self.ransackable_attributes(_auth_object = nil)
     %w[content created_at id range resource_id scripture_id updated_at]
   end
 
-  def self.ransackable_associations(auth_object = nil)
+  def self.ransackable_associations(_auth_object = nil)
     %w[resource scripture]
   end
 
