@@ -15,10 +15,11 @@ class Series < ApplicationRecord
 
   # Only allow these associations to be searchable by Ransack (used in ActiveAdmin filters)
   def self.ransackable_associations(_auth_object = nil)
-    %w[resources connection_series]
+    %w[resources connection_series banner_attachment banner_blob foreground_attachment foreground_blob
+       background_attachment background_blob]
   end
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[created_at id name slug updated_at]
+    %w[created_at id name slug updated_at banner foreground background]
   end
 end

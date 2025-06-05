@@ -7,10 +7,7 @@ RSpec.describe 'ActiveAdmin Smoke Tests', :js do
   let(:admin) { create(:user, :admin, password: password, password_confirmation: password) }
 
   before do
-    visit new_user_session_path
-    fill_in 'Email', with: admin.email
-    fill_in 'Password', with: password
-    click_button 'Log in'
+    login_as(admin, scope: :user)
   end
 
   it 'loads Resource::Article index (with filter sidebar) without error' do
@@ -39,7 +36,7 @@ RSpec.describe 'ActiveAdmin Smoke Tests', :js do
   end
 
   it 'loads Series index (with filter sidebar) without error' do
-    visit admin_series_path
+    visit admin_series_index_path
     expect(page).to have_css('.filter_form_field')
   end
 
