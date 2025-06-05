@@ -18,7 +18,7 @@ class ResourcesController < ApplicationController
 
         response.headers['Content-Type'] = 'application/rss+xml; charset=utf-8'
 
-        cached_rss_content = Rails.cache.fetch(cache_key_parts.compact.join('/'), expires_in: 1.hour) do
+        cached_rss_content = Rails.cache.fetch(cache_key_parts.compact.join('/'), expires_in: 1.day) do
           @resources = resource_scope.includes(:authors, :connection_scriptures)
           render_to_string template: 'resources/index', formats: [:rss]
         end
