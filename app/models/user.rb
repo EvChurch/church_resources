@@ -12,7 +12,6 @@ class User < ApplicationRecord
   end
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[created_at email encrypted_password first_name id last_name locked_at
-       reset_password_sent_at reset_password_token sign_in_count updated_at]
+    %w[created_at email first_name id last_name sign_in_count updated_at]
   end
 end
