@@ -29,8 +29,8 @@ ActiveAdmin.register Step do
     selectable_column
     column do |post|
       [
-        link_to(fa_icon('chevron-up'), move_higher_admin_step_path(post)),
-        link_to(fa_icon('chevron-down'), move_lower_admin_step_path(post))
+        link_to(icon('chevron-up', 'font-awesome'), move_higher_admin_step_path(post)),
+        link_to(icon('chevron-down', 'font-awesome'), move_lower_admin_step_path(post))
       ].join(' ').html_safe
     end
     column :position
