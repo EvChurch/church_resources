@@ -27,7 +27,7 @@ xml.rss version: '2.0',
     xml.itunes :category, text: 'Religion & Spirituality' do
       xml.itunes :category, text: 'Christianity'
     end
-    resources.each do |resource|
+    resources.find_each do |resource|
       xml.item do
         xml.title resource.name
         xml.description resource.description
