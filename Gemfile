@@ -6,6 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.2.8'
 
 gem 'activeadmin', '~> 3.3.0'
+gem 'active_admin_datetimepicker'
 gem 'active_storage_validations'
 gem 'acts_as_list'
 gem 'aws-sdk-s3', require: false

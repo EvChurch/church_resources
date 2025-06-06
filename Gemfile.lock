@@ -46,6 +46,8 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_admin_datetimepicker (1.1.0)
+      activeadmin (>= 2.14.0, < 4.0)
     active_storage_validations (3.0.0)
       activejob (>= 6.1.4)
       activemodel (>= 6.1.4)
@@ -534,6 +536,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_admin_datetimepicker
   active_storage_validations
   activeadmin (~> 3.3.0)
   acts_as_list
