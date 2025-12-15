@@ -280,6 +280,10 @@ GEM
       net-imap
       net-pop
       net-smtp
+    mailgun-ruby (1.4.0)
+      faraday (~> 2.1)
+      faraday-multipart (~> 1.1.0)
+      mini_mime
     marcel (1.0.4)
     matrix (0.4.2)
     mechanize (2.14.0)
@@ -566,6 +570,7 @@ DEPENDENCIES
   koala
   letter_opener
   listen (~> 3.8)
+  mailgun-ruby
   mechanize
   meta-tags (~> 2.22)
   mini_magick

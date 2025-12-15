@@ -68,15 +68,10 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
   config.action_mailer.default_url_options = { protocol: 'https', host: 'resources.ev.church' }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address: 'smtp.sendgrid.net',
-    port: 587,
-    domain: 'ev.church',
-    user_name: ENV['SENDGRID_USERNAME'],
-    password: ENV['SENDGRID_PASSWORD'],
-    authentication: :login,
-    enable_starttls_auto: true
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+    api_key: ENV.fetch('MAILGUN_API_KEY'),
+    domain: ENV.fetch('MAILGUN_DOMAIN', 'ev.church'),
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
