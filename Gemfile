@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.2.8'
+ruby '3.2.10'
 
 gem 'activeadmin', '~> 3.3.0'
 gem 'active_admin_datetimepicker'
@@ -28,7 +28,7 @@ gem 'mechanize'
 gem 'meta-tags', '~> 2.22'
 gem 'mini_magick'
 gem 'pg'
-gem 'puma', '~> 5.0'
+gem 'puma', '~> 7.0'
 gem 'rack-cors'
 gem 'rails', '~> 7.0.0'
 gem 'redis'

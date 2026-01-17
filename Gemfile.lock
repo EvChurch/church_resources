@@ -352,7 +352,7 @@ GEM
     pry-rails (0.3.11)
       pry (>= 0.13.0)
     public_suffix (6.0.2)
-    puma (5.6.9)
+    puma (7.1.0)
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (2.2.17)
@@ -577,7 +577,7 @@ DEPENDENCIES
   pg
   pry-byebug
   pry-rails
-  puma (~> 5.0)
+  puma (~> 7.0)
   rack-cors
   rails (~> 7.0.0)
   redis
@@ -598,7 +598,7 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 RUBY VERSION
-   ruby 3.2.8p263
+   ruby 3.2.10p266
 
 BUNDLED WITH
-   2.6.9
+   2.4.19
