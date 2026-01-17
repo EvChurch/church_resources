@@ -37,14 +37,8 @@ xml.rss version: '2.0',
         xml.title resource.name
         xml.description resource.description
         xml.pubDate resource.published_at.to_fs(:rfc822)
-        if resource.audio_url.present?
-          audio_url = "#{'https://chtbl.com/track/1G77G/' if Rails.env.production?}#{resource.audio_url}"
-          xml.enclosure url: audio_url, type: 'audio/mp3'
-        end
-        if resource.audio.present?
-          audio_url = "#{'https://chtbl.com/track/1G77G/' if Rails.env.production?}#{polymorphic_url(resource.audio)}"
-          xml.enclosure url: audio_url, type: resource.audio.content_type
-        end
+        xml.enclosure url: resource.audio_url, type: 'audio/mp3' if resource.audio_url.present?
+        xml.enclosure url: polymorphic_url(resource.audio), type: resource.audio.content_type if resource.audio.present?
         xml.link resource_url(resource)
         xml.guid({ isPermaLink: 'false' }, resource_url(resource))
         xml.itunes :author, resource.author_names
