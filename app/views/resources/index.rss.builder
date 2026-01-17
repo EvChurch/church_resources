@@ -31,7 +31,7 @@ xml.rss version: '2.0',
       xml.itunes :category, text: 'Christianity'
     end
 
-    @resources.find_each do |undecorated_resource|
+    @resources.each do |undecorated_resource|
       resource = undecorated_resource.decorate
       xml.item do
         xml.title resource.name
