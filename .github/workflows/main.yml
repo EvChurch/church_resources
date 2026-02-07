@@ -69,6 +69,11 @@ jobs:
         run: |
           bundle exec rails db:create db:migrate
 
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@latest
+        with:
+          chrome-version: stable
+
       - name: Run tests
         run: |
           bundle exec rspec
