@@ -32,6 +32,14 @@ class Resource < ApplicationRecord
   scope :published, -> { where.not(published_at: nil) }
   scope :featured, -> { where.not(featured_at: nil) }
 
+  def self.batch_publish(ids)
+    where(id: ids).find_each { |r| r.update(published_at: Time.zone.now) }
+  end
+
+  def self.batch_unpublish(ids)
+    where(id: ids).find_each { |r| r.update(published_at: nil) }
+  end
+
   # Only allow these associations to be searchable by Ransack (used in ActiveAdmin filters)
   def self.ransackable_associations(_auth_object = nil)
     %w[authors scriptures series topics connection_authors connection_scriptures connection_series connection_topics]
