@@ -4,6 +4,19 @@ ActiveAdmin.register Resource::Sermon do
   menu parent: 'Resources', label: 'Sermons'
   config.sort_order = 'published_at_desc'
 
+  controller do
+    def scoped_collection
+      collection = super
+      order_param = params[:order]
+      if order_param.blank? || order_param.start_with?('published_at_')
+        direction = order_param&.match(/published_at_(asc|desc)/)&.[](1) || 'desc'
+        collection.reorder(Arel.sql("published_at #{direction.upcase} NULLS LAST"))
+      else
+        collection
+      end
+    end
+  end
+
   permit_params :name, :snippet, :content, :video, :audio, :youtube_url, :audio_url, :published_at, :featured_at,
                 :sermon_notes, :connect_group_notes,
                 topic_ids: [], author_ids: [], scripture_ids: [], series_ids: [],
@@ -14,10 +27,7 @@ ActiveAdmin.register Resource::Sermon do
   filter :content
   filter :published_at
   filter :featured_at
-  filter :author
-  filter :scripture
-  filter :series
-  filter :topic
+  filter :series, collection: proc { Series.order(:name).all }
 
   batch_action :publish do |ids|
     Resource::Sermon.batch_publish(ids)

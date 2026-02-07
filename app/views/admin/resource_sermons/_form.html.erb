@@ -1,4 +1,4 @@
-<%= active_admin_form_for resource do |f| %>
+<%= active_admin_form_for resource, url: resource.persisted? ? admin_resource_sermon_path(resource) : admin_resource_sermons_path do |f| %>
   <%= f.semantic_errors %>
   <%= f.inputs do %>
     <%= f.input :name %>
