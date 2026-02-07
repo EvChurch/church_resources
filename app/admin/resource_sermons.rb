@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 ActiveAdmin.register Resource::Sermon do
   menu parent: 'Resources', label: 'Sermons'
   config.sort_order = 'published_at_desc'
@@ -48,5 +49,29 @@ ActiveAdmin.register Resource::Sermon do
     actions
   end
 
-  form partial: 'admin/resource_sermons/form'
+  form do |f|
+    f.semantic_errors
+    inputs do
+      f.input :name
+      f.input :published_at, as: :date_time_picker
+      f.input :featured_at, as: :date_time_picker
+      f.input :snippet
+      f.input :content, as: :text
+      f.input :youtube_url
+      f.input :audio_url
+      f.input :video, as: :file
+      f.input :audio, as: :file
+      f.input :topics, collection: Category::Topic.all, multiple: true
+      f.input :authors, collection: Author.all, multiple: true
+      f.has_many :connection_scriptures, heading: 'Bible Passage', new_record: 'Add Passage Range' do |a|
+        a.input :scripture, collection: Scripture.all, label: 'Book'
+        a.input :range
+      end
+      f.input :series, collection: Series.all, multiple: true
+      f.input :sermon_notes, as: :text
+      f.input :connect_group_notes, as: :text
+    end
+    f.actions
+  end
 end
+# rubocop:enable Metrics/BlockLength
