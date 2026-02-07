@@ -19,7 +19,18 @@ ActiveAdmin.register Resource::Sermon do
   filter :series
   filter :topic
 
+  batch_action :publish do |ids|
+    batch_action_collection.find(ids).each { |sermon| sermon.update(published_at: Time.zone.now) }
+    redirect_to collection_path, notice: "#{ids.size} sermon(s) published"
+  end
+
+  batch_action :unpublish do |ids|
+    batch_action_collection.find(ids).each { |sermon| sermon.update(published_at: nil) }
+    redirect_to collection_path, notice: "#{ids.size} sermon(s) unpublished"
+  end
+
   index do
+    selectable_column
     id_column
     column :name
     column :published_at
