@@ -11,7 +11,6 @@ import videojs from "video.js";
 import "videojs-youtube";
 import $ from "jquery";
 
-require("@rails/ujs").start();
 import "@hotwired/turbo-rails";
 require("@rails/activestorage").start();
 require("channels");
