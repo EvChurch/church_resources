@@ -48,7 +48,7 @@
     "defaults"
   ],
   "scripts": {
-    "build": "bundle exec rake assets:precompile",
+    "build": "RAILS_ENV=production NODE_ENV=production bundle exec rake assets:precompile",
     "update-browserslist": "npx update-browserslist-db@latest"
   }
 }
