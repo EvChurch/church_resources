@@ -12,7 +12,7 @@ services:
       - claude-code-bashhistory:/commandhistory
       - claude-code-config:/home/vscode/.claude
       - ${HOME}/.claude:/tmp/claude-host-config:ro
-      - ${HOME}/.config/gh:/home/vscode/.config/gh:ro
+      - gh-config:/home/vscode/.config/gh
       - ${HOME}/.gitconfig:/home/vscode/.gitconfig:ro
       - .:/workspace/.devcontainer:ro
     cap_add:
@@ -71,5 +71,6 @@ services:
 volumes:
   claude-code-bashhistory:
   claude-code-config:
+  gh-config:
   postgres-data:
   redis-data:
