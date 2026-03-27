@@ -1,7 +1,7 @@
 ---
 title: "feat: Upgrade Ruby 3.4 + Rails 7.2 with dependency security audit"
 type: feat
-status: active
+status: completed
 date: 2026-03-27
 origin: docs/brainstorms/2026-03-27-ruby-rails-upgrade-requirements.md
 ---
