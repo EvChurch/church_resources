@@ -10,7 +10,8 @@ services:
     volumes:
       - ..:/workspace:cached
       - claude-code-bashhistory:/commandhistory
-      - ${HOME}/.claude:/home/vscode/.claude:ro
+      - claude-code-config:/home/vscode/.claude
+      - ${HOME}/.claude:/tmp/claude-host-config:ro
       - ${HOME}/.config/gh:/home/vscode/.config/gh:ro
       - ${HOME}/.gitconfig:/home/vscode/.gitconfig:ro
       - .:/workspace/.devcontainer:ro
@@ -73,5 +74,6 @@ services:
 
 volumes:
   claude-code-bashhistory:
+  claude-code-config:
   postgres-data:
   redis-data:

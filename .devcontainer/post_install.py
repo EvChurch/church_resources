@@ -10,9 +10,41 @@ Runs on container creation to set up:
 import contextlib
 import json
 import os
+import shutil
 import subprocess
 import sys
 from pathlib import Path
+
+HOST_CLAUDE_CONFIG = Path("/tmp/claude-host-config")
+
+
+def copy_claude_credentials():
+    """Copy Claude credentials from host mount into the writable volume.
+
+    Host ~/.claude is bind-mounted read-only at /tmp/claude-host-config.
+    The container's ~/.claude is a named volume so it's writable.
+    We copy credential files on each container creation to keep them fresh.
+    """
+    claude_dir = Path.home() / ".claude"
+    claude_dir.mkdir(parents=True, exist_ok=True)
+
+    if not HOST_CLAUDE_CONFIG.exists():
+        print("[post_install] No host Claude config found, skipping credential copy", file=sys.stderr)
+        return
+
+    # Copy credential files (not settings, which we manage separately)
+    credential_files = ["credentials.json", ".credentials.json"]
+    for name in credential_files:
+        src = HOST_CLAUDE_CONFIG / name
+        if src.exists():
+            shutil.copy2(src, claude_dir / name)
+            print(f"[post_install] Copied credential: {name}", file=sys.stderr)
+
+    # Copy any other auth-related files (tokens, etc.)
+    for src in HOST_CLAUDE_CONFIG.iterdir():
+        if src.is_file() and src.name not in ("settings.json", *credential_files):
+            shutil.copy2(src, claude_dir / src.name)
+            print(f"[post_install] Copied config file: {src.name}", file=sys.stderr)
 
 
 def setup_claude_settings():
@@ -90,7 +122,6 @@ def fix_directory_ownership():
     gid = os.getgid()
 
     dirs_to_fix = [
-        Path.home() / ".claude",
         Path("/commandhistory"),
         Path.home() / ".config" / "gh",
     ]
@@ -211,6 +242,7 @@ def main():
     """Run all post-install configuration."""
     print("[post_install] Starting post-install configuration...", file=sys.stderr)
 
+    copy_claude_credentials()
     setup_claude_settings()
     setup_tmux_config()
     fix_directory_ownership()
