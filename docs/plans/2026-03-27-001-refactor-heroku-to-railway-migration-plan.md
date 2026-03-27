@@ -10,7 +10,7 @@ origin: docs/brainstorms/2026-03-27-heroku-to-railway-requirements.md
 
 ## Overview
 
-Move the Rails 7.0 app (resources.ev.church) from Heroku to Railway. The app uses PostgreSQL, Redis, S3, Mailgun, and Rollbar. No code changes are expected beyond Railway-specific configuration. Some downtime (15-30 min) during cutover is acceptable.
+Move the Rails 7.2 app (Ruby 3.4, resources.ev.church) from Heroku to Railway. The app uses PostgreSQL, Redis, S3, Mailgun, and Rollbar. No code changes are expected beyond Railway-specific configuration. Some downtime (15-30 min) during cutover is acceptable.
 
 ## Problem Frame
 

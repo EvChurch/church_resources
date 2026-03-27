@@ -6,7 +6,7 @@ topic: heroku-to-railway
 # Migrate from Heroku to Railway
 
 ## Problem Frame
-The app (resources.ev.church) is hosted on Heroku and needs to move to Railway. This is a Rails 7.0 app with PostgreSQL, Redis, S3 storage, Mailgun email, and Rollbar error tracking.
+The app (resources.ev.church) is hosted on Heroku and needs to move to Railway. This is a Rails 7.2 app (Ruby 3.4) with PostgreSQL, Redis, S3 storage, Mailgun email, and Rollbar error tracking.
 
 ## Requirements
 - R1. Deploy the Rails app on Railway with the same services: PostgreSQL, Redis, web process
