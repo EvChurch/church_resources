@@ -38,7 +38,7 @@ gem 'rollbar'
 gem 'dartsass-sprockets'
 gem 'shakapacker', '~> 8.0'
 gem 'simple_form'
-gem 'turbolinks', '~> 5'
+gem 'turbo-rails'
 gem 'validate_url'
 
 group :development, :test do

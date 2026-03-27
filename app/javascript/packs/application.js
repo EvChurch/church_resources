@@ -12,11 +12,11 @@ import "videojs-youtube";
 import $ from "jquery";
 
 require("@rails/ujs").start();
-require("turbolinks").start();
+import "@hotwired/turbo-rails";
 require("@rails/activestorage").start();
 require("channels");
 
-$(document).on("turbolinks:load", () => {
+$(document).on("turbo:load", () => {
   const players = $(".video-js");
   players.each((_index, player) => {
     videojs(player);
