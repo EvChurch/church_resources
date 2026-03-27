@@ -13,8 +13,8 @@ gem 'aws-sdk-s3', '>= 1.208.0', require: false
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'bootstrap4-kaminari-views'
 gem 'concurrent-ruby'
-gem 'drb'
-gem 'mutex_m'
+gem 'drb' # Required: removed from Ruby 3.4 stdlib
+gem 'mutex_m' # Required: removed from Ruby 3.4 stdlib
 gem 'devise', '>= 5.0.3'
 gem 'draper'
 gem 'font-awesome-sass', '~> 6.0'

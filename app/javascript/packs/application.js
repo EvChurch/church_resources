@@ -16,14 +16,25 @@ import "@hotwired/turbo-rails";
 require("@rails/activestorage").start();
 require("channels");
 
+// Dispose all video.js players before Turbo caches the page to prevent
+// leaked instances and duplicate event handlers on back/forward navigation.
+$(document).on("turbo:before-cache", () => {
+  Object.keys(videojs.getPlayers()).forEach((id) => {
+    const player = videojs.getPlayers()[id];
+    if (player) player.dispose();
+  });
+});
+
 $(document).on("turbo:load", () => {
   const players = $(".video-js");
   players.each((_index, player) => {
-    videojs(player);
-    $(player).on("play", () => {
-      players.each((_index, player_to_compare) => {
-        if (player_to_compare !== player) {
-          player_to_compare.pause();
+    const config = JSON.parse(player.getAttribute("data-player-config") || "{}");
+    const vp = videojs(player, config);
+    vp.on("play", () => {
+      players.each((_index, other) => {
+        if (other !== player) {
+          const otherPlayer = videojs.getPlayers()[other.id];
+          if (otherPlayer) otherPlayer.pause();
         }
       });
     });

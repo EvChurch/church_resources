@@ -2,25 +2,25 @@
   <video
     class="media-video video-js vjs-default-skin"
     controls
-    data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "<%= resource.youtube_url %>"}], "fluid": true, "playbackRates": [1, 1.5, 2] }'>
+    data-player-config='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "<%= resource.youtube_url %>"}], "fluid": true, "playbackRates": [1, 1.5, 2] }'>
   </video>
 <% elsif resource.video.present? %>
     <video class="media-video video-js vjs-default-skin"
       controls preload="none" poster="<%= polymorphic_url(resource.banner) if resource.banner.present? %>"
-      data-setup='{ "aspectRatio":"16:9", "fluid": true, "playbackRates": [1, 1.5, 2] }'>
+      data-player-config='{ "aspectRatio":"16:9", "fluid": true, "playbackRates": [1, 1.5, 2] }'>
       <source src="https://vjs.zencdn.net/v/oceans.mp4" type='video/mp4' />
       <source src="https://vjs.zencdn.net/v/oceans.webm" type='video/webm' />
     </video>
 <% elsif resource.audio_url.present? %>
   <audio class="media-audio video-js vjs-default-skin"
     controls preload="none" poster="<%= polymorphic_url(resource.banner) if resource.banner.present? %>"
-    data-setup='{ "fluid": true, "playbackRates": [1, 1.5, 2] }'>
+    data-player-config='{ "fluid": true, "playbackRates": [1, 1.5, 2] }'>
     <source src="<%= resource.audio_url %>" type='audio/mp3'/>
   </audio>
 <% elsif resource.audio.present? %>
   <audio class="media-audio video-js vjs-default-skin"
     controls preload="none" poster="<%= polymorphic_url(resource.banner) if resource.banner.present? %>"
-    data-setup='{ "fluid": true, "playbackRates": [1, 1.5, 2] }'>
+    data-player-config='{ "fluid": true, "playbackRates": [1, 1.5, 2] }'>
     <source src="<%= polymorphic_url(resource.audio) %>" type='audio/mp3'/>
   </audio>
 <% elsif resource.banner.present? %>
