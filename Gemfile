@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.2.10'
+ruby '3.4.9'
 
 gem 'activeadmin', '~> 3.3.0'
 gem 'active_admin_datetimepicker'
@@ -12,7 +12,9 @@ gem 'acts_as_list'
 gem 'aws-sdk-s3', require: false
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'bootstrap4-kaminari-views'
-gem 'concurrent-ruby', '1.3.4' # Fix for Rails 7.0 Logger compatibility
+gem 'concurrent-ruby'
+gem 'drb'
+gem 'mutex_m'
 gem 'devise'
 gem 'draper'
 gem 'font-awesome-sass', '~> 6.0'
@@ -22,9 +24,8 @@ gem 'graphql'
 gem 'high_voltage', '~> 3.1'
 gem 'httparty'
 gem 'image_processing', '~> 1.2'
-gem 'koala'
 gem 'mailgun-ruby'
-gem 'mechanize'
+gem 'mechanize', '~> 2.14'
 gem 'meta-tags', '~> 2.22'
 gem 'mini_magick'
 gem 'pg'
@@ -65,7 +66,7 @@ group :development do
 end
 
 group :test do
-  gem 'capybara', '>= 2.15'
+  gem 'capybara', '~> 3.40'
   gem 'cuprite'
   gem 'database_cleaner-active_record'
 end
