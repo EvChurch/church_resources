@@ -4,7 +4,7 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
-  config.cache_classes = true
+  config.enable_reloading = false
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
@@ -25,7 +25,7 @@ Rails.application.configure do
   config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
   config.public_file_server.headers = {
     'Cache-Control' => 'public, s-maxage=31536000, max-age=15552000',
-    'Expires' => 1.year.from_now.to_formatted_s(:rfc822).to_s
+    'Expires' => 1.year.from_now.to_fs(:rfc822).to_s
   }
 
   # Compress CSS using a preprocessor.
