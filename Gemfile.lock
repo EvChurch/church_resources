@@ -167,6 +167,12 @@ GEM
     cuprite (0.17)
       capybara (~> 3.0)
       ferrum (~> 0.17.0)
+    dartsass-sprockets (3.2.1)
+      railties (>= 4.0.0)
+      sassc-embedded (~> 1.80.1)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     database_cleaner-active_record (2.2.1)
       activerecord (>= 5.a)
       database_cleaner-core (~> 2.0.0)
@@ -226,6 +232,9 @@ GEM
       activerecord (>= 4.0.0)
     globalid (1.3.0)
       activesupport (>= 6.1)
+    google-protobuf (4.34.1)
+      bigdecimal
+      rake (~> 13.3)
     graphiql-rails (1.10.5)
       railties
     graphql (2.5.8)
@@ -510,19 +519,13 @@ GEM
     ruby2_keywords (0.0.5)
     rubyntlm (0.6.5)
       base64
-    sass (3.7.4)
-      sass-listen (~> 4.0.0)
-    sass-listen (4.0.0)
-      rb-fsevent (~> 0.9, >= 0.9.4)
-      rb-inotify (~> 0.9, >= 0.9.7)
-    sass-rails (5.1.0)
-      railties (>= 5.2.0)
-      sass (~> 3.1)
-      sprockets (>= 2.8, < 4.0)
-      sprockets-rails (>= 2.0, < 4.0)
-      tilt (>= 1.1, < 3)
+    sass-embedded (1.98.0)
+      google-protobuf (~> 4.31)
+      rake (>= 13)
     sassc (2.4.0)
       ffi (~> 1.9)
+    sassc-embedded (1.80.8)
+      sass-embedded (~> 1.80)
     securerandom (0.4.1)
     semantic_range (3.1.0)
     shakapacker (8.3.0)
@@ -534,17 +537,17 @@ GEM
     simple_form (5.3.1)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
-    sprockets (3.7.5)
-      base64
+    sprockets (4.2.2)
       concurrent-ruby (~> 1.0)
-      rack (> 1, < 3)
+      logger
+      rack (>= 2.2.4, < 4)
     sprockets-rails (3.5.2)
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       sprockets (>= 3.0.0)
     stringio (3.2.0)
     thor (1.5.0)
-    tilt (2.6.0)
+    tilt (2.7.0)
     timeout (0.6.1)
     tsort (0.2.0)
     turbolinks (5.2.1)
@@ -593,6 +596,7 @@ DEPENDENCIES
   capybara (~> 3.40)
   concurrent-ruby
   cuprite
+  dartsass-sprockets
   database_cleaner-active_record
   devise
   dotenv-rails (~> 2.7)
@@ -631,7 +635,6 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rspec
   rubocop-rspec_rails
-  sass-rails (~> 5)
   shakapacker (~> 8.0)
   simple_form
   turbolinks (~> 5)
