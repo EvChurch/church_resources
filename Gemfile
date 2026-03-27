@@ -13,10 +13,10 @@ gem 'aws-sdk-s3', '>= 1.208.0', require: false
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'bootstrap4-kaminari-views'
 gem 'concurrent-ruby'
-gem 'drb' # Required: removed from Ruby 3.4 stdlib
-gem 'mutex_m' # Required: removed from Ruby 3.4 stdlib
+gem 'dartsass-sprockets'
 gem 'devise', '>= 5.0.3'
 gem 'draper'
+gem 'drb' # Required: removed from Ruby 3.4 stdlib
 gem 'font-awesome-sass', '~> 6.0'
 gem 'formtastic', '>= 4.0'
 gem 'friendly_id', '~> 5.2.4'
@@ -28,6 +28,7 @@ gem 'mailgun-ruby'
 gem 'mechanize', '~> 2.14'
 gem 'meta-tags', '~> 2.22'
 gem 'mini_magick'
+gem 'mutex_m' # Required: removed from Ruby 3.4 stdlib
 gem 'pg'
 gem 'puma', '~> 7.0'
 gem 'rack-cors'
@@ -35,7 +36,6 @@ gem 'rails', '~> 7.2.3', '>= 7.2.3.1'
 gem 'redis'
 gem 'rolify'
 gem 'rollbar'
-gem 'dartsass-sprockets'
 gem 'shakapacker', '>= 9.5.0'
 gem 'simple_form'
 gem 'turbo-rails'
