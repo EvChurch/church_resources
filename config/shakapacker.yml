@@ -103,6 +103,11 @@ production:
   # Production depends on precompilation of packs prior to booting for performance.
   compile: false
 
+  # Webpack is run via the package.json build script before Railpack strips
+  # node_modules. Disable shakapacker_precompile so assets:precompile (Sprockets)
+  # does not attempt to re-run webpack after node_modules is gone.
+  shakapacker_precompile: false
+
   # Extract and emit a css file
   extract_css: true
 
