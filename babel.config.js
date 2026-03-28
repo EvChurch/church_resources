@@ -29,8 +29,6 @@ module.exports = function (api) {
         require("@babel/preset-env").default,
         {
           forceAllTransforms: true,
-          useBuiltIns: "entry",
-          corejs: 3,
           modules: false,
           exclude: ["transform-typeof-symbol"],
         },
@@ -69,13 +67,7 @@ module.exports = function (api) {
         require("@babel/plugin-transform-runtime").default,
         {
           helpers: false,
-          regenerator: true,
-        },
-      ],
-      [
-        require("@babel/plugin-transform-regenerator").default,
-        {
-          async: false,
+          regenerator: false,
         },
       ],
     ].filter(Boolean),

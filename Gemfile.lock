@@ -565,63 +565,63 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_admin_datetimepicker
-  active_storage_validations
+  active_admin_datetimepicker (~> 1.1)
+  active_storage_validations (~> 3.0)
   activeadmin (~> 3.3.0)
-  acts_as_list
-  aws-sdk-s3 (>= 1.208.0)
-  better_errors
-  binding_of_caller
-  bootsnap (>= 1.4.2)
-  bootstrap4-kaminari-views
-  byebug
+  acts_as_list (~> 1.2)
+  aws-sdk-s3 (~> 1.217)
+  better_errors (~> 2.10)
+  binding_of_caller (~> 1.0)
+  bootsnap (~> 1.18)
+  bootstrap4-kaminari-views (~> 1.0)
+  byebug (~> 12.0)
   capybara (~> 3.40)
-  concurrent-ruby
-  cuprite
-  dartsass-sprockets
-  database_cleaner-active_record
-  devise (>= 5.0.3)
+  concurrent-ruby (~> 1.3)
+  cuprite (~> 0.17)
+  dartsass-sprockets (~> 3.2)
+  database_cleaner-active_record (~> 2.2)
+  devise (~> 5.0)
   dotenv-rails (~> 2.7)
-  draper
-  drb
-  factory_bot_rails
+  draper (~> 4.0)
+  drb (~> 2.2)
+  factory_bot_rails (~> 6.4)
   font-awesome-sass (~> 6.0)
-  foreman
-  formtastic (>= 4.0)
+  foreman (~> 0.88)
+  formtastic (~> 5.0)
   friendly_id (~> 5.2.4)
-  graphiql-rails
-  graphql
+  graphiql-rails (~> 1.10)
+  graphql (~> 2.5)
   high_voltage (~> 3.1)
-  httparty (>= 0.24.0)
+  httparty (~> 0.24)
   image_processing (~> 1.2)
-  letter_opener
+  letter_opener (~> 1.10)
   listen (~> 3.8)
   mechanize (~> 2.14)
   meta-tags (~> 2.22)
-  mini_magick
-  mutex_m
-  pg
-  pry-byebug
-  pry-rails
+  mini_magick (~> 5.2)
+  mutex_m (~> 0.3)
+  pg (~> 1.5)
+  pry-byebug (~> 3.11)
+  pry-rails (~> 0.3)
   puma (~> 7.0)
-  rack-cors
+  rack-cors (~> 2.0)
   rails (~> 7.2.3, >= 7.2.3.1)
-  redis
-  resend
-  rolify
-  rollbar
+  redis (~> 5.4)
+  resend (~> 1.0)
+  rolify (~> 6.0)
+  rollbar (~> 3.6)
   rspec-rails (~> 7.0)
-  rubocop-capybara
-  rubocop-factory_bot
-  rubocop-graphql
-  rubocop-rails
-  rubocop-rspec
-  rubocop-rspec_rails
-  shakapacker (>= 9.5.0)
-  simple_form
-  turbo-rails
-  validate_url
-  web-console (>= 3.3.0)
+  rubocop-capybara (~> 2.22)
+  rubocop-factory_bot (~> 2.27)
+  rubocop-graphql (~> 1.5)
+  rubocop-rails (~> 2.32)
+  rubocop-rspec (~> 3.6)
+  rubocop-rspec_rails (~> 2.31)
+  shakapacker (~> 9.7)
+  simple_form (~> 5.3)
+  turbo-rails (~> 2.0)
+  validate_url (~> 1.0)
+  web-console (~> 4.2)
 
 RUBY VERSION
    ruby 3.4.9p82
