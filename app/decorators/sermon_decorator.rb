@@ -43,8 +43,6 @@ class SermonDecorator < ApplicationDecorator
   end
 
   def description
-    return snippet if snippet.present?
-
     author_names = authors.map(&:name).join(', ')
     scripture_names = sermon_scriptures.map(&:name).join(', ')
     display_published_at = published_at.strftime('%b %d, %Y')

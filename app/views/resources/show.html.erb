@@ -13,7 +13,7 @@
       <% end %>
     </div>
     <h1><%= title resource.name %></h1>
-    <p class="lead"><%= resource.snippet %></p>
+    <p class="lead"><%= resource.description %></p>
     <div class="addthis_inline_share_toolbox mb-3"></div>
     <p>
       <% if resource.authors.any? %>
@@ -46,13 +46,6 @@
       <% end %>
     <% end %>
   </div>
-  <% if resource.content.present? %>
-    <div class="container pb-5">
-      <div class="resource-content">
-        <%= resource.content.html_safe %>
-      </div>
-    </div>
-  <% end %>
 </div>
 <% if resource.related.any? %>
 <div class="card-deck-container">

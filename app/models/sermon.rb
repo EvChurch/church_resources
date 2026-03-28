@@ -41,6 +41,6 @@ class Sermon < ApplicationRecord
   end
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[created_at featured_at id name published_at slug updated_at snippet content]
+    %w[created_at featured_at id name published_at slug updated_at]
   end
 end
