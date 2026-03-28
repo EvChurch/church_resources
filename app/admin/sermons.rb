@@ -9,7 +9,7 @@ ActiveAdmin.register Sermon do
     [order_clause.to_sql, 'NULLS LAST'].join(' ')
   end
 
-  permit_params :name, :video, :audio, :youtube_url, :audio_url, :published_at, :featured_at,
+  permit_params :name, :video, :audio, :audio_url, :published_at, :featured_at,
                 topic_ids: [], author_ids: [], scripture_ids: [], series_ids: [],
                 sermon_scriptures_attributes: %i[id sermon_id scripture_id range _destroy]
 
@@ -43,7 +43,6 @@ ActiveAdmin.register Sermon do
       f.input :name
       f.input :published_at, as: :date_time_picker
       f.input :featured_at, as: :date_time_picker
-      f.input :youtube_url
       f.input :audio_url
       f.input :video, as: :file
       f.input :audio, as: :file

@@ -15,7 +15,6 @@ class Types::SermonType < Types::BaseObject
   field :scriptures, [Types::ScriptureType], null: false
   field :series, [Types::SeriesType], null: false
   field :topics, [Types::TopicType], null: false
-  field :youtube_url, String, null: true
 
   def banner_url
     attachment = attached_image(:banner)

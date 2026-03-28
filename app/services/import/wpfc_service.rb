@@ -37,7 +37,7 @@ class Import::WpfcService
 
   def import_sermons
     items('wpfc_sermon').each do |remote_sermon|
-      sermon = Sermon.find_or_initialize_by(remote_id: remote_sermon['id'])
+      sermon = Sermon.find_or_initialize_by(slug: remote_sermon['slug'])
       sermon.name = CGI.unescapeHTML(remote_sermon['title']['rendered'])
       sermon.slug = remote_sermon['slug']
       sermon.sermon_scriptures = sermon_scriptures(remote_sermon['bible_passage'])

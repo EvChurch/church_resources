@@ -1,10 +1,4 @@
-<% if resource.youtube_url.present? %>
-  <video
-    class="media-video video-js vjs-default-skin"
-    controls
-    data-player-config='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "<%= resource.youtube_url %>"}], "fluid": true, "playbackRates": [1, 1.5, 2] }'>
-  </video>
-<% elsif resource.video.present? %>
+<% if resource.video.present? %>
     <video class="media-video video-js vjs-default-skin"
       controls preload="none" poster="<%= polymorphic_url(resource.banner) if resource.banner.present? %>"
       data-player-config='{ "aspectRatio":"16:9", "fluid": true, "playbackRates": [1, 1.5, 2] }'>

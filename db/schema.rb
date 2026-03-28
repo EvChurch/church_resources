@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_03_28_102619) do
+ActiveRecord::Schema[7.2].define(version: 2026_03_28_103010) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
@@ -164,8 +164,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_28_102619) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "youtube_url"
-    t.string "remote_id"
     t.string "audio_url"
   end
 
