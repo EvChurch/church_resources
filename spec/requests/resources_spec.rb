@@ -16,7 +16,7 @@ RSpec.describe 'Resources RSS Feed' do
     Rails.cache.clear
   end
 
-  let!(:sermon) { create(:resource, type: 'Resource::Sermon', name: 'The Main Event', published_at: 1.day.ago) }
+  let!(:sermon) { create(:sermon, name: 'The Main Event', published_at: 1.day.ago) }
 
   describe 'response' do
     before { get resources_path(format: :rss) }
@@ -38,7 +38,7 @@ RSpec.describe 'Resources RSS Feed' do
 
     it { is_expected.to include('<rss version="2.0"') }
     it { is_expected.to include('<channel>') }
-    it { is_expected.to include('<title>Ev Church - Resources</title>') }
+    it { is_expected.to include('<title>Ev Church - Sermons</title>') }
     it { is_expected.to include('<item>') }
     it { is_expected.to include("<title>#{sermon.name}</title>") }
   end

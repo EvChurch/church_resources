@@ -1,4 +1,4 @@
-<% title params[:resource_type] ? "#{params[:resource_type].pluralize.titleize} by Series" : 'Series Index' %>
+<% title 'Series Index' %>
 <%= render 'shared/listing_header' %>
 <div class="index container my-5">
   <div class="row">
@@ -9,7 +9,7 @@
       <dt class="mt-4 mb-2"><%= key %></dt>
       <% collection.each do |series| %>
       <dd>
-        <a href="<%= series_path(series, resource_type: params[:resource_type]) %>">
+        <a href="<%= series_path(series) %>">
           <div class="card">
             <%= image_tag series.banner, class: 'card-img-top' if series.banner.attached? %>
             <div class="card-body">

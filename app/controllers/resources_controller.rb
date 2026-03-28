@@ -20,9 +20,6 @@ class ResourcesController < ApplicationController
     return @resources if @resources
 
     @resources = scope.order(published_at: :desc).published
-    if params[:resource_type].present?
-      @resources = @resources.where(type: Resource::TYPES[params[:resource_type].to_sym])
-    end
     @resources = @resources.page params[:page]
   end
 
@@ -31,7 +28,7 @@ class ResourcesController < ApplicationController
   end
 
   def scope
-    ::Resource
+    ::Sermon
   end
 
   def render_rss_feed
@@ -39,15 +36,12 @@ class ResourcesController < ApplicationController
     latest_update = resource_scope.maximum(:updated_at)
 
     cache_key_parts = %w[v1 rss resources]
-    if params[:resource_type].present? && Resource::TYPES.key?(params[:resource_type].to_sym)
-      cache_key_parts << params[:resource_type]
-    end
     cache_key_parts << latest_update.utc.to_fs(:number) if latest_update
 
     response.headers['Content-Type'] = 'application/rss+xml; charset=utf-8'
 
     cached_rss_content = Rails.cache.fetch(cache_key_parts.compact.join('/'), expires_in: 1.day) do
-      @resources = resource_scope.includes(:authors, :connection_scriptures)
+      @resources = resource_scope.includes(:authors, :sermon_scriptures)
       render_to_string template: 'resources/index', formats: [:rss]
     end
 
@@ -55,10 +49,6 @@ class ResourcesController < ApplicationController
   end
 
   def rss_resources_scope
-    resources = scope.order(published_at: :desc).published
-    if params[:resource_type].present? && Resource::TYPES.key?(params[:resource_type].to_sym)
-      resources = resources.where(type: Resource::TYPES[params[:resource_type].to_sym])
-    end
-    resources
+    scope.order(published_at: :desc).published
   end
 end

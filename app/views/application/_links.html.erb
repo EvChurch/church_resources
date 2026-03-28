@@ -1,16 +1,9 @@
 <div class="links">
   <div class="row">
-    <% if Resource.published.articles.any? %>
+    <% if Sermon.published.any? %>
     <div class="col">
       <ul>
-        <li><%= link_to 'Articles', resources_path(resource_type: 'article') %></li>
-      </ul>
-    </div>
-    <% end %>
-    <% if Resource.published.sermons.any? %>
-    <div class="col">
-      <ul>
-        <li><%= link_to 'Sermons', resources_path(resource_type: 'sermon') %></li>
+        <li><%= link_to 'Sermons', resources_path %></li>
       </ul>
     </div>
     <% end %>

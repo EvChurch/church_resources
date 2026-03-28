@@ -10,28 +10,13 @@ RSpec.describe 'ActiveAdmin Smoke Tests', :js do
     login_as(admin, scope: :user)
   end
 
-  it 'loads Resource::Article index (with filter sidebar) without error' do
-    visit admin_resource_articles_path
-    expect(page).to have_css('.filter_form_field')
-  end
-
-  it 'loads Resource::Sermon index (with filter sidebar) without error' do
-    visit admin_resource_sermons_path
+  it 'loads Sermon index (with filter sidebar) without error' do
+    visit admin_sermons_path
     expect(page).to have_css('.filter_form_field')
   end
 
   it 'loads User index (with filter sidebar) without error' do
     visit admin_users_path
-    expect(page).to have_css('.filter_form_field')
-  end
-
-  it 'loads Location index (with filter sidebar) without error' do
-    visit admin_locations_path
-    expect(page).to have_css('.filter_form_field')
-  end
-
-  it 'loads Step index (with filter sidebar) without error' do
-    visit admin_steps_path
     expect(page).to have_css('.filter_form_field')
   end
 
@@ -57,26 +42,6 @@ RSpec.describe 'ActiveAdmin Smoke Tests', :js do
 
   it 'loads Category index (with filter sidebar) without error' do
     visit admin_categories_path
-    expect(page).to have_css('.filter_form_field')
-  end
-
-  it 'loads Location Connection Steps index (with filter sidebar) without error' do
-    visit admin_location_connection_steps_path
-    expect(page).to have_css('.filter_form_field')
-  end
-
-  it 'loads Location Events index (with filter sidebar) without error' do
-    visit admin_location_events_path
-    expect(page).to have_css('.filter_form_field')
-  end
-
-  it 'loads Location Prayers index (with filter sidebar) without error' do
-    visit admin_location_prayers_path
-    expect(page).to have_css('.filter_form_field')
-  end
-
-  it 'loads Location Services index (with filter sidebar) without error' do
-    visit admin_location_services_path
     expect(page).to have_css('.filter_form_field')
   end
 end
