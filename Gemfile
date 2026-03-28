@@ -8,7 +8,6 @@ ruby '3.4.9'
 gem 'activeadmin', '~> 3.3.0'
 gem 'active_admin_datetimepicker', '~> 1.1'
 gem 'active_storage_validations', '~> 3.0'
-gem 'acts_as_list', '~> 1.2'
 gem 'aws-sdk-s3', '~> 1.217', require: false
 gem 'bootsnap', '~> 1.18', require: false
 gem 'bootstrap4-kaminari-views', '~> 1.0'
@@ -22,7 +21,6 @@ gem 'formtastic', '~> 5.0'
 gem 'friendly_id', '~> 5.2.4'
 gem 'graphql', '~> 2.5'
 gem 'high_voltage', '~> 3.1'
-gem 'httparty', '~> 0.24'
 gem 'image_processing', '~> 1.2'
 gem 'mechanize', '~> 2.14'
 gem 'meta-tags', '~> 2.22'
@@ -39,7 +37,6 @@ gem 'rollbar', '~> 3.6'
 gem 'shakapacker', '~> 9.7'
 gem 'simple_form', '~> 5.3'
 gem 'turbo-rails', '~> 2.0'
-gem 'validate_url', '~> 1.0'
 
 group :development, :test do
   gem 'byebug', '~> 12.0'

@@ -11,7 +11,6 @@ import $ from "jquery";
 
 import "@hotwired/turbo-rails";
 require("@rails/activestorage").start();
-require("channels");
 
 // Dispose all video.js players before Turbo caches the page to prevent
 // leaked instances and duplicate event handlers on back/forward navigation.

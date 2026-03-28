@@ -96,9 +96,6 @@ GEM
       minitest (>= 5.1, < 6)
       securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
-    acts_as_list (1.2.4)
-      activerecord (>= 6.1)
-      activesupport (>= 6.1)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
     arbre (1.7.0)
@@ -541,9 +538,6 @@ GEM
       unicode-emoji (~> 4.0, >= 4.0.4)
     unicode-emoji (4.0.4)
     useragent (0.16.11)
-    validate_url (1.0.15)
-      activemodel (>= 3.0.0)
-      public_suffix
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.1)
@@ -568,7 +562,6 @@ DEPENDENCIES
   active_admin_datetimepicker (~> 1.1)
   active_storage_validations (~> 3.0)
   activeadmin (~> 3.3.0)
-  acts_as_list (~> 1.2)
   aws-sdk-s3 (~> 1.217)
   better_errors (~> 2.10)
   binding_of_caller (~> 1.0)
@@ -592,7 +585,6 @@ DEPENDENCIES
   graphiql-rails (~> 1.10)
   graphql (~> 2.5)
   high_voltage (~> 3.1)
-  httparty (~> 0.24)
   image_processing (~> 1.2)
   letter_opener (~> 1.10)
   listen (~> 3.8)
@@ -620,7 +612,6 @@ DEPENDENCIES
   shakapacker (~> 9.7)
   simple_form (~> 5.3)
   turbo-rails (~> 2.0)
-  validate_url (~> 1.0)
   web-console (~> 4.2)
 
 RUBY VERSION
