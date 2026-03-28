@@ -19,12 +19,12 @@ class ResourcesController < ApplicationController
   def load_resources
     return @resources if @resources
 
-    @resources = scope.order(published_at: :desc).published
+    @resources = scope.order(published_at: :desc).published.with_associations
     @resources = @resources.page params[:page]
   end
 
   def load_resource
-    @resource ||= scope.friendly.find(params[:id])
+    @resource ||= scope.with_associations.friendly.find(params[:id])
   end
 
   def scope
@@ -41,7 +41,7 @@ class ResourcesController < ApplicationController
     response.headers['Content-Type'] = 'application/rss+xml; charset=utf-8'
 
     cached_rss_content = Rails.cache.fetch(cache_key_parts.compact.join('/'), expires_in: 1.day) do
-      @resources = resource_scope.includes(:authors, :sermon_scriptures)
+      @resources = resource_scope.includes(:authors, sermon_scriptures: :scripture)
       render_to_string template: 'resources/index', formats: [:rss]
     end
 

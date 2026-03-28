@@ -18,7 +18,7 @@ class Resources::ScripturesController < ApplicationController
     return @resources if @resources
 
     @resources = Sermon.order(published_at: :desc).joins(:scriptures).where(scriptures: { id: [@scripture.id] })
-    @resources = @resources.published.page params[:page]
+    @resources = @resources.published.with_associations.page params[:page]
   end
 
   def load_scriptures

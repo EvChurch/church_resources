@@ -18,7 +18,7 @@ class Resources::AuthorsController < ApplicationController
     return @resources if @resources
 
     @resources = Sermon.order(published_at: :desc).joins(:authors).where(authors: { id: [@author.id] })
-    @resources = @resources.published.page params[:page]
+    @resources = @resources.published.with_associations.page params[:page]
   end
 
   def load_authors

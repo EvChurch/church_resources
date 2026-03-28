@@ -29,12 +29,17 @@ class SermonDecorator < ApplicationDecorator
   end
 
   def related
+    series_ids = object.series.map(&:id)
+    topic_ids = object.topics.map(&:id)
+    author_ids = object.authors.map(&:id)
+    scripture_ids = object.scriptures.map(&:id)
+
     sermons = related_sermon_scope
-    sermons = sermons.where(series: { id: object.series.pluck(:id) })
-    sermons = sermons.or(sermons.where(category_topics: { id: object.topics.pluck(:id) }))
-    sermons = sermons.or(sermons.where(authors: { id: object.authors.pluck(:id) }))
-    sermons = sermons.or(sermons.where(scriptures: { id: object.scriptures.pluck(:id) }))
-    sermons.decorate
+    sermons = sermons.where(series: { id: series_ids })
+    sermons = sermons.or(sermons.where(category_topics: { id: topic_ids })) if topic_ids.any?
+    sermons = sermons.or(sermons.where(authors: { id: author_ids })) if author_ids.any?
+    sermons = sermons.or(sermons.where(scriptures: { id: scripture_ids })) if scripture_ids.any?
+    sermons.includes(:authors, :series, sermon_scriptures: :scripture).decorate
   end
 
   def description

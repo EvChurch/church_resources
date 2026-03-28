@@ -25,6 +25,7 @@ class Sermon < ApplicationRecord
 
   scope :published, -> { where.not(published_at: nil) }
   scope :featured, -> { where.not(featured_at: nil) }
+  scope :with_associations, -> { includes(:authors, :series, :topics, sermon_scriptures: :scripture) }
 
   def self.batch_publish(ids)
     where(id: ids).find_each { |r| r.update(published_at: Time.zone.now) }
