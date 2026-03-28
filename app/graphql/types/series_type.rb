@@ -8,7 +8,7 @@ class Types::SeriesType < Types::BaseObject
   field :foreground_url, String, null: true
   field :id, ID, null: false
   field :name, String, null: false
-  field :resources, Types::ResourceType.connection_type, null: false
+  field :sermons, Types::SermonType.connection_type, null: false
 
   def banner_url
     object.banner.presence && polymorphic_url(
