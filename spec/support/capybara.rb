@@ -3,20 +3,25 @@
 require 'capybara/rspec'
 require 'capybara/cuprite'
 
-CHROME_AVAILABLE = ENV.fetch('BROWSER_PATH', nil) || %w[
+CHROME_PATH = ENV.fetch('BROWSER_PATH', nil) || %w[
   google-chrome chromium chromium-browser
-].any? { |name| system("which #{name}", out: File::NULL, err: File::NULL) }
+].find { |name| path = `which #{name} 2>/dev/null`.strip; break path unless path.empty? }
+
+# Verify the binary actually launches (snap stubs on Ubuntu report as found but fail)
+CHROME_AVAILABLE = CHROME_PATH && system(
+  "#{CHROME_PATH} --headless --no-sandbox --disable-gpu --dump-dom about:blank",
+  out: File::NULL, err: File::NULL
+)
 
 Capybara.register_driver(:cuprite) do |app|
   options = {
     window_size: [1400, 1400],
     js_errors: true,
-    timeout: 30
+    timeout: 30,
+    process_timeout: 30,
+    browser_options: { 'no-sandbox': nil, 'disable-dev-shm-usage': nil }
   }
-  if ENV['CI']
-    options[:process_timeout] = 30
-    options[:browser_options] = { 'no-sandbox': nil, 'disable-dev-shm-usage': nil }
-  end
+  options[:browser_path] = CHROME_PATH if CHROME_PATH
   Capybara::Cuprite::Driver.new(app, **options)
 end
 
