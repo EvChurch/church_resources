@@ -23,36 +23,35 @@ class Types::SermonType < Types::BaseObject
   field :youtube_url, String, null: true
 
   def banner_url
-    banner && polymorphic_url(banner)
+    attachment = attached_image(:banner)
+    attachment && polymorphic_url(attachment)
   end
 
   def foreground_url
-    foreground && polymorphic_url(foreground)
+    attachment = attached_image(:foreground)
+    attachment && polymorphic_url(attachment)
   end
 
   def background_url
-    background && polymorphic_url(background)
+    attachment = attached_image(:background)
+    attachment && polymorphic_url(attachment)
   end
 
   def audio_url
-    object.audio_url.presence || (object.audio.presence && polymorphic_url(object.audio))
+    object.audio_url.presence || (object.audio.attached? ? polymorphic_url(object.audio) : nil)
   end
 
   def video_url
-    object.video_url.presence || (object.video.presence && polymorphic_url(object.video))
+    object.video_url.presence || (object.video.attached? ? polymorphic_url(object.video) : nil)
   end
 
   protected
 
-  def banner
-    object.banner.presence || object.series.first&.banner
-  end
+  def attached_image(name)
+    attachment = object.public_send(name)
+    return attachment if attachment.attached?
 
-  def foreground
-    object.foreground.presence || object.series.first&.foreground
-  end
-
-  def background
-    object.background.presence || object.series.first&.background
+    series_attachment = object.series.first&.public_send(name)
+    series_attachment if series_attachment&.attached?
   end
 end
