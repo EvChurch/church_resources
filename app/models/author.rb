@@ -15,6 +15,6 @@ class Author < ApplicationRecord
   end
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[created_at id name remote_id slug updated_at]
+    %w[created_at id name slug updated_at]
   end
 end
