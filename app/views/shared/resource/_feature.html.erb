@@ -4,7 +4,7 @@
     <div class="content">
       <div>
         <span class="type">
-          <%= defined?(type_title) ? type_title : resource.type_title %>
+          <%= defined?(type_title) ? type_title : 'Sermon' %>
           <% if resource.scriptures.any? %>
             <%= render partial: 'shared/resource/scripture_list', locals: { resource: resource } %>
           <% end %>
@@ -13,11 +13,11 @@
         <% if resource.series.any? || resource.authors.any? %>
           <div class="snippet">
             <% resource.series.each do |series| %>
-              <%= link_to series.name, series_path(series, resource_type: params[:resource_type]) %>
+              <%= link_to series.name, series_path(series) %>
             <% end %>
             |
             <% resource.authors.each do |author| %>
-              <%= link_to author.name, author_path(author, resource_type: params[:resource_type]) %>
+              <%= link_to author.name, author_path(author) %>
             <% end %>
           </div>
         <% end %>
@@ -26,7 +26,7 @@
     <div class="d-flex">
       <date class="date"><%= resource.published_at.strftime('%b %d, %Y') %></date>
       <div class="ml-auto">
-        <%= link_to "#{resource.action} <i class=\"fa fa-angle-right ml-1\"></i>".html_safe, resource_path(resource), class: 'action' %>
+        <%= link_to "View <i class=\"fa fa-angle-right ml-1\"></i>".html_safe, resource_path(resource), class: 'action' %>
       </div>
     </div>
   </div>

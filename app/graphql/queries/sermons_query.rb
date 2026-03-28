@@ -1,0 +1,52 @@
+# frozen_string_literal: true
+
+class Queries::SermonsQuery < Queries::BaseQuery
+  type Types::SermonType.connection_type, null: false
+  argument :author_ids, [ID], required: false, default_value: nil
+  argument :category_ids, [ID], required: false, default_value: nil
+  argument :ids, [ID], required: false, default_value: nil
+  argument :scripture_ids, [ID], required: false, default_value: nil
+  argument :series_ids, [ID], required: false, default_value: nil
+  argument :topic_ids, [ID], required: false, default_value: nil
+
+  def resolve(ids:, author_ids:, category_ids:, scripture_ids:, series_ids:, topic_ids:)
+    scope(ids, author_ids, category_ids, scripture_ids, series_ids, topic_ids).all
+  end
+
+  protected
+
+  def scope(ids, author_ids, category_ids, scripture_ids, series_ids, topic_ids)
+    scope = ::Sermon.published.order(published_at: :desc)
+
+    scope = filter_by_ids(scope, ids)
+    scope = filter_by_authors(scope, author_ids)
+    scope = filter_by_categories(scope, category_ids)
+    scope = filter_by_scriptures(scope, scripture_ids)
+    scope = filter_by_series(scope, series_ids)
+    filter_by_topics(scope, topic_ids)
+  end
+
+  def filter_by_ids(scope, ids)
+    ids.present? ? scope.where(id: ids) : scope
+  end
+
+  def filter_by_authors(scope, ids)
+    ids.present? ? scope.joins(:authors).where(authors: { id: ids }) : scope
+  end
+
+  def filter_by_categories(scope, ids)
+    ids.present? ? scope.joins(:categories).where(categories: { id: ids }) : scope
+  end
+
+  def filter_by_scriptures(scope, ids)
+    ids.present? ? scope.joins(:scriptures).where(scriptures: { id: ids }) : scope
+  end
+
+  def filter_by_series(scope, ids)
+    ids.present? ? scope.joins(:series).where(series: { id: ids }) : scope
+  end
+
+  def filter_by_topics(scope, ids)
+    ids.present? ? scope.joins(:topics).where(topics: { id: ids }) : scope
+  end
+end

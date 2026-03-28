@@ -1,12 +1,12 @@
 <div class="item">
   <header>
     <div class="d-flex">
-      <span class="type"><%= resource.type_title %></span>
+      <span class="type">Sermon</span>
       <% if resource.series.any? %>
       <div class="series ml-auto d-none d-md-block">
         Series:
         <% resource.series.each do |series| %>
-          <%= link_to series.name, series_path(series, resource_type: params[:resource_type]) %>
+          <%= link_to series.name, series_path(series) %>
         <% end %>
       </div>
       <% end %>
@@ -14,7 +14,7 @@
     <h2><%= link_to resource.name, resource_path(resource) %></h2>
     <p class="authors">
     <% resource.authors.each do |author| %>
-      <%= link_to author.name, author_path(author, resource_type: params[:resource_type]) %>
+      <%= link_to author.name, author_path(author) %>
     <% end %>
     </p>
   </header>
@@ -26,7 +26,7 @@
       <div class="topics ml-3 d-none d-md-block">
         Topic:
         <% resource.topics.each do |topic| %>
-          <%= link_to topic.name, topic_path(topic, resource_type: params[:resource_type]) %>
+          <%= link_to topic.name, topic_path(topic) %>
         <% end %>
       </div>
       <% end %>

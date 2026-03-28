@@ -17,10 +17,7 @@ class Resources::AuthorsController < ApplicationController
   def load_resources
     return @resources if @resources
 
-    @resources = Resource.order(published_at: :desc).joins(:authors).where(authors: { id: [@author.id] })
-    if params[:resource_type].present?
-      @resources = @resources.where(type: Resource::TYPES[params[:resource_type].to_sym])
-    end
+    @resources = Sermon.order(published_at: :desc).joins(:authors).where(authors: { id: [@author.id] })
     @resources = @resources.published.page params[:page]
   end
 
@@ -43,8 +40,6 @@ class Resources::AuthorsController < ApplicationController
   end
 
   def scope
-    return ::Author unless params[:resource_type]
-
-    ::Author.joins(:resources).where(resources: { type: Resource::TYPES[params[:resource_type].to_sym] }).distinct
+    ::Author
   end
 end

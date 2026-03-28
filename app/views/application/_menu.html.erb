@@ -1,24 +1,24 @@
 <nav class="navbar fixed-top navbar-light">
-  <a href="<%= root_path %>" class="navbar-brand"><%= image_pack_tag 'images/ev-church-logo.png', style: 'height: 40px; margin-right: 10px;' %> Resources</a>
+  <a href="<%= root_path %>" class="navbar-brand"><%= image_pack_tag 'images/ev-church-logo.png', style: 'height: 40px; margin-right: 10px;' %> Sermons</a>
   <div class="d-none d-md-block">
     <ul class="navbar-nav md-menu">
       <li class="nav-item<%= ' active' if current_page?(root_path) %>">
         <%= link_to 'Home', root_path, class: 'nav-link' %>
       </li>
-      <li class="nav-item<%= ' active' if current_page?(resources_path(resource_type: params[:resource_type])) %>">
-        <%= link_to 'Recent', resources_path(resource_type: params[:resource_type]), class: 'nav-link' %>
+      <li class="nav-item<%= ' active' if current_page?(resources_path) %>">
+        <%= link_to 'Recent', resources_path, class: 'nav-link' %>
       </li>
-      <li class="nav-item<%= ' active' if current_page?(authors_path(resource_type: params[:resource_type])) %>">
-        <%= link_to 'Authors', authors_path(resource_type: params[:resource_type]), class: 'nav-link' %>
+      <li class="nav-item<%= ' active' if current_page?(authors_path) %>">
+        <%= link_to 'Authors', authors_path, class: 'nav-link' %>
       </li>
-      <li class="nav-item<%= ' active' if current_page?(scriptures_path(resource_type: params[:resource_type])) %>">
-        <%= link_to 'Scripture', scriptures_path(resource_type: params[:resource_type]), class: 'nav-link' %>
+      <li class="nav-item<%= ' active' if current_page?(scriptures_path) %>">
+        <%= link_to 'Scripture', scriptures_path, class: 'nav-link' %>
       </li>
-      <li class="nav-item<%= ' active' if current_page?(series_index_path(resource_type: params[:resource_type])) %>">
-        <%= link_to 'Series', series_index_path(resource_type: params[:resource_type]), class: 'nav-link' %>
+      <li class="nav-item<%= ' active' if current_page?(series_index_path) %>">
+        <%= link_to 'Series', series_index_path, class: 'nav-link' %>
       </li>
-      <li class="nav-item<%= ' active' if current_page?(topics_path(resource_type: params[:resource_type])) %>">
-        <%= link_to 'Topics', topics_path(resource_type: params[:resource_type]), class: 'nav-link' %>
+      <li class="nav-item<%= ' active' if current_page?(topics_path) %>">
+        <%= link_to 'Topics', topics_path, class: 'nav-link' %>
       </li>
     </ul>
   </div>

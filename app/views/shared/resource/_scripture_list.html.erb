@@ -1,7 +1,7 @@
-<% resource.connection_scriptures.each_with_index do |connection_scripture, i| %>
-  <% if i>0 && resource.connection_scriptures[i-1].scripture.name == connection_scripture.scripture.name %>
-    , <%= link_to connection_scripture.range, scripture_path(connection_scripture.scripture_id, resource_type: params[:resource_type]) %>
+<% resource.sermon_scriptures.each_with_index do |sermon_scripture, i| %>
+  <% if i>0 && resource.sermon_scriptures[i-1].scripture.name == sermon_scripture.scripture.name %>
+    , <%= link_to sermon_scripture.range, scripture_path(sermon_scripture.scripture_id) %>
   <% else %>
-    <%= link_to connection_scripture.name, scripture_path(connection_scripture.scripture_id, resource_type: params[:resource_type]) %>
+    <%= link_to sermon_scripture.name, scripture_path(sermon_scripture.scripture_id) %>
   <% end %>
 <% end %>

@@ -4,15 +4,15 @@ class Category::Topic < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 
-  has_many :connection_topics, class_name: 'Resource::Connection::Topic', dependent: :destroy
-  has_many :resources, through: :connection_topics
+  has_many :sermon_topics, dependent: :destroy
+  has_many :sermons, through: :sermon_topics
 
   belongs_to :category
   validates :name, presence: true, uniqueness: true
 
   # Only allow these associations to be searchable by Ransack (used in ActiveAdmin filters)
   def self.ransackable_associations(_auth_object = nil)
-    %w[resources connection_topics]
+    %w[sermons sermon_topics]
   end
 
   def self.ransackable_attributes(_auth_object = nil)

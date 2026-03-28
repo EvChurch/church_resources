@@ -1,4 +1,4 @@
-<% title params[:resource_type] ? "#{params[:resource_type].pluralize.titleize} on #{series.name}" : "Resources on #{series.name}" %>
+<% title "Sermons in #{series.name}" %>
 <% if series.background.present? && series.foreground.present? %>
 <header class="listing-header">
   <div class="series-background" style="background-image:url(<%= polymorphic_url(series.background) %>);">

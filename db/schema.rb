@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2021_01_15_004827) do
+ActiveRecord::Schema[7.2].define(version: 2026_03_28_000000) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "active_admin_comments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "active_admin_comments", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "namespace"
     t.text "body"
     t.string "resource_type"
@@ -30,7 +31,7 @@ ActiveRecord::Schema[7.2].define(version: 2021_01_15_004827) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
-  create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "active_storage_attachments", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.uuid "record_id", null: false
@@ -40,7 +41,7 @@ ActiveRecord::Schema[7.2].define(version: 2021_01_15_004827) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "active_storage_blobs", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -58,23 +59,22 @@ ActiveRecord::Schema[7.2].define(version: 2021_01_15_004827) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "authors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "authors", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "remote_id"
-    t.index ["remote_id"], name: "index_authors_on_remote_id"
   end
 
-  create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "categories", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "category_topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "category_topics", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.uuid "category_id", null: false
     t.string "slug"
@@ -83,7 +83,7 @@ ActiveRecord::Schema[7.2].define(version: 2021_01_15_004827) do
     t.index ["category_id"], name: "index_category_topics_on_category_id"
   end
 
-  create_table "friendly_id_slugs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "friendly_id_slugs", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "slug", null: false
     t.uuid "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
@@ -94,106 +94,70 @@ ActiveRecord::Schema[7.2].define(version: 2021_01_15_004827) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
-  create_table "location_connection_steps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "elvanto_form_id"
-    t.text "content"
-    t.uuid "step_id", null: false
-    t.uuid "location_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "mail_chimp_user_id"
-    t.string "mail_chimp_audience_id"
-    t.string "fluro_form_url"
-    t.index ["location_id"], name: "index_location_connection_steps_on_location_id"
-    t.index ["step_id"], name: "index_location_connection_steps_on_step_id"
-  end
-
-  create_table "location_events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.datetime "start_at", precision: nil
-    t.datetime "end_at", precision: nil
+  create_table "roles", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
-    t.text "content"
-    t.string "address"
-    t.string "elvanto_form_id"
-    t.string "facebook_url"
-    t.uuid "location_id", null: false
+    t.string "resource_type"
+    t.uuid "resource_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "featured_at", precision: nil
-    t.string "registration_url"
-    t.index ["featured_at"], name: "index_location_events_on_featured_at"
-    t.index ["location_id"], name: "index_location_events_on_location_id"
+    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", unique: true
+    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
   end
 
-  create_table "location_prayers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "scriptures", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
-    t.string "snippet"
-    t.text "content"
-    t.uuid "location_id", null: false
+    t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["location_id"], name: "index_location_prayers_on_location_id"
   end
 
-  create_table "location_services", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.datetime "start_at", precision: nil
-    t.datetime "end_at", precision: nil
-    t.uuid "location_id", null: false
-    t.string "elvanto_form_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["location_id"], name: "index_location_services_on_location_id"
-  end
-
-  create_table "locations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "series", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
-    t.string "snippet"
-    t.text "content"
-    t.string "address"
+    t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "remote_id"
   end
 
-  create_table "resource_connection_authors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "resource_id", null: false
+  create_table "sermon_authors", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "sermon_id", null: false
     t.uuid "author_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["author_id"], name: "index_resource_connection_authors_on_author_id"
-    t.index ["resource_id"], name: "index_resource_connection_authors_on_resource_id"
+    t.index ["author_id"], name: "index_sermon_authors_on_author_id"
+    t.index ["sermon_id"], name: "index_sermon_authors_on_sermon_id"
   end
 
-  create_table "resource_connection_scriptures", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "resource_id", null: false
+  create_table "sermon_scriptures", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "sermon_id", null: false
     t.uuid "scripture_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "range"
     t.text "content"
-    t.index ["resource_id"], name: "index_resource_connection_scriptures_on_resource_id"
-    t.index ["scripture_id"], name: "index_resource_connection_scriptures_on_scripture_id"
+    t.index ["scripture_id"], name: "index_sermon_scriptures_on_scripture_id"
+    t.index ["sermon_id"], name: "index_sermon_scriptures_on_sermon_id"
   end
 
-  create_table "resource_connection_series", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "resource_id", null: false
+  create_table "sermon_series", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "sermon_id", null: false
     t.uuid "series_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["resource_id"], name: "index_resource_connection_series_on_resource_id"
-    t.index ["series_id"], name: "index_resource_connection_series_on_series_id"
+    t.index ["series_id"], name: "index_sermon_series_on_series_id"
+    t.index ["sermon_id"], name: "index_sermon_series_on_sermon_id"
   end
 
-  create_table "resource_connection_topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "resource_id", null: false
+  create_table "sermon_topics", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "sermon_id", null: false
     t.uuid "topic_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["resource_id"], name: "index_resource_connection_topics_on_resource_id"
-    t.index ["topic_id"], name: "index_resource_connection_topics_on_topic_id"
+    t.index ["sermon_id"], name: "index_sermon_topics_on_sermon_id"
+    t.index ["topic_id"], name: "index_sermon_topics_on_topic_id"
   end
 
-  create_table "resources", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "type"
+  create_table "sermons", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "snippet"
     t.text "content"
@@ -208,46 +172,9 @@ ActiveRecord::Schema[7.2].define(version: 2021_01_15_004827) do
     t.string "audio_url"
     t.text "sermon_notes"
     t.text "connect_group_notes"
-    t.index ["remote_id"], name: "index_resources_on_remote_id"
   end
 
-  create_table "roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
-    t.string "resource_type"
-    t.uuid "resource_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", unique: true
-    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
-  end
-
-  create_table "scriptures", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
-    t.string "slug"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "series", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
-    t.string "slug"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "remote_id"
-    t.index ["remote_id"], name: "index_series_on_remote_id"
-  end
-
-  create_table "steps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
-    t.text "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "position"
-    t.datetime "featured_at", precision: nil
-    t.index ["featured_at"], name: "index_steps_on_featured_at"
-  end
-
-  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "email", default: "", null: false
@@ -279,7 +206,7 @@ ActiveRecord::Schema[7.2].define(version: 2021_01_15_004827) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
-  create_table "users_roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "users_roles", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.uuid "role_id", null: false
     t.datetime "created_at", null: false
@@ -292,19 +219,14 @@ ActiveRecord::Schema[7.2].define(version: 2021_01_15_004827) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "category_topics", "categories", on_delete: :cascade
-  add_foreign_key "location_connection_steps", "locations", on_delete: :cascade
-  add_foreign_key "location_connection_steps", "steps", on_delete: :cascade
-  add_foreign_key "location_events", "locations", on_delete: :cascade
-  add_foreign_key "location_prayers", "locations", on_delete: :cascade
-  add_foreign_key "location_services", "locations", on_delete: :cascade
-  add_foreign_key "resource_connection_authors", "authors", on_delete: :cascade
-  add_foreign_key "resource_connection_authors", "resources", on_delete: :cascade
-  add_foreign_key "resource_connection_scriptures", "resources", on_delete: :cascade
-  add_foreign_key "resource_connection_scriptures", "scriptures", on_delete: :cascade
-  add_foreign_key "resource_connection_series", "resources", on_delete: :cascade
-  add_foreign_key "resource_connection_series", "series", on_delete: :cascade
-  add_foreign_key "resource_connection_topics", "category_topics", column: "topic_id", on_delete: :cascade
-  add_foreign_key "resource_connection_topics", "resources", on_delete: :cascade
+  add_foreign_key "sermon_authors", "authors", on_delete: :cascade
+  add_foreign_key "sermon_authors", "sermons", on_delete: :cascade
+  add_foreign_key "sermon_scriptures", "scriptures", on_delete: :cascade
+  add_foreign_key "sermon_scriptures", "sermons", on_delete: :cascade
+  add_foreign_key "sermon_series", "series", on_delete: :cascade
+  add_foreign_key "sermon_series", "sermons", on_delete: :cascade
+  add_foreign_key "sermon_topics", "category_topics", column: "topic_id", on_delete: :cascade
+  add_foreign_key "sermon_topics", "sermons", on_delete: :cascade
   add_foreign_key "users_roles", "roles", on_delete: :cascade
   add_foreign_key "users_roles", "users", on_delete: :cascade
 end

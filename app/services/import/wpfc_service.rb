@@ -37,10 +37,10 @@ class Import::WpfcService
 
   def import_sermons
     items('wpfc_sermon').each do |remote_sermon|
-      sermon = Resource::Sermon.find_or_initialize_by(remote_id: remote_sermon['id'])
+      sermon = Sermon.find_or_initialize_by(remote_id: remote_sermon['id'])
       sermon.name = CGI.unescapeHTML(remote_sermon['title']['rendered'])
       sermon.slug = remote_sermon['slug']
-      sermon.connection_scriptures = connection_scriptures(remote_sermon['bible_passage'])
+      sermon.sermon_scriptures = sermon_scriptures(remote_sermon['bible_passage'])
       sermon.authors = Author.where(remote_id: remote_sermon['wpfc_preacher'])
       sermon.series = Series.where(remote_id: remote_sermon['wpfc_sermon_series'])
       sermon.audio_url = remote_sermon['sermon_audio']
@@ -49,12 +49,12 @@ class Import::WpfcService
     end
   end
 
-  def connection_scriptures(bible_passage)
+  def sermon_scriptures(bible_passage)
     matches = bible_passage.match(/(?<name>[\dA-Za-z ]*) (?<range>[\d:-]*)/)
     return [] if matches.blank?
 
     Scripture.where(name: matches[:name]).map do |scripture|
-      Resource::Connection::Scripture.new(scripture: scripture, range: matches[:range])
+      SermonScripture.new(scripture: scripture, range: matches[:range])
     end
   end
 

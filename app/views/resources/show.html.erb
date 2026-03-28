@@ -1,15 +1,15 @@
-<div class="page-header <%= resource.type_title.underscore %>">
+<div class="page-header sermon">
   <div class="container">
     <%= render partial: 'shared/resource/media', locals: { resource: resource } %>
   </div>
 </div>
-<div class="page-section <%= resource.type_title.underscore %>">
-  <div class="container resource-header <%= resource.type_title.underscore %>">
+<div class="page-section sermon">
+  <div class="container resource-header sermon">
     <div class="breadcrumbs">
-      <%= link_to resource.type_title, resources_path(resource_type: resource.type_param) %>
+      <%= link_to 'Sermons', resources_path %>
       <% if resource.series.any? %>
         /
-        <%= link_to resource.series.first.name, series_path(resource.series.first, resource_type: params[:resource_type]) %>
+        <%= link_to resource.series.first.name, series_path(resource.series.first) %>
       <% end %>
     </div>
     <h1><%= title resource.name %></h1>
@@ -19,7 +19,7 @@
       <% if resource.authors.any? %>
         <span class="authors">
         <% resource.authors.each do |author| %>
-          <%= link_to author.name, author_path(author, resource_type: params[:resource_type]) %>
+          <%= link_to author.name, author_path(author) %>
         <% end %>
         </span>
         <span class="pipe">|</span>
@@ -31,7 +31,7 @@
           Topics:
         <%=
           resource.topics.map do |topic|
-            link_to topic.name, topic_path(topic, resource_type: params[:resource_type])
+            link_to topic.name, topic_path(topic)
           end.join(', ').html_safe
         %>
         </p>
@@ -41,8 +41,8 @@
         Scripture:
         <%= render partial: 'shared/resource/scripture_list', locals: { resource: resource } %>
       </p>
-      <% resource.connection_scriptures.each do |connection_scripture| %>
-        <%= connection_scripture.content&.html_safe %>
+      <% resource.sermon_scriptures.each do |sermon_scripture| %>
+        <%= sermon_scripture.content&.html_safe %>
       <% end %>
     <% end %>
   </div>
@@ -57,7 +57,7 @@
 <% if resource.related.any? %>
 <div class="card-deck-container">
   <div class="container">
-    <h2>Related Resources</h2>
+    <h2>Related Sermons</h2>
     <div class="card-deck">
     <% resource.related.each do |resource| %>
       <%= render partial: "shared/resource/card", locals: { resource: resource, show_image: true } %>

@@ -17,10 +17,7 @@ class Resources::ScripturesController < ApplicationController
   def load_resources
     return @resources if @resources
 
-    @resources = Resource.order(published_at: :desc).joins(:scriptures).where(scriptures: { id: [@scripture.id] })
-    if params[:resource_type].present?
-      @resources = @resources.where(type: Resource::TYPES[params[:resource_type].to_sym])
-    end
+    @resources = Sermon.order(published_at: :desc).joins(:scriptures).where(scriptures: { id: [@scripture.id] })
     @resources = @resources.published.page params[:page]
   end
 
@@ -43,8 +40,6 @@ class Resources::ScripturesController < ApplicationController
   end
 
   def scope
-    return ::Scripture unless params[:resource_type]
-
-    ::Scripture.joins(:resources).where(resources: { type: Resource::TYPES[params[:resource_type].to_sym] }).distinct
+    ::Scripture
   end
 end
