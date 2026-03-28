@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# rubocop:disable Metrics/ClassLength, Metrics/AbcSize, Metrics/MethodLength
 class SimplifyResourcesToSermons < ActiveRecord::Migration[7.2]
   def up
     # --- Rename resources -> sermons ---
@@ -48,19 +51,19 @@ class SimplifyResourcesToSermons < ActiveRecord::Migration[7.2]
     drop_table :steps
 
     # --- Update polymorphic type references ---
-    execute <<~SQL
+    execute <<~SQL.squish
       UPDATE active_storage_attachments
       SET record_type = 'Sermon'
       WHERE record_type IN ('Resource', 'Resource::Sermon');
     SQL
 
-    execute <<~SQL
+    execute <<~SQL.squish
       UPDATE active_admin_comments
       SET resource_type = 'Sermon'
       WHERE resource_type IN ('Resource', 'Resource::Sermon');
     SQL
 
-    execute <<~SQL
+    execute <<~SQL.squish
       UPDATE friendly_id_slugs
       SET sluggable_type = 'Sermon'
       WHERE sluggable_type IN ('Resource', 'Resource::Sermon');
@@ -69,93 +72,93 @@ class SimplifyResourcesToSermons < ActiveRecord::Migration[7.2]
 
   def down
     # --- Reverse polymorphic type references ---
-    execute <<~SQL
+    execute <<~SQL.squish
       UPDATE active_storage_attachments
       SET record_type = 'Resource'
       WHERE record_type = 'Sermon';
     SQL
 
-    execute <<~SQL
+    execute <<~SQL.squish
       UPDATE active_admin_comments
       SET resource_type = 'Resource::Sermon'
       WHERE resource_type = 'Sermon';
     SQL
 
-    execute <<~SQL
+    execute <<~SQL.squish
       UPDATE friendly_id_slugs
       SET sluggable_type = 'Resource'
       WHERE sluggable_type = 'Sermon';
     SQL
 
     # --- Recreate dropped tables ---
-    create_table :steps, id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-      t.string "name"
-      t.text "content"
-      t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
-      t.integer "position"
-      t.datetime "featured_at", precision: nil
-      t.index ["featured_at"], name: "index_steps_on_featured_at"
+    create_table :steps, id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+      t.string 'name'
+      t.text 'content'
+      t.datetime 'created_at', null: false
+      t.datetime 'updated_at', null: false
+      t.integer 'position'
+      t.datetime 'featured_at', precision: nil
+      t.index ['featured_at'], name: 'index_steps_on_featured_at'
     end
 
-    create_table :locations, id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-      t.string "name"
-      t.string "snippet"
-      t.text "content"
-      t.string "address"
-      t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
+    create_table :locations, id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+      t.string 'name'
+      t.string 'snippet'
+      t.text 'content'
+      t.string 'address'
+      t.datetime 'created_at', null: false
+      t.datetime 'updated_at', null: false
     end
 
-    create_table :location_services, id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-      t.datetime "start_at", precision: nil
-      t.datetime "end_at", precision: nil
-      t.uuid "location_id", null: false
-      t.string "elvanto_form_id"
-      t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
-      t.index ["location_id"], name: "index_location_services_on_location_id"
+    create_table :location_services, id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+      t.datetime 'start_at', precision: nil
+      t.datetime 'end_at', precision: nil
+      t.uuid 'location_id', null: false
+      t.string 'elvanto_form_id'
+      t.datetime 'created_at', null: false
+      t.datetime 'updated_at', null: false
+      t.index ['location_id'], name: 'index_location_services_on_location_id'
     end
 
-    create_table :location_prayers, id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-      t.string "name"
-      t.string "snippet"
-      t.text "content"
-      t.uuid "location_id", null: false
-      t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
-      t.index ["location_id"], name: "index_location_prayers_on_location_id"
+    create_table :location_prayers, id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+      t.string 'name'
+      t.string 'snippet'
+      t.text 'content'
+      t.uuid 'location_id', null: false
+      t.datetime 'created_at', null: false
+      t.datetime 'updated_at', null: false
+      t.index ['location_id'], name: 'index_location_prayers_on_location_id'
     end
 
-    create_table :location_events, id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-      t.datetime "start_at", precision: nil
-      t.datetime "end_at", precision: nil
-      t.string "name"
-      t.text "content"
-      t.string "address"
-      t.string "elvanto_form_id"
-      t.string "facebook_url"
-      t.uuid "location_id", null: false
-      t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
-      t.datetime "featured_at", precision: nil
-      t.string "registration_url"
-      t.index ["featured_at"], name: "index_location_events_on_featured_at"
-      t.index ["location_id"], name: "index_location_events_on_location_id"
+    create_table :location_events, id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+      t.datetime 'start_at', precision: nil
+      t.datetime 'end_at', precision: nil
+      t.string 'name'
+      t.text 'content'
+      t.string 'address'
+      t.string 'elvanto_form_id'
+      t.string 'facebook_url'
+      t.uuid 'location_id', null: false
+      t.datetime 'created_at', null: false
+      t.datetime 'updated_at', null: false
+      t.datetime 'featured_at', precision: nil
+      t.string 'registration_url'
+      t.index ['featured_at'], name: 'index_location_events_on_featured_at'
+      t.index ['location_id'], name: 'index_location_events_on_location_id'
     end
 
-    create_table :location_connection_steps, id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-      t.string "elvanto_form_id"
-      t.text "content"
-      t.uuid "step_id", null: false
-      t.uuid "location_id", null: false
-      t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
-      t.string "mail_chimp_user_id"
-      t.string "mail_chimp_audience_id"
-      t.string "fluro_form_url"
-      t.index ["location_id"], name: "index_location_connection_steps_on_location_id"
-      t.index ["step_id"], name: "index_location_connection_steps_on_step_id"
+    create_table :location_connection_steps, id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+      t.string 'elvanto_form_id'
+      t.text 'content'
+      t.uuid 'step_id', null: false
+      t.uuid 'location_id', null: false
+      t.datetime 'created_at', null: false
+      t.datetime 'updated_at', null: false
+      t.string 'mail_chimp_user_id'
+      t.string 'mail_chimp_audience_id'
+      t.string 'fluro_form_url'
+      t.index ['location_id'], name: 'index_location_connection_steps_on_location_id'
+      t.index ['step_id'], name: 'index_location_connection_steps_on_step_id'
     end
 
     # Restore foreign keys on location tables
@@ -205,3 +208,4 @@ class SimplifyResourcesToSermons < ActiveRecord::Migration[7.2]
     add_foreign_key :resource_connection_topics, :resources, on_delete: :cascade
   end
 end
+# rubocop:enable Metrics/ClassLength, Metrics/AbcSize, Metrics/MethodLength

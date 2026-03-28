@@ -8,7 +8,7 @@ xml.rss version: '2.0',
         'xmlns:atom' => 'http://www.w3.org/2005/Atom' do
   xml.channel do
     xml.tag!('atom:link', 'href' => resources_url(format: 'rss'), 'rel' => 'self', 'type' => 'application/rss+xml')
-    xml.title "Ev Church - Sermons"
+    xml.title 'Ev Church - Sermons'
     xml.link resources_url
     xml.description "We are a bunch of people, convinced we're not perfect, " \
                     'captivated by the historical Jesus, excited about the future he offers, ' \
