@@ -29,16 +29,8 @@ class SermonDecorator < ApplicationDecorator
   end
 
   def related
-    series_ids = object.series.map(&:id)
-    topic_ids = object.topics.map(&:id)
-    author_ids = object.authors.map(&:id)
-    scripture_ids = object.scriptures.map(&:id)
-
-    sermons = related_sermon_scope
-    sermons = sermons.where(series: { id: series_ids })
-    sermons = sermons.or(sermons.where(category_topics: { id: topic_ids })) if topic_ids.any?
-    sermons = sermons.or(sermons.where(authors: { id: author_ids })) if author_ids.any?
-    sermons = sermons.or(sermons.where(scriptures: { id: scripture_ids })) if scripture_ids.any?
+    sermons = related_sermon_scope.where(series: { id: object.series.ids })
+    sermons = add_related_conditions(sermons)
     sermons.includes(:authors, :series, sermon_scriptures: :scripture).decorate
   end
 
@@ -52,6 +44,14 @@ class SermonDecorator < ApplicationDecorator
 
   def author_names
     object.authors.map(&:name).join(', ')
+  end
+
+  def add_related_conditions(sermons)
+    { category_topics: object.topics, authors: object.authors, scriptures: object.scriptures }.each do |table, assoc|
+      ids = assoc.map(&:id)
+      sermons = sermons.or(sermons.where(table => { id: ids })) if ids.any?
+    end
+    sermons
   end
 
   def related_sermon_scope

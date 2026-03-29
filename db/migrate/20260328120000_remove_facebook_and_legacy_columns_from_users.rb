@@ -2,9 +2,11 @@
 
 class RemoveFacebookAndLegacyColumnsFromUsers < ActiveRecord::Migration[7.2]
   def change
-    remove_column :users, :facebook_token, :string
-    remove_column :users, :facebook_remote_id, :string
-    remove_column :users, :avatar_url, :string
-    remove_column :users, :name, :string
+    change_table :users, bulk: true do |t|
+      t.remove :facebook_token, type: :string
+      t.remove :facebook_remote_id, type: :string
+      t.remove :avatar_url, type: :string
+      t.remove :name, type: :string
+    end
   end
 end

@@ -1,9 +1,13 @@
+# frozen_string_literal: true
+
 class RemoveUnusedColumnsFromSermons < ActiveRecord::Migration[7.2]
   def change
-    remove_column :sermons, :video_url, :string
-    remove_column :sermons, :content, :text
-    remove_column :sermons, :connect_group_notes, :text
-    remove_column :sermons, :sermon_notes, :text
-    remove_column :sermons, :snippet, :string
+    change_table :sermons, bulk: true do |t|
+      t.remove :video_url, type: :string
+      t.remove :content, type: :text
+      t.remove :connect_group_notes, type: :text
+      t.remove :sermon_notes, type: :text
+      t.remove :snippet, type: :string
+    end
   end
 end

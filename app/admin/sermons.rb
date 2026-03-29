@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/BlockLength
 ActiveAdmin.register Sermon do
   menu label: 'Sermons'
   config.sort_order = 'published_at_desc'
@@ -57,4 +56,3 @@ ActiveAdmin.register Sermon do
     f.actions
   end
 end
-# rubocop:enable Metrics/BlockLength
