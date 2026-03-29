@@ -24,7 +24,7 @@
         </span>
         <span class="pipe">|</span>
       <% end %>
-      <date class="date"><%= resource.published_at.strftime('%b %d, %Y') %></date>
+      <date class="date"><%= resource.published_at&.strftime('%b %d, %Y') %></date>
     </p>
     <% if resource.topics.any? %>
         <p class="topics">

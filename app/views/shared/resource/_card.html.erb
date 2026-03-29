@@ -16,7 +16,7 @@
     <p class="card-text"><%= resource.description %></p>
   </div>
   <div class="card-footer border-top d-flex">
-    <date class="date"><%= resource.published_at.strftime('%b %d, %Y') %></date>
+    <date class="date"><%= resource.published_at&.strftime('%b %d, %Y') %></date>
     <div class="ml-auto">
       <%= link_to "View <i class=\"fa fa-angle-right ml-1\"></i>".html_safe, resource_path(resource), class: 'action' %>
     </div>
