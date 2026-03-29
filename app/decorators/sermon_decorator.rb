@@ -37,7 +37,7 @@ class SermonDecorator < ApplicationDecorator
   def description
     author_names = authors.map(&:name).join(', ')
     scripture_names = sermon_scriptures.map(&:name).join(', ')
-    display_published_at = published_at.strftime('%b %d, %Y')
+    display_published_at = published_at&.strftime('%b %d, %Y')
 
     [author_names, scripture_names, display_published_at].compact_blank.join(' | ')
   end
