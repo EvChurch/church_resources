@@ -10,6 +10,7 @@ class Types::SermonType < Types::BaseObject
   field :connection_scriptures, [Types::SermonScriptureType], null: false
   field :foreground_url, String, null: true
   field :id, ID, null: false
+  field :video_url, String, null: true
   field :name, String, null: false
   field :published_at, GraphQL::Types::ISO8601DateTime, null: true
   field :scriptures, [Types::ScriptureType], null: false
@@ -33,6 +34,10 @@ class Types::SermonType < Types::BaseObject
 
   def audio_url
     object.audio_url.presence || (object.audio.attached? ? polymorphic_url(object.audio) : nil)
+  end
+
+  def video_url
+    object.video.attached? ? polymorphic_url(object.video) : nil
   end
 
   protected
