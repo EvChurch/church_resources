@@ -10,12 +10,12 @@ class Types::SermonType < Types::BaseObject
   field :connection_scriptures, [Types::SermonScriptureType], null: false
   field :foreground_url, String, null: true
   field :id, ID, null: false
-  field :video_url, String, null: true
   field :name, String, null: false
   field :published_at, GraphQL::Types::ISO8601DateTime, null: true
   field :scriptures, [Types::ScriptureType], null: false
   field :series, [Types::SeriesType], null: false
   field :topics, [Types::TopicType], null: false
+  field :video_url, String, null: true
 
   def banner_url
     attachment = attached_image(:banner)
