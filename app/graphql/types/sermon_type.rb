@@ -7,7 +7,7 @@ class Types::SermonType < Types::BaseObject
   field :authors, [Types::AuthorType], null: false
   field :background_url, String, null: true
   field :banner_url, String, null: true
-  field :connection_scriptures, [Types::SermonScriptureType], null: false
+  field :sermon_scriptures, [Types::SermonScriptureType], null: false
   field :foreground_url, String, null: true
   field :id, ID, null: false
   field :name, String, null: false
