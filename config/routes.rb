@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   get 'resources/sermon', to: 'resources#index', defaults: { format: :rss }
+  get 'resources/sermons', to: 'resources#index', defaults: { format: :rss }
 
   resources :resources, only: %i[index show] do
     collection do
