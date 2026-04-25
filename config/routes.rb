@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   devise_for :users
   ActiveAdmin.routes(self)
 
+  get 'resources/sermon', to: 'resources#index', defaults: { format: :rss }
+
   resources :resources, only: %i[index show] do
     collection do
       scope module: :resources do
