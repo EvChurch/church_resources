@@ -110,4 +110,21 @@ RSpec.describe 'Public resource redirects', :aggregate_failures do
       expect(response).to have_http_status(:moved_permanently)
     end
   end
+
+  describe 'static public pages' do
+    {
+      '/' => 'home page',
+      '/home' => 'legacy home path',
+      '/permissions' => 'permissions page',
+      '/privacy' => 'privacy page',
+      '/terms' => 'terms page'
+    }.each do |path, label|
+      it "permanently redirects the #{label} to the sermon library" do
+        get path
+
+        expect(response).to redirect_to(sermon_library_url)
+        expect(response).to have_http_status(:moved_permanently)
+      end
+    end
+  end
 end
