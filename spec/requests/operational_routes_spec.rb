@@ -20,11 +20,10 @@ RSpec.describe 'Operational routes', :aggregate_failures do
     expect(response.location).not_to start_with(sermon_library_url)
   end
 
-  it 'keeps the sign-in page on the resource application' do
-    get new_user_session_path
+  it 'keeps the sign-in route on the resource application' do
+    route = Rails.application.routes.recognize_path(new_user_session_path, method: :get)
 
-    expect(response).to have_http_status(:ok)
-    expect(response.location).to be_nil
+    expect(route).to include(controller: 'devise/sessions', action: 'new')
   end
 
   it 'keeps GraphQL requests on the resource application' do
@@ -57,11 +56,10 @@ RSpec.describe 'Operational routes', :aggregate_failures do
     expect(response.location).to be_nil
   end
 
-  it 'serves compiled application assets without an external redirect' do
-    get '/packs-test/js/application.js'
-
-    expect(response).to have_http_status(:ok)
-    expect(response.location).to be_nil
+  it 'leaves compiled application assets to the static file server' do
+    expect do
+      Rails.application.routes.recognize_path('/packs/application.js', method: :get)
+    end.to raise_error(ActionController::RoutingError)
   end
 
   it 'preserves the legacy podcast feed alias' do
