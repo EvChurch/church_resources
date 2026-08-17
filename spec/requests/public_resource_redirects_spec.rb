@@ -61,7 +61,7 @@ RSpec.describe 'Public resource redirects', :aggregate_failures do
     it 'maps authors to speaker pages using the church-web slug algorithm' do
       author = create(:author, name: "Renée & O'Connor")
 
-      get author_path(author.id)
+      get author_path(author)
 
       expect(response).to redirect_to("#{sermon_library_url}/speakers/ren-e-o-connor")
       expect(response).to have_http_status(:moved_permanently)
@@ -70,7 +70,7 @@ RSpec.describe 'Public resource redirects', :aggregate_failures do
     it 'maps series to series pages' do
       series = create(:series, name: 'Hebrews: Jesus is Better')
 
-      get series_path(series.id)
+      get series_path(series)
 
       expect(response).to redirect_to("#{sermon_library_url}/series/hebrews-jesus-is-better")
       expect(response).to have_http_status(:moved_permanently)
@@ -79,7 +79,7 @@ RSpec.describe 'Public resource redirects', :aggregate_failures do
     it 'maps topics to topic pages' do
       topic = create(:category_topic, name: 'Faith & Life', category: create(:category))
 
-      get topic_path(topic.id)
+      get topic_path(topic)
 
       expect(response).to redirect_to("#{sermon_library_url}/topics/faith-life")
       expect(response).to have_http_status(:moved_permanently)

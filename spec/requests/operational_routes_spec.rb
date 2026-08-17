@@ -4,6 +4,14 @@ require 'rails_helper'
 
 RSpec.describe 'Operational routes', :aggregate_failures do
   let(:sermon_library_url) { 'https://www.ev.church/sermons' }
+  let(:direct_upload_params) do
+    {
+      blob: {
+        filename: 'sample.mp3', byte_size: 12,
+        checksum: Digest::MD5.base64digest('sample audio'), content_type: 'audio/mpeg'
+      }
+    }
+  end
 
   it 'keeps the admin authentication redirect on the resource application' do
     get admin_root_path
@@ -39,6 +47,14 @@ RSpec.describe 'Operational routes', :aggregate_failures do
 
     expect(response).to have_http_status(:found)
     expect(response.location).not_to start_with(sermon_library_url)
+  end
+
+  it 'keeps Active Storage direct uploads on the resource application' do
+    post rails_direct_uploads_path, params: direct_upload_params, as: :json
+
+    expect(response).to have_http_status(:ok)
+    expect(response.parsed_body).to include('direct_upload')
+    expect(response.location).to be_nil
   end
 
   it 'serves compiled application assets without an external redirect' do
