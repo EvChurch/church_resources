@@ -1,40 +1,13 @@
 # frozen_string_literal: true
 
 class Resources::TopicsController < ApplicationController
-  decorates_assigned :categories, :topic, :resources
+  include PublicSermonRedirect
 
   def index
-    load_categories
+    redirect_to_sermon_library
   end
 
   def show
-    load_topic
-    load_resources
-  end
-
-  protected
-
-  def load_resources
-    return @resources if @resources
-
-    @resources = Sermon.order(published_at: :desc).joins(:topics).where(category_topics: { id: [@topic.id] })
-    @resources = @resources.published.with_associations.page params[:page]
-  end
-
-  def load_categories
-    @categories ||= category_scope.includes(:topics).all
-    @topic_ids_with_sermons = Category::Topic.joins(:sermons).merge(Sermon.published).distinct.pluck(:id).to_set
-  end
-
-  def load_topic
-    @topic ||= scope.friendly.find(params[:id])
-  end
-
-  def category_scope
-    ::Category.joins(topics: :sermons).distinct
-  end
-
-  def scope
-    ::Category::Topic
+    redirect_to_taxonomy(scope: ::Category::Topic, segment: 'topics')
   end
 end
