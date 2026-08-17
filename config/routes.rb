@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   mount GraphiQL::Rails::Engine, at: '/graphiql', graphql_path: '/graphql' if Rails.env.development?
@@ -18,7 +20,11 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'permissions' => 'high_voltage/pages#show', id: 'permissions'
-  get 'privacy' => 'high_voltage/pages#show', id: 'privacy'
-  get 'terms' => 'high_voltage/pages#show', id: 'terms'
+  public_sermon_library_redirect = redirect('https://www.ev.church/sermons', status: :moved_permanently)
+
+  get '/', to: public_sermon_library_redirect
+  get 'home', to: public_sermon_library_redirect
+  get 'permissions', to: public_sermon_library_redirect, as: :permissions
+  get 'privacy', to: public_sermon_library_redirect, as: :privacy
+  get 'terms', to: public_sermon_library_redirect, as: :terms
 end

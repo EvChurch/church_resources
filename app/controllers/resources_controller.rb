@@ -1,31 +1,22 @@
 # frozen_string_literal: true
 
 class ResourcesController < ApplicationController
-  decorates_assigned :resources, :resource
+  include PublicSermonRedirect
 
   def index
     respond_to do |format|
-      format.html { load_resources }
+      format.html { redirect_to_sermon_library }
       format.rss { render_rss_feed }
     end
   end
 
   def show
-    load_resource
+    respond_to do |format|
+      format.html { redirect_to_sermon_library }
+    end
   end
 
   protected
-
-  def load_resources
-    return @resources if @resources
-
-    @resources = scope.order(published_at: :desc).published.with_associations
-    @resources = @resources.page params[:page]
-  end
-
-  def load_resource
-    @resource ||= scope.with_associations.friendly.find(params[:id])
-  end
 
   def scope
     ::Sermon
