@@ -21,7 +21,7 @@ module PublicSermonRedirect
 
     redirect_to_sermon_library("#{segment}/#{slug}")
   rescue ActiveRecord::RecordNotFound
-    redirect_to_sermon_library
+    redirect_to_sermon_library("#{segment}/#{params[:id]}")
   end
 
   def church_web_slug(value)

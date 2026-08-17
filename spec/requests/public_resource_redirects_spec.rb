@@ -94,10 +94,10 @@ RSpec.describe 'Public resource redirects', :aggregate_failures do
       expect(response).to have_http_status(:moved_permanently)
     end
 
-    it 'falls back when a taxonomy record is missing' do
+    it 'passes a missing taxonomy slug through to the sermon library' do
       get author_path('missing-author')
 
-      expect(response).to redirect_to(sermon_library_url)
+      expect(response).to redirect_to("#{sermon_library_url}/speakers/missing-author")
       expect(response).to have_http_status(:moved_permanently)
     end
 
