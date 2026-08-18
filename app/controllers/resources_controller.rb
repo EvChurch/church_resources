@@ -6,7 +6,9 @@ class ResourcesController < ApplicationController
   def index
     respond_to do |format|
       format.html { redirect_to_sermon_library }
-      format.rss { render_rss_feed }
+      format.rss do
+        redirect_to 'https://www.ev.church/sermons/feed.xml', allow_other_host: true, status: :moved_permanently
+      end
     end
   end
 

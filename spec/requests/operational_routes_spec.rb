@@ -62,14 +62,10 @@ RSpec.describe 'Operational routes', :aggregate_failures do
     end.to raise_error(ActionController::RoutingError)
   end
 
-  it 'preserves the legacy podcast feed alias' do
-    create(:sermon, name: 'Podcast Message')
-
+  it 'redirects the legacy podcast feed alias to the EV Church sermons feed' do
     get resources_sermon_path
 
-    expect(response).to have_http_status(:ok)
-    expect(response.media_type).to eq('application/rss+xml')
-    expect(response.body).to include('<rss version="2.0"')
-    expect(response.location).to be_nil
+    expect(response).to redirect_to('https://www.ev.church/sermons/feed.xml')
+    expect(response).to have_http_status(:moved_permanently)
   end
 end
