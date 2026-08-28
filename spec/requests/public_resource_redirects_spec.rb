@@ -39,6 +39,13 @@ RSpec.describe 'Public resource redirects', :aggregate_failures do
     it 'does not externally redirect unsupported index formats' do
       expect { get resources_path(format: :json) }.to raise_error(ActionController::UnknownFormat)
     end
+
+    it 'permanently redirects a nested legacy sermon URL' do
+      get '/resources/sermon/a-message-with-an-apparent-match'
+
+      expect(response).to redirect_to(sermon_library_url)
+      expect(response).to have_http_status(:moved_permanently)
+    end
   end
 
   describe 'taxonomy indexes' do
@@ -58,6 +65,19 @@ RSpec.describe 'Public resource redirects', :aggregate_failures do
   end
 
   describe 'taxonomy details' do
+    [
+      ['authors', 'resources/authors'],
+      ['scriptures', 'resources/scriptures'],
+      ['series', 'resources/series'],
+      ['topics', 'resources/topics']
+    ].each do |segment, controller|
+      it "recognizes the nested legacy #{segment} route" do
+        expect(
+          Rails.application.routes.recognize_path("/resources/sermon/#{segment}/legacy-slug")
+        ).to include(controller:, action: 'show', id: 'legacy-slug')
+      end
+    end
+
     it 'maps authors to speaker pages using the church-web slug algorithm' do
       author = create(:author, name: "Renée & O'Connor")
 
@@ -107,6 +127,33 @@ RSpec.describe 'Public resource redirects', :aggregate_failures do
       get author_path(author.id)
 
       expect(response).to redirect_to(sermon_library_url)
+      expect(response).to have_http_status(:moved_permanently)
+    end
+
+    it 'maps nested legacy taxonomy URLs to the current sermon library' do
+      series = create(:series, name: 'Colossians: Captivated')
+
+      get "/resources/sermon/series/#{series.friendly_id}"
+
+      expect(response).to redirect_to("#{sermon_library_url}/series/colossians-captivated")
+      expect(response).to have_http_status(:moved_permanently)
+    end
+  end
+
+  describe 'legacy passage links' do
+    it 'permanently redirects the supported query to BibleGateway' do
+      get '/passage', params: { search: 'John 3:16', version: 'CSB', ignored: 'value' }
+
+      expect(response).to redirect_to(
+        'https://www.biblegateway.com/passage/?search=John+3%3A16&version=CSB'
+      )
+      expect(response).to have_http_status(:moved_permanently)
+    end
+
+    it 'redirects an empty passage request without adding an empty query string' do
+      get '/passage'
+
+      expect(response).to redirect_to('https://www.biblegateway.com/passage/')
       expect(response).to have_http_status(:moved_permanently)
     end
   end

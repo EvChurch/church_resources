@@ -9,6 +9,17 @@ Rails.application.routes.draw do
 
   get 'resources/sermon', to: 'resources#index', defaults: { format: :rss }
 
+  # Preserve links emitted by the retired public sermon UI. These nested
+  # paths predate the current REST routes but still carry Google visibility.
+  get 'resources/sermon/authors/:id', to: 'resources/authors#show'
+  get 'resources/sermon/scriptures/:id', to: 'resources/scriptures#show'
+  get 'resources/sermon/series/:id', to: 'resources/series#show'
+  get 'resources/sermon/topics/:id', to: 'resources/topics#show'
+  get 'resources/sermon/:id', to: 'resources#show'
+
+  # Old sermon pages embedded relative BibleGateway links at /passage.
+  get 'passage', to: 'resources#passage'
+
   resources :resources, only: %i[index show] do
     collection do
       scope module: :resources do
