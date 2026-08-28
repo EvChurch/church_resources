@@ -18,6 +18,13 @@ class ResourcesController < ApplicationController
     end
   end
 
+  def passage
+    query = { search: params[:search], version: params[:version] }.compact_blank.to_query
+    target = ['https://www.biblegateway.com/passage/', query.presence].compact.join('?')
+
+    redirect_to target, allow_other_host: true, status: :moved_permanently
+  end
+
   protected
 
   def scope
