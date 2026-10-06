@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.4.9'
+ruby '3.4.11'
 
 gem 'activeadmin', '~> 3.3.0'
 gem 'active_admin_datetimepicker', '~> 1.1'
