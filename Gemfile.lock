@@ -438,7 +438,7 @@ GEM
       railties (>= 7.0)
     rexml (3.4.4)
     rolify (6.0.1)
-    rollbar (3.6.2)
+    rollbar (3.8.0)
     rouge (4.5.2)
     rspec-core (3.13.6)
       rspec-support (~> 3.13.0)
