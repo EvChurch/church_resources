@@ -2,6 +2,7 @@
 
 class Series < ApplicationRecord
   extend FriendlyId
+
   friendly_id :name, use: :slugged
 
   has_many :sermon_series, dependent: :destroy
