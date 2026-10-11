@@ -2,6 +2,7 @@
 
 class Author < ApplicationRecord
   extend FriendlyId
+
   friendly_id :name, use: :slugged
 
   has_many :sermon_authors, dependent: :destroy
