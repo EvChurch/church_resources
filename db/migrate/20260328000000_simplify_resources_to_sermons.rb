@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/ClassLength, Metrics/AbcSize, Metrics/MethodLength
+# rubocop:disable-next Metrics/ClassLength, Metrics/AbcSize, Metrics/MethodLength
 class SimplifyResourcesToSermons < ActiveRecord::Migration[7.2]
   def up
     # --- Rename resources -> sermons ---
@@ -208,4 +208,3 @@ class SimplifyResourcesToSermons < ActiveRecord::Migration[7.2]
     add_foreign_key :resource_connection_topics, :resources, on_delete: :cascade
   end
 end
-# rubocop:enable Metrics/ClassLength, Metrics/AbcSize, Metrics/MethodLength
