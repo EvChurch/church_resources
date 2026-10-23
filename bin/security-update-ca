@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+apt-get update
+apt-get install -y --no-install-recommends ca-certificates
+sed -i \
+  -e 's|^mozilla/emSign_ECC_Root_CA_-_G3.crt|!&|' \
+  -e 's|^mozilla/Comodo_AAA_Services_root.crt|!&|' \
+  /etc/ca-certificates.conf
+update-ca-certificates --fresh
+
+# Ruby/OpenSSL reads both the bundle and a hashed certificate directory.
+# Derive the directory only from the refreshed bundle, excluding stale PEM links.
+CA_DIRECTORY=/usr/local/share/security-ca/certs
+mkdir -p "$CA_DIRECTORY"
+rm -f "$CA_DIRECTORY"/root-*.pem
+awk -v ca_directory="$CA_DIRECTORY" '/-----BEGIN CERTIFICATE-----/ { n++; f=sprintf("%s/root-%03d.pem", ca_directory, n) } f != "" { print > f } /-----END CERTIFICATE-----/ { close(f); f="" }' /etc/ssl/certs/ca-certificates.crt
+openssl rehash "$CA_DIRECTORY"
