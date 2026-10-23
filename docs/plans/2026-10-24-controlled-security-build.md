@@ -11,6 +11,12 @@ runtime versions, both affected chains and valid public TLS controls. Existing
 RuboCop, RSpec and Shakapacker jobs remain required. No Rails integration, mail,
 upload or synchronization is invoked by the trust probe.
 
+The first image build reached Rails asset initialization and failed because
+`config/database.yml` defines development and test only. Supply a synthetic
+loopback PostgreSQL URL to that build command so Rails can resolve its adapter.
+It is never exported into the runtime image; the real platform database binding
+remains authoritative. No live database credentials are needed for image CI.
+
 Do not merge until all checks pass. After the normal main source release,
 measure the exact running image and its effective clients and complete the
 read-only application smoke before closing the audit row. Local Docker and Ruby

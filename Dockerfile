@@ -27,7 +27,11 @@ RUN bundle install --jobs 4 --retry 3
 COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 COPY . .
-RUN SECRET_KEY_BASE=build-only-placeholder yarn build
+# Rails requires an adapter configuration during asset initialization. This URL
+# is build-only and cannot reach a real database; runtime uses platform secrets.
+RUN SECRET_KEY_BASE=build-only-placeholder \
+    DATABASE_URL=postgresql://build:build@127.0.0.1/church_resources_build \
+    yarn build
 RUN rm -rf /root/.bundle /root/.gem /root/.cache /usr/local/bundle/cache
 
 FROM base AS runtime
