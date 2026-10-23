@@ -1,6 +1,7 @@
 #!/bin/sh
 # Public transport controls only; do not initialize Rails or any integration.
 set -eu
+test ! -e /app/config/initializers/build_only_asset_storage.rb
 node --input-type=module - <<'JS'
 import assert from 'node:assert/strict'
 assert.equal(process.version, 'v22.23.4')

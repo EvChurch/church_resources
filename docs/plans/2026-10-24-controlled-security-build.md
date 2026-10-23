@@ -17,6 +17,12 @@ loopback PostgreSQL URL to that build command so Rails can resolve its adapter.
 It is never exported into the runtime image; the real platform database binding
 remains authoritative. No live database credentials are needed for image CI.
 
+Rails also initializes its production S3 storage service while compiling
+assets. Use the existing local disk service in a temporary build initializer
+and remove that initializer after compilation. The image verification asserts
+it is absent; runtime retains the unchanged production S3 configuration. This
+keeps asset builds independent of AWS credentials and metadata endpoints.
+
 Do not merge until all checks pass. After the normal main source release,
 measure the exact running image and its effective clients and complete the
 read-only application smoke before closing the audit row. Local Docker and Ruby
