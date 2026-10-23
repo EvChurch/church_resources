@@ -7,6 +7,15 @@ on:
     branches: [main]
 
 jobs:
+  production-image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build production image without credentials
+        run: docker build -t church-resources-security-ci .
+      - name: Verify production image runtime and trust
+        run: docker run --rm --entrypoint sh church-resources-security-ci bin/verify-image-trust
+
   lint:
     runs-on: ubuntu-latest
     steps:
