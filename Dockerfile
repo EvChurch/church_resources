@@ -4,7 +4,9 @@ FROM ruby:3.4.11-bookworm@sha256:1aed73d35b66ce974febaefe42e8385abb8cbf6244ea4f4
 WORKDIR /app
 COPY bin/security-update-ca /usr/local/bin/security-update-ca
 RUN bash /usr/local/bin/security-update-ca \
-    && apt-get install -y --no-install-recommends imagemagick libpq-dev \
+    && apt-get install -y --no-install-recommends libbrotli1 libbrotli-dev imagemagick libpq-dev \
+    && dpkg --compare-versions "$(dpkg-query -W -f='${Version}' libbrotli1)" ge 1.0.9-2+deb12u1 \
+    && dpkg --compare-versions "$(dpkg-query -W -f='${Version}' libbrotli-dev)" ge 1.0.9-2+deb12u1 \
     && rm -rf /var/lib/apt/lists/*
 ENV SSL_CERT_DIR=/usr/local/share/security-ca/certs
 
