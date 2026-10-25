@@ -1,6 +1,11 @@
 #!/bin/sh
 # Public transport controls only; do not initialize Rails or any integration.
 set -eu
+# Debian backports keep the upstream version; require its fixed package revision.
+for package in libbrotli1 libbrotli-dev; do
+  dpkg --compare-versions "$(dpkg-query -W -f='${Version}' "$package")" ge 1.0.9-2+deb12u1
+done
+printf '%s\n' 'PASS: system Brotli includes CVE-2026-111497 security fixes'
 test ! -e /app/config/initializers/build_only_asset_storage.rb
 node --input-type=module - <<'JS'
 import assert from 'node:assert/strict'
