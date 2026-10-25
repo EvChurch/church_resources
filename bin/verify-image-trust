@@ -1,0 +1,34 @@
+#!/bin/sh
+# Public transport controls only; do not initialize Rails or any integration.
+set -eu
+# Debian backports keep the upstream version; require its fixed package revision.
+for package in libbrotli1 libbrotli-dev; do
+  dpkg --compare-versions "$(dpkg-query -W -f='${Version}' "$package")" ge 1.0.9-2+deb12u1
+done
+printf '%s\n' 'PASS: system Brotli includes CVE-2026-111497 security fixes'
+test ! -e /app/config/initializers/build_only_asset_storage.rb
+node --input-type=module - <<'JS'
+import assert from 'node:assert/strict'
+assert.equal(process.version, 'v22.23.4')
+for (const host of ['dv-g3b-emudhra.we-have-a-problem.com', 'dv-g3b-aaa-emudhra.we-have-a-problem.com']) {
+  await assert.rejects(fetch(`https://${host}/`, { signal: AbortSignal.timeout(10000) }), error => error.cause?.code === 'CERT_REVOKED')
+}
+assert.equal((await fetch('https://www.google.com/generate_204', { signal: AbortSignal.timeout(10000) })).status, 204)
+console.log('PASS: copied Node version and public TLS controls')
+JS
+ruby - <<'RUBY'
+require 'net/http'
+require 'openssl'
+raise 'Unexpected Ruby' unless RUBY_VERSION == '3.4.11'
+%w[dv-g3b-emudhra.we-have-a-problem.com dv-g3b-aaa-emudhra.we-have-a-problem.com www.google.com].each do |host|
+  begin
+    response = Net::HTTP.start(host, 443, use_ssl: true, open_timeout: 10, read_timeout: 10) do |http|
+      http.get('/generate_204')
+    end
+    raise 'Affected chain accepted' unless host == 'www.google.com' && response.code == '204'
+  rescue OpenSSL::SSL::SSLError
+    raise if host == 'www.google.com'
+  end
+end
+puts 'PASS: copied Ruby version and public OpenSSL TLS controls'
+RUBY

@@ -2,6 +2,7 @@
 
 class Category::Topic < ApplicationRecord
   extend FriendlyId
+
   friendly_id :name, use: :slugged
 
   has_many :sermon_topics, dependent: :destroy

@@ -47,5 +47,8 @@
   "scripts": {
     "build": "NODE_ENV=production webpack --config config/webpack/webpack.config.js && RAILS_ENV=production bundle exec rake assets:precompile",
     "update-browserslist": "npx update-browserslist-db@latest"
+  },
+  "engines": {
+    "node": "22.23.4"
   }
 }

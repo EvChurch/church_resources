@@ -1,0 +1,16 @@
+.git
+.github
+.bundle
+.env
+.env.*
+**/*.key
+config/master.key
+node_modules
+vendor/bundle
+log/*
+tmp/*
+storage/*
+public/assets
+public/packs
+public/packs-test
+coverage

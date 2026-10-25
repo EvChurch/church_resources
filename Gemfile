@@ -3,9 +3,9 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.4.9'
+ruby '3.4.11'
 
-gem 'activeadmin', '~> 3.3.0'
+gem 'activeadmin', '~> 3.5.0'
 gem 'active_admin_datetimepicker', '~> 1.1'
 gem 'active_storage_validations', '~> 3.0'
 gem 'aws-sdk-s3', '~> 1.217', require: false
@@ -18,7 +18,7 @@ gem 'draper', '~> 4.0'
 gem 'drb', '~> 2.2' # Required: removed from Ruby 3.4 stdlib
 gem 'font-awesome-sass', '~> 6.0'
 gem 'formtastic', '~> 5.0'
-gem 'friendly_id', '~> 5.2.4'
+gem 'friendly_id', '~> 5.7.0'
 gem 'graphql', '~> 2.5'
 gem 'high_voltage', '~> 3.1'
 gem 'image_processing', '~> 1.2'
