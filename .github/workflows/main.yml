@@ -7,6 +7,50 @@ on:
     branches: [main]
 
 jobs:
+  production-image:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: church_resources_container_ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      redis:
+        image: redis:8
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build production image without credentials
+        run: docker build -t church-resources-security-ci .
+      - name: Verify production image runtime and trust
+        run: docker run --rm --entrypoint sh church-resources-security-ci bin/verify-image-trust
+      - name: Verify isolated production admin session and sermon reads
+        run: |
+          docker run --rm --network host --entrypoint sh \
+            -e RAILS_ENV=production \
+            -e DATABASE_URL=postgresql://postgres:postgres@127.0.0.1:5432/church_resources_container_ci \
+            -e REDIS_URL=redis://127.0.0.1:6379/15 \
+            -e SECRET_KEY_BASE=synthetic-ci-session-key-with-no-production-authority \
+            church-resources-security-ci -c '
+              printf "%s\n" "Rails.application.config.active_storage.service = :local" \
+                > config/initializers/security_fixture_storage.rb
+              bundle exec rails db:migrate &&
+                bundle exec ruby -rbundler/setup bin/verify-security-session.rb
+            '
+
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -89,7 +133,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 22.23.4
           cache: yarn
 
       - name: Install dependencies
