@@ -18,7 +18,8 @@ RSpec.describe 'Session authentication', :aggregate_failures do
   it 'denies invalid password authentication' do
     user = create(:user, :admin)
     user.confirm
-    post user_session_path, params: { user: { email: user.email, password: 'wrong-password' } }
+    post user_session_path, params: { user: { email: user.email, password: 'wrong-password' } }, as: :json
+    expect(response).to have_http_status(:unauthorized)
     get admin_root_path
     expect(response).to redirect_to(new_user_session_path)
   end

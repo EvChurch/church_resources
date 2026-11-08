@@ -73,3 +73,13 @@ Redis TLS VERIFY_NONE and unrelated dependency advisories remain out of scope.
 Hosted exact-head checks/image and independent HUMAN source-security review
 must be recorded on the dedicated PR. Deployment/running-runtime closure is
 still held separately; neither local tests nor the source PR closes it.
+
+Hosted first-head lint/assets/image and actual Redis acceptance passed. Full
+RSpec exposed a missing application pack manifest while the added invalid-
+password HTML case rendered the existing Devise layout. The CI test job does
+not install application packs; local compiled packs had masked that dependency.
+The negative credential test now requests Devise's supported JSON response and
+asserts HTTP401 plus denial of a subsequent protected HTML request. This tests
+authentication directly without changing login UI, CI or asset checks. The
+successful HTML password login/logout test remains. Final-head checks must
+run again; the failed first run is retained as evidence.
