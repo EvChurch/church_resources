@@ -97,5 +97,5 @@ Rails.application.configure do
   config.cache_store = :redis_cache_store, { 
     url: ENV['REDIS_URL'], ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE }
   }
-  config.session_store :cache_store, key: '_church_resources_session'
+  config.session_store :cache_store, key: '_church_resources_session', same_site: :lax
 end
