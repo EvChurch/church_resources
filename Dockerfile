@@ -1,4 +1,4 @@
-FROM node:22.23.4-bookworm-slim@sha256:5ec23b7c622b00547753bc6ffd78085dd868a68aeb41c8e0a1418f033e13d96d AS node-runtime
+FROM node:22.23.5-bookworm-slim@sha256:e9f565d32859f0cbfb52125eafe8be39390f24dac302dc3cdf566e8ba3ab21ee AS node-runtime
 FROM ruby:3.4.11-bookworm@sha256:1aed73d35b66ce974febaefe42e8385abb8cbf6244ea4f45b266be9178acfd37 AS base
 
 WORKDIR /app
@@ -16,7 +16,7 @@ COPY --from=node-runtime /opt/yarn-v1.22.22 /opt/yarn-v1.22.22
 RUN ln -sf /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm \
     && ln -sf /usr/local/lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx \
     && ln -sf /opt/yarn-v1.22.22/bin/yarn /usr/local/bin/yarn \
-    && node -e 'if (process.version !== "v22.23.4") process.exit(1)' \
+    && node -e 'if (process.version !== "v22.23.5") process.exit(1)' \
     && gem install bundler -v 2.4.19 --no-document
 
 ENV RAILS_ENV=production RACK_ENV=production \
