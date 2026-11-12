@@ -49,6 +49,6 @@
     "update-browserslist": "npx update-browserslist-db@latest"
   },
   "engines": {
-    "node": "22.23.4"
+    "node": "22.23.5"
   }
 }
