@@ -20,10 +20,45 @@ RSpec.describe 'Operational routes', :aggregate_failures do
     expect(response.location).not_to start_with(sermon_library_url)
   end
 
-  it 'keeps the sign-in route on the resource application' do
+  it 'uses ActiveAdmin defaults for the sign-in page' do
     route = Rails.application.routes.recognize_path(new_user_session_path, method: :get)
 
-    expect(route).to include(controller: 'devise/sessions', action: 'new')
+    expect(new_user_session_path).to eq('/admin/login')
+    expect(route).to include(controller: 'users/sessions', action: 'new')
+
+    get new_user_session_path
+
+    expect(response).to have_http_status(:ok)
+    expect(response.body).to include('class="active_admin logged_out new"')
+    expect(response.body).to include('id="session_new"')
+  end
+
+  it 'renders the ActiveAdmin sign-in page after invalid credentials' do
+    post user_session_path, params: { user: { email: 'missing@example.com', password: 'incorrect' } }
+
+    expect(response).to have_http_status(:ok)
+    expect(response.body).to include('class="active_admin logged_out new"')
+    expect(response.body).to include('id="session_new"')
+  end
+
+  it 'signs an administrator in and out through the ActiveAdmin routes' do
+    user = create(:user, :admin)
+    user.confirm
+
+    post user_session_path, params: { user: { email: user.email, password: user.password } }
+
+    expect(response).to redirect_to(admin_root_path)
+
+    delete destroy_user_session_path
+
+    expect(response).to redirect_to(new_user_session_path)
+  end
+
+  it 'preserves the existing non-session Devise routes' do
+    expect(new_user_password_path).to eq('/users/password/new')
+    expect(new_user_registration_path).to eq('/users/sign_up')
+    expect(new_user_confirmation_path).to eq('/users/confirmation/new')
+    expect(new_user_unlock_path).to eq('/users/unlock/new')
   end
 
   it 'keeps GraphQL requests on the resource application' do

@@ -4,7 +4,12 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   mount GraphiQL::Rails::Engine, at: '/graphiql', graphql_path: '/graphql' if Rails.env.development?
   post '/graphql', to: 'graphql#execute'
-  devise_for :users
+  devise_for :users, skip: :sessions
+  devise_scope :user do
+    get 'admin/login', to: 'users/sessions#new', as: :new_user_session
+    post 'admin/login', to: 'users/sessions#create', as: :user_session
+    delete 'admin/logout', to: 'users/sessions#destroy', as: :destroy_user_session
+  end
   ActiveAdmin.routes(self)
 
   get 'resources/sermon', to: 'resources#index', defaults: { format: :rss }
