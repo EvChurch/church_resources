@@ -64,14 +64,48 @@ class SecuritySessionFixture
     cookies = Array(headers.fetch('set-cookie')).map { |value| value.split(';', 2).first }.join('; ')
     assert(!cookies.empty?, 'No production session cookie issued')
     assert(request(cookies).first == 200, 'Issued session cookie did not authenticate')
+    session_header = Array(headers.fetch('set-cookie')).find do |value|
+      value.start_with?('_church_resources_session=')
+    end
+    assert(session_header&.match?(/; samesite=lax/i), 'Production cookie lacks explicit SameSite=Lax')
     assert(denied?(request("#{cookies}tampered")), 'Tampered session authenticated')
     login_as(other, scope: :user)
     assert(denied?(request), 'Non-admin identity accessed admin records')
+    verify_concurrent_revocation(cookies)
+    # Issue another session so deleted-identity denial is independently tested.
+    login_as(admin, scope: :user)
+    _, fresh_headers, = request
+    cookies = Array(fresh_headers.fetch('set-cookie')).map { |value| value.split(';', 2).first }.join('; ')
     admin.destroy!
     assert(denied?(request(cookies)), 'Deleted admin identity retained access')
     puts 'PASS: production session issue/reuse, protected sermon read and anonymous/tampered/non-admin/deleted denials'
   ensure
     Warden.test_reset!
+  end
+
+  def verify_concurrent_revocation(cookies)
+    session_value = cookies.split('; ').find { |cookie| cookie.start_with?('_church_resources_session=') }
+    sid = Rack::Session::SessionId.new(session_value.split('=', 2).last)
+    deleted = false
+    # Complete another request's backend deletion after authentication loaded
+    # this session, before CacheStore commits the protected request's response.
+    subscriber = ActiveSupport::Notifications.subscribe('process_action.action_controller') do
+      Thread.new do
+        Rails.cache.delete("_session_id:#{sid.private_id}")
+        Rails.cache.delete("_session_id:#{sid.public_id}")
+      end.value
+      deleted = true
+    end
+    begin
+      response = request(cookies)
+    ensure
+      ActiveSupport::Notifications.unsubscribe(subscriber)
+    end
+    assert(deleted && response.first == 200, 'Overlapping authenticated request was not exercised')
+    session_cookies = Array(response[1]['set-cookie']).grep(/\A_church_resources_session=/)
+    assert(session_cookies.empty?, 'Revoked request resent its session cookie')
+    assert(denied?(request(cookies)), 'Overlapping request restored revoked credentials')
+    puts 'PASS: actual Redis overlapping revocation stays denied; production cookie emits SameSite=Lax'
   end
 
   def run
